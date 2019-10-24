@@ -9,3 +9,10 @@
 4. apakah jumlah maks pasukan pada bangunan adalah M atau bisa lebih kalau bisa bagaimana mekanismenya??
 5. apakah command MOVE dapat dilakukan berkali kali?
 6. Teknis Pembacaan Command??
+
+## Timeline Pengerjaan
+
+|    Kerjaan    |    Minggu     |   STATUS     |
+| ------------- | ------------- | ------------ |
+| ADT           | 01  |      ?       |
+| Maksimalin ADT dan konsep  | 02  |      ?       |
