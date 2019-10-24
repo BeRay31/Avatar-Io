@@ -92,3 +92,18 @@ void QDel (Queue *Q,Buildings *X)
 {I.S Q defined }
 {F.S Head deleted or 1st element deleted}
 */
+void CopyQueue(Queue *Q,Queue TempQ)
+{
+    address Temp,Place;
+    Temp = (TempQ).Head;
+    Place = (*Q).Head;
+    Place = Temp;
+    while (Temp != NULL)
+    {
+        Next(Place) = Next(Temp);
+    }
+}
+/*
+{I.S TempQ and Q defined}
+{F.S Q = TempQ}
+*/

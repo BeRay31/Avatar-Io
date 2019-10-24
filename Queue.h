@@ -39,4 +39,10 @@ void QDel (Queue *Q,Buildings *X);
 {F.S Head deleted or 1st element deleted}
 */
 
+void CopyQueue(Queue *Q,Queue TempQ);
+/*
+{I.S TempQ and Q defined}
+{F.S Q = TempQ}
+*/
+
 #endif
