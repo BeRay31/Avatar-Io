@@ -9,6 +9,8 @@
 4. apakah jumlah maks pasukan pada bangunan adalah M atau bisa lebih kalau bisa bagaimana mekanismenya??
 5. apakah command MOVE dapat dilakukan berkali kali?
 6. Teknis Pembacaan Command??
+7. File eksternalnya boleh ditambahin titik ga diakhir untuk memudahkan pembacaan informasi dalam file eksternalnya? (boleh aja lah, udah dibikin soalnya)
+8. Kalau no.7 jawabannya ga boleh, boleh gak pakai fungsi ```fgets()```?
 
 ## Timeline Pengerjaan
 
