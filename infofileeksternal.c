@@ -1,50 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "boolean.h"
-#include "mesinkata.h"
+#include "infofileeksternal.h"
 
-/*  Kamus Umum */
 #define IdxMax 10000
 /* Indeks maksimum array, sekaligus ukuran maksimum array dalam C */
 #define IdxMin 1
 /* Indeks minimum array */
 
-/* KONSTRUKTOR ARRAY PENYIMPAN INFO BANGUNAN */
-typedef struct {
-  char building;
-  int indeks;
-  int kolom;
-} ElType;
-
-typedef struct {
-  ElType *T;
-  int MaxEl; 
-} Bangunan;
-/********************************************/
-
-/* KONSTRUKTOR ARRAY PENYIMPAN ELEMEN GRAF */
-typedef struct { 
-  int TI[IdxMax+1];
-  int Neff;
-} TabGraf;
-/*******************************************/
-
-/* ********** SELEKTOR ********** */
-#define Elmt(B,i)	   (B).T[(i)]
-#define Maxel(B)       (B).MaxEl
-#define Building(e)    (e).building
-#define Indeks(e)      (e).indeks
-#define Kolom(e)       (e).kolom
-/* ****************************** */
-
 /******** BANGUNAN *********/
 void CreateEmptyBangunan (Bangunan *b, int MaksEl)
 {
-	(*b).T = (ElType*) malloc ((MaksEl+1) * sizeof(ElType));
+	(*b).T = (InfoBangunan*) malloc ((MaksEl+1) * sizeof(InfoBangunan));
 	if ((*b).T != NULL){
-		Maxel(*b) = MaksEl;
+		(*b).MaxEl = MaksEl;
 	} else {
-		Maxel(*b) = 0;	
+		(*b).MaxEl = 0;	
 	}
 }
 void TulisIsiBangunan (Bangunan b)
@@ -55,9 +26,18 @@ void TulisIsiBangunan (Bangunan b)
 		printf(" %d\n", b.T[i].kolom);
 	}
 }
+void CopyBangunan (Bangunan bin, Bangunan *bout)
+{
+	CreateEmptyBangunan (bout, bin.MaxEl);
+	for (int i=1; i<=bin.MaxEl; i++){
+		(*bout).T[i].building = bin.T[i].building;
+		(*bout).T[i].indeks = bin.T[i].indeks;
+		(*bout).T[i].kolom = bin.T[i].kolom;
+	}
+}
 void DealokasiBangunan (Bangunan *b)
 {
-	Maxel(*b) = 0;
+	(*b).MaxEl = 0;
 	free((*b).T);
 }
 boolean IsTipeBangunan (Kata src)
@@ -156,8 +136,9 @@ void InputString (Kata *kata)
     }
     (*kata).Length = n;
 }
-/** test ***/
-int main(){
+
+void GetInfoDariFile (int *n, int *m, int *nbangunan, Bangunan *b, MATRIKS *mgraf)
+{
 	/*** KAMUS ***/
 	// kamus tinggi dan lebar peta
 	int N, M;
@@ -165,7 +146,7 @@ int main(){
 	int NBangunan;
 	// kamus bangunan
 	Bangunan B;
-	ElType e;
+	InfoBangunan e;
 	char tipe; // tipe bangunan
 	int idx, kol; // baris, kolom
 	int j; // indeks elemen array Bangunan
@@ -224,66 +205,22 @@ int main(){
 		}
 		ADVKATA();
 	}
-	printf("tinggi peta %d\n",N);
-	printf("lebar peta %d\n",M);
-	printf("banyaknya bangunan %d\n",NBangunan);
-	printf("info bangunan <tipe bangunan, baris, kolom>\n");
-	TulisIsiBangunan(B);
-	printf("info graf\n");
-	TulisIsiTabGraf(tg, NBangunan);
-	// kamus command
-	Kata ATTACK, LEVEL_UP, SKILL, UNDO, END_TURN, SAVE;
-	// ATTTACK
-	ATTACK.TabKata[1] = 'A';
-	ATTACK.TabKata[2] = 'T';
-	ATTACK.TabKata[3] = 'T';
-	ATTACK.TabKata[4] = 'A';
-	ATTACK.TabKata[5] = 'C';
-	ATTACK.TabKata[6] = 'K';
-	ATTACK.Length = 6;
-	// LEVEL_UP
-	LEVEL_UP.TabKata[1] = 'L';
-	LEVEL_UP.TabKata[2] = 'E';
-	LEVEL_UP.TabKata[3] = 'V';
-	LEVEL_UP.TabKata[4] = 'E';
-	LEVEL_UP.TabKata[5] = 'L';
-	LEVEL_UP.TabKata[6] = '_';
-	LEVEL_UP.TabKata[7] = 'U';
-	LEVEL_UP.TabKata[8] = 'P';
-	LEVEL_UP.Length = 8;
-	// SKILL
-	SKILL.TabKata[1] = 'S';
-	SKILL.TabKata[2] = 'K';
-	SKILL.TabKata[3] = 'I';
-	SKILL.TabKata[4] = 'L';
-	SKILL.TabKata[5] = 'L';
-	SKILL.Length = 5;
-	// UNDO
-	UNDO.TabKata[1] = 'U';
-	UNDO.TabKata[2] = 'N';
-	UNDO.TabKata[3] = 'D';
-	UNDO.TabKata[4] = 'O';
-	UNDO.Length = 4;
-	// END_TURN
-	END_TURN.TabKata[1] = 'E';
-	END_TURN.TabKata[2] = 'N';
-	END_TURN.TabKata[3] = 'D';
-	END_TURN.TabKata[4] = '_';
-	END_TURN.TabKata[5] = 'T';
-	END_TURN.TabKata[6] = 'U';
-	END_TURN.TabKata[7] = 'R';
-	END_TURN.TabKata[8] = 'N';
-	END_TURN.Length = 8;
-	// SAVE
-	SAVE.TabKata[1] = 'S';
-	SAVE.TabKata[2] = 'A';
-	SAVE.TabKata[3] = 'V';
-	SAVE.TabKata[4] = 'E';
-	SAVE.Length = 4; 
-	
-	// kamus coba
-	Kata serang;
-	InputString(&serang);
-	TampilkanKata(serang);
-	return 0;
+	// MATRIKS GRAF
+	// kamus
+	MATRIKS MGraf;
+	int k;
+	MakeMATRIKS(NBangunan, NBangunan, &MGraf);
+	// isi matriks
+	k = 1; // indeks array graf
+	for (int i=1; i<=NBangunan; i++){
+		for (int j=1; j<=NBangunan; j++){
+			MGraf.Mem[i][j] = tg.TI[k];
+			k++;
+		}
+	}
+	(*n) = N;
+	(*m) = M;
+	(*nbangunan) = NBangunan;
+	CopyMATRIKS (MGraf, mgraf);
+	CopyBangunan (B, b);
 }
