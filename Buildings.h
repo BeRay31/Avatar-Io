@@ -15,7 +15,8 @@ typedef struct{
     int maxArmyOnBuildings; //Max Army in Building (M)
     bool defenses; //defenses status yes = true , no = false
     int minArmiesToOccupy; //precondition to occupy an free building (total army) auto to level 1
-    char buildingsType; //
+    char buildingsType; //Building Type
+    int buildingIndex; //
 }Buildings;
 //data structures for buildings
 
