@@ -1,7 +1,7 @@
 #ifndef __QUEUE_H__
 #define __QUEUE_H__
 
-#include "skill.h"
+#include "Skills.h"
 #include <stdlib.h>
 #include <stdbool.h>
 //preprocessor
