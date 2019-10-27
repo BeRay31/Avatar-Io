@@ -9,7 +9,7 @@ void CreateBuildings (Buildings *B,char type)
 	unsigned short int P;
 	if(type=='C'){
 		(*B).buildingsIndex = 0;
-		(*B).buildingdType = type;
+		(*B).buildingsType = type;
 		(*B).level = 1;
 		(*B).owner = 0;
 		(*B).incArmy = 10;
@@ -20,7 +20,7 @@ void CreateBuildings (Buildings *B,char type)
 	}
 	else if (type=='T'){
 		(*B).buildingsIndex = 0;
-		(*B).buildingdType = type;
+		(*B).buildingsType = type;
 		(*B).level = 1;
 		(*B).owner = 0;
 		(*B).incArmy = 5;
@@ -31,7 +31,7 @@ void CreateBuildings (Buildings *B,char type)
 	}
 	else if(type=='F'){
 		(*B).buildingsIndex = 0;
-		(*B).buildingdType = type;
+		(*B).buildingsType = type;
 		(*B).level = 1;
 		(*B).owner = 0;
 		(*B).incArmy = 10;
@@ -42,7 +42,7 @@ void CreateBuildings (Buildings *B,char type)
 	}
 	else if(type=='V'){
 		(*B).buildingsIndex = 0;
-		(*B).buildingdType = type;
+		(*B).buildingsType = type;
 		(*B).level = 1;
 		(*B).owner = 0;
 		(*B).incArmy = 5;
@@ -53,7 +53,7 @@ void CreateBuildings (Buildings *B,char type)
 	}
 	else if(type==' '){
 		(*B).buildingsIndex = 0;
-		(*B).buildingdType = type;
+		(*B).buildingsType = type;
 		(*B).level = 0;
 		(*B).owner = 0;
 		(*B).incArmy = 0;
@@ -71,13 +71,13 @@ void LevelUp (Buildings *B)
 */
 {
 	if((*B).level <4 && (*B).armies>=((*B).maxArmyOnBuildings/2)){
-		(*B).armies -= ((*B).maxArmyOnBuildings/2)
-		if((*B).buildingdType == 'C'){
+		(*B).armies -= ((*B).maxArmyOnBuildings/2);
+		if((*B).buildingsType == 'C'){
 			(*B).incArmy += 5;
 			(*B).maxArmyOnBuildings += 20;
 			(*B).minArmiesToOccupy = -999;		
 		}	
-		else if((*B).buildingdType == 'T'){
+		else if((*B).buildingsType == 'T'){
 			if((*B).level==1){
 				(*B).incArmy += 5;
 			}
@@ -87,7 +87,7 @@ void LevelUp (Buildings *B)
 			(*B).maxArmyOnBuildings += 10;
 			(*B).minArmiesToOccupy = -999;
 		}
-		else if((*B).buildingdType == 'F'){
+		else if((*B).buildingsType == 'F'){
 			(*B).incArmy += 10;
 			(*B).maxArmyOnBuildings += 20;
 			(*B).minArmiesToOccupy = -999;	
@@ -95,7 +95,7 @@ void LevelUp (Buildings *B)
 				(*B).defenses = true;
 			}
 		}
-		else if((*B).buildingdType == 'V'){
+		else if((*B).buildingsType == 'V'){
 			(*B).incArmy += 5;
 			(*B).maxArmyOnBuildings += 10;
 			(*B).minArmiesToOccupy = -999;	
@@ -149,7 +149,7 @@ void Attacked (Buildings *B, Buildings *BL, int Narmies)
 
 		if((*B).armies <= 0){
 			army = -1*((*B).armies);
-			CreateBuildings(*B, (*B).buildingdType); //bangunan dirubah ke kondisi level 1
+			CreateBuildings(B, (*B).buildingsType); //bangunan dirubah ke kondisi level 1
 			(*B).owner = (*BL).owner;//kepemilikan di rubah
 			
 			(*B).armies += army; 
