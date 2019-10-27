@@ -2,29 +2,51 @@
 #define __LIST_H__
 
 #include "Buildings.h"
-
+// LInked List for Buildings
 //TYPEDEF
-typedef struct tElmtlist *address;
-typedef struct tElmtlist {
-	Buildings info;
-	address next;
-} ElmtList;
+typedef Buildings infotype;
+typedef struct bElmtlist *buildingAddress;  //define *address as struct tElmtList
+typedef struct bElmtlist {  //define ELmtList as Struct tElmtList
+	infotype info;
+	buildingAddress next;
+} BElmtList;
 typedef struct {
-	address First;
-} List;
-//SELECTOR
-#define Info(P) (P)->info
-#define Next(P) (P)->next
-#define First(L) ((L).First)
+	buildingAddress First;
+} ListB;
 
-address Alokasi (Buildings X); //pastiin nextnya NULL
+buildingAddress AllocateB (infotype X);
+/*
+{I.S Anything}
+{F.S X allocated}
+*/
 
-void InsertFirst (List *L, address P);
+void CreateEmptyB (ListB *L);
+/*
+{I.S Anything}
+{F.S Building Defined}
+*/
 
-void InsertAfter (List *L, address P, address Prec);
+void InsertFirst (ListB *L, buildingAddress P);
+/*
+{I.S List defined}
+{F.S First Elmt B is P}
+*/
 
-void DelFirst (List *L, address *P);
+void InsertAfter (ListB *L, buildingAddress P, buildingAddress Prec);
+/*
+{I.S List defined}
+{F.S Elmt after Prec is P}
+*/
 
-void DelAfter (List *L, address *Pdel, address Prec);
+void DelFirst (ListB *L, buildingAddress *P);
+/*
+{I.S List defined}
+{F.S First element of List deleted and saved in P} 
+*/
+void DelAfter (ListB *L, buildingAddress *Pdel, buildingAddress Prec);
+/*
+{I.S List Defined}
+{F.S Elmt After Prec Deleted and saved in Pdel}
+*/
 
 #endif

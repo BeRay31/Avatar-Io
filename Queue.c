@@ -1,109 +1,79 @@
 #include "Queue.h"
-
 //IMPLEMENTATION
-bool QIsEmpty(Queue Q)
+
+address AllocateQ (Skill S)
 {
-    return ((Q).Head == NULL && ((Q).Tail==NULL));
+    address P;
+    P = (address)malloc(sizeof(ElmtQueue));
+    if (P != NULL)
+    {
+        P->info = S;
+        P->next = NULL;
+        return P;
+    }
+    else
+    {
+        return NULL;
+    }
+}
+/*
+{I.S anything}
+{F.S S alocated}
+*/
+
+bool IsQEmpty (Queue Q)
+{
+    return ((Q.Head == NULL)&&(Q.Tail == NULL));
 }
 /*
 {I.S Q defined}
 {F.S True if Q Empty && False if Q not Empty}
 */
 
-void QCreateEmpty (Queue *QAdd)
+void QCreateEmpty(Queue *Q)
 {
-    (*QAdd).Head = NULL;
-    (*QAdd).Tail = NULL;
+    (*Q).Head = NULL;
+    (*Q).Tail = NULL;
 }
 /*
 {I.S Anything}
 {F.S Q created and Q empty}
 */
 
-int QNbElmt(Queue Q)
+void QAddElmt (Queue *Q, Skill S)
 {
-    address CElmt;
-    int nBElmt = 0;
-    if (Q.Head == NULL)
+    address newSkill;
+    newSkill = Allocate (S);
+    if (IsQEmpty(*Q))
     {
-        return nBElmt;
+        (*Q).Head = newSkill;
+        (*Q).Tail = newSkill;        
     }
     else
     {
-        if ((Q).Head == (Q).Tail)
-        {
-            nBElmt ++;
-            return nBElmt;
-        }
-        else
-        {
-            CElmt = (Q).Head;
-            while (CElmt != (Q).Tail)
-            {
-                nBElmt++;
-                CElmt = Next(CElmt);
-            }
-            nBElmt++;
-            return nBElmt;
-        }
+        (*Q).Tail->next = newSkill;
+        (*Q).Tail = (*Q).Tail->next;
     }
-        
-}
-/*
-{I.S Anything}
-{F.S Return Number Element of Q}
-*/
-
-void QAdd (Queue *Q,Buildings X)
-{
-    address Elmt,NewElmt;
-    NewElmt = Alokasi (X);
-    if (QIsEmpty(*Q))
-    {
-        (*Q).Head = NewElmt;
-        (*Q).Tail = NewElmt;
-    }
-    else
-    {
-        Next((*Q).Tail) = NewElmt;
-    }
-     
 }
 /*
 {I.S Q defined}
 {F.S Elmt of Q ++ Tail = new Elmt}
 */
-
-void QDel (Queue *Q,Buildings *X)
+void QDelElmt (Queue *Q, Skill *S)
 {
     if ((*Q).Head == (*Q).Tail)
     {
-        *X = (*Q).Head -> info;
+        *S = (*Q).Head ->info;
         (*Q).Head = NULL;
         (*Q).Tail = NULL;
     }
     else
     {
-        *X = (*Q).Head -> info;
-        (*Q).Head = Next ((*Q).Head);
+        *S = (*Q).Head->info;
+        (*Q).Head = (*Q).Head->next; 
     }
 }
 /*
 {I.S Q defined }
 {F.S Head deleted or 1st element deleted}
-*/
-void CopyQueue(Queue *Q,Queue TempQ)
-{
-    address Temp,Place;
-    Temp = (TempQ).Head;
-    Place = (*Q).Head;
-    Place = Temp;
-    while (Temp != NULL)
-    {
-        Next(Place) = Next(Temp);
-    }
-}
-/*
-{I.S TempQ and Q defined}
-{F.S Q = TempQ}
 */
