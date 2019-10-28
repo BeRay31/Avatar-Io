@@ -1,10 +1,10 @@
 #include "List.h"
 //IMPLEMENTATION
 
-buildingAddress AllocateB (infotype X)
+address AllocateL (int X)
 {
-    buildingAddress P;
-    P = (buildingAddress*)malloc(sizeof(BElmtList));
+    address P;
+    P = (address*)malloc(sizeof(BElmtList));
     if (P!=NULL)
     {
         P->info = X;
@@ -21,7 +21,7 @@ buildingAddress AllocateB (infotype X)
 {F.S X allocated}
 */
 
-void CreateEmptyB (ListB *L)
+void CreateEmptyL (List *L)
 {
    (*L).First = NULL ;
 }
@@ -30,25 +30,17 @@ void CreateEmptyB (ListB *L)
 {F.S Building Defined}
 */
 
-void InsertFirst (ListB *L, buildingAddress P)
+void InsertFirst (List *L, address P)
 {
-    if((*L).First ==NULL)
-    {
-        P->next = NULL;  
-        (*L).First = P;
-    }
-    else
-    {
-        P->next = (*L).First->next;
-        (*L).First = P;        
-    }    
+    P->next = (*L).First;
+    (*L).First = P;
 }
 /*
 {I.S List defined}
 {F.S First Elmt B is P}
 */
 
-void InsertAfter (ListB *L, buildingAddress P, buildingAddress Prec)
+void InsertAfter (List *L, address P, address Prec)
 {
    P->next = Prec->next;
    Prec->next = P; 
@@ -58,7 +50,7 @@ void InsertAfter (ListB *L, buildingAddress P, buildingAddress Prec)
 {F.S Elmt after Prec is P}
 */
 
-void DelFirst (ListB *L, buildingAddress *P)
+void DelFirst (List *L, address *P)
 {
     *P = (*L).First;
     (*L).First = (*L).First->next;
@@ -67,7 +59,7 @@ void DelFirst (ListB *L, buildingAddress *P)
 {I.S List defined}
 {F.S First element of List deleted and saved in P} 
 */
-void DelP (ListB *L, buildingAddress *Pdel, buildingAddress P)
+void DelP (List *L, address *Pdel, address P)
 {
     if (P == (*L).First)
     {
@@ -75,7 +67,7 @@ void DelP (ListB *L, buildingAddress *Pdel, buildingAddress P)
     }
     else
     {
-        buildingAddress delElmt;
+        address delElmt;
         *Pdel = P;
         delElmt = (*L).First;
         while (delElmt->next != P)
@@ -88,4 +80,26 @@ void DelP (ListB *L, buildingAddress *Pdel, buildingAddress P)
 /*
 {I.S List Defined}
 {F.S Elmt  Prec Deleted and saved in Pdel}
+*/
+void InsertLast (List *L, address P)
+{
+    address Last;
+    if (!IsEmpty(*L))
+    {
+        Last = (*L).First;
+        while (Last->next!=NULL)
+        {
+            Last = Last->next;
+        }
+        (P)->next = Last->next;
+        Last->next = P;
+    }
+    else
+    {
+        InsertFirst(L,P);
+    }
+}
+/*
+{I.S List Defined}
+{F.S Last Elmt of List updated by P}
 */
