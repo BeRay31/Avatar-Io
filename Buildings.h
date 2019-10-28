@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include "point.h"
 
 #define MaxArmies 1000000
 
@@ -17,6 +18,7 @@ typedef struct{
     int minArmiesToOccupy; //precondition to occupy an free building (total army) auto to level 1
     char buildingsType; //
     int buildingsIndex; //
+    POINT position; // building position
 }Buildings;
 //data structures for buildings
 

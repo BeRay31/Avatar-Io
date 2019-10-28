@@ -22,7 +22,7 @@ void TulisPOINT (POINT P)
     printf("(%.2f,%.2f)",Absis(P),Ordinat(P));
 }
 
-boolean EQ (POINT P1, POINT P2)
+boolean PEQ (POINT P1, POINT P2)
 {
     if ((Absis(P1)==Absis(P2))&&(Ordinat(P1)==Ordinat(P2)))
     {
@@ -30,7 +30,7 @@ boolean EQ (POINT P1, POINT P2)
     }
     else return false;
 }
-boolean NEQ (POINT P1, POINT P2)
+boolean PNEQ (POINT P1, POINT P2)
 {
     if ((Absis(P1)!=Absis(P2))||(Ordinat(P1)!=Ordinat(P2)))
     {

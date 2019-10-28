@@ -9,33 +9,33 @@
 /* Indeks minimum array */
 
 /******** BANGUNAN *********/
-void CreateEmptyBangunan (Bangunan *b, int MaksEl)
+void CreateEmptyBangunan (BuildingsArr *b, int MaksEl)
 {
-	(*b).T = (InfoBangunan*) malloc ((MaksEl+1) * sizeof(InfoBangunan));
+	(*b).T = (Buildings*) malloc ((MaksEl+1) * sizeof(Buildings));
 	if ((*b).T != NULL){
 		(*b).MaxEl = MaksEl;
 	} else {
 		(*b).MaxEl = 0;	
 	}
 }
-void TulisIsiBangunan (Bangunan b)
+void TulisIsiBangunan (BuildingsArr b)
 {
 	for (int i=1; i<=b.MaxEl; i++){
-		printf("%c", b.T[i].building);
-		printf(" %d", b.T[i].indeks);
-		printf(" %d\n", b.T[i].kolom);
+		printf("%d.", b.T[i].buildingsIndex);
+		printf(" %c", b.T[i].buildingsType);
+		printf(" (%d,%d)\n", b.T[i].position.X,b.T[i].position.Y);
 	}
 }
-void CopyBangunan (Bangunan bin, Bangunan *bout)
+void CopyBangunan (BuildingsArr bin, BuildingsArr *bout)
 {
 	CreateEmptyBangunan (bout, bin.MaxEl);
 	for (int i=1; i<=bin.MaxEl; i++){
-		(*bout).T[i].building = bin.T[i].building;
-		(*bout).T[i].indeks = bin.T[i].indeks;
-		(*bout).T[i].kolom = bin.T[i].kolom;
+		(*bout).T[i].buildingsType = bin.T[i].buildingsType;
+		(*bout).T[i].buildingsIndex = bin.T[i].buildingsIndex;
+		(*bout).T[i].position = bin.T[i].position;
 	}
 }
-void DealokasiBangunan (Bangunan *b)
+void DealokasiBangunan (BuildingsArr *b)
 {
 	(*b).MaxEl = 0;
 	free((*b).T);
@@ -137,23 +137,28 @@ void InputString (Kata *kata)
     (*kata).Length = n;
 }
 
-void GetInfoDariFile (int *n, int *m, int *nbangunan, Bangunan *b, MATRIKS *mgraf)
+void GetInfoDariFile (int *n, int *m, int *nbangunan, BuildingsArr *b, MATRIKS *mgraf)
 {
 	/*** KAMUS ***/
+
 	// kamus tinggi dan lebar peta
 	int N, M;
+
 	// kamus banyaknya bangunan
 	int NBangunan;
+
 	// kamus bangunan
-	Bangunan B;
-	InfoBangunan e;
+	BuildingsArr B;
+	Buildings e;
 	char tipe; // tipe bangunan
-	int idx, kol; // baris, kolom
+	int idx, kol; // baris, kolom (posisi)
 	int j; // indeks elemen array Bangunan
+
 	// kamus graf
 	TabGraf tg;
 	int elmtGraf; // nilai elemen 1 atau 0
 	int idks; // indeks elemen array Tabgraf
+
 	// kamus umum
 	int countKata; // menghitung kata yg telah dibaca
 	int count;
@@ -182,17 +187,18 @@ void GetInfoDariFile (int *n, int *m, int *nbangunan, Bangunan *b, MATRIKS *mgra
 			if (count == 1){// && (IsTipeBangunan(CKata))){
 				count = 2; // = 2
 				GetTipeBangunan(&tipe, CKata);
-				e.building = tipe;
+				e.buildingsType = tipe;
 			} else if (count == 2) {
 				count = 3; // = 3;
 				Salin(&KataTemp, CKata);
 				CharToInt(&idx, KataTemp);
-				e.indeks = idx;
+				e.position.X = idx;
 			} else if (count == 3){
 				count = 1;
 				Salin(&KataTemp, CKata);
 				CharToInt(&kol, KataTemp);
-				e.kolom = kol;
+				e.position.Y = kol;
+				e.buildingsIndex = j;
 				B.T[j] = e;
 				j++;
 			}

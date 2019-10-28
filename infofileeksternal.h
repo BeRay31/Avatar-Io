@@ -4,6 +4,7 @@
 #include "boolean.h"
 #include "mesinkata.h"
 #include "matriks.h"
+#include "Buildings.h"
 
 /*  Kamus Umum */
 #define IdxMax 10000
@@ -13,15 +14,9 @@
 
 /* KONSTRUKTOR ARRAY PENYIMPAN INFO BANGUNAN */
 typedef struct {
-  char building;
-  int indeks;
-  int kolom;
-} InfoBangunan;
-
-typedef struct {
-  InfoBangunan *T;
+  Buildings *T;
   int MaxEl; 
-} Bangunan;
+} BuildingsArr;
 /********************************************/
 
 /* KONSTRUKTOR ARRAY PENYIMPAN ELEMEN GRAF */
@@ -31,10 +26,10 @@ typedef struct {
 } TabGraf;
 /*******************************************/
 /******** BANGUNAN ******/
-void CreateEmptyBangunan (Bangunan *b, int MaksEl);
-void TulisIsiBangunan (Bangunan b);
-void CopyBangunan (Bangunan bin, Bangunan *bout);
-void DealokasiBangunan (Bangunan *b);
+void CreateEmptyBangunan (BuildingsArr *b, int MaksEl); //create array of Buildings with maxElmt Maksel
+void TulisIsiBangunan (BuildingsArr b); //write Array of building 
+void CopyBangunan (BuildingsArr bin, BuildingsArr *bout); //copy array of Building
+void DealokasiBangunan (BuildingsArr *b); //free array of building
 boolean IsTipeBangunan (Kata src);
 void GetTipeBangunan (char *tipe, Kata src);
 /************************/
@@ -54,6 +49,6 @@ boolean IsKataSama (Kata k1, Kata k2);
 void TampilkanKata (Kata kata);
 int PanjangString (char str[]);
 void InputString (Kata *kata);
-void GetInfoDariFile (int *n, int *m, int *nbangunan, Bangunan *b, MATRIKS *mgraf);
+void GetInfoDariFile (int *n, int *m, int *nbangunan, BuildingsArr *b, MATRIKS *mgraf);
 
 #endif
