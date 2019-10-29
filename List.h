@@ -24,6 +24,7 @@ void CreateEmptyL (List *L);
 {I.S Anything}
 {F.S Building Defined}
 */
+boolean IsEmpty (List L);
 
 void InsertFirst (List *L, address P);
 /*

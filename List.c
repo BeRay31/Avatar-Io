@@ -4,7 +4,7 @@
 address AllocateL (int X)
 {
     address P;
-    P = (address*)malloc(sizeof(BElmtList));
+    P = (address)malloc(sizeof(BElmtList));
     if (P!=NULL)
     {
         P->info = X;
@@ -29,6 +29,9 @@ void CreateEmptyL (List *L)
 {I.S Anything}
 {F.S Building Defined}
 */
+boolean IsEmpty (List L){  
+	return L.First==NULL;
+}
 
 void InsertFirst (List *L, address P)
 {
@@ -83,6 +86,7 @@ void DelP (List *L, address *Pdel, address P)
 */
 void InsertLast (List *L, address P)
 {
+	printf("Here\n");
     address Last;
     if (!IsEmpty(*L))
     {

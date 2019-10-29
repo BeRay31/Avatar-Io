@@ -1,7 +1,7 @@
 #include "Map.h"
 
 
-void MakeValidMap(BuildMap *Map)
+void MakeBMap(BuildMap *Map)
 {
     //GRABBING INFO FROM FILE
     int n,m,Nbuildings;
@@ -43,7 +43,7 @@ void MakeValidMap(BuildMap *Map)
         }
         (*Map).M[x][y] = Temp;
     }
-
+	
     //EDIT GRAPH
     CreateEmptyGraph((*Map).G,Nbuildings);
     for (int i = 1; i <= Nbuildings;i++)
@@ -65,6 +65,31 @@ void MakeValidMap(BuildMap *Map)
 
 void PrintMap(BuildMap Map)
 {
+<<<<<<< HEAD
+=======
+    for (int j = 1; j <= Map.NKolEff+2 ; j++){
+		printf("*");
+	}
+	printf("\n");
+	
+	for (int i = 1; i <= Map.NBrsEff; i++){
+		printf("*");
+		for (int j = 1; j <= Map.NKolEff; j++){
+			if (Map.M[i][j].owner == 1)
+				print_blue(Map.M[i][j].buildingsType);
+			else if (Map.M[i][j].owner == 2)
+				print_red(Map.M[i][j].buildingsType);
+			else
+				printf("%c",Map.M[i][j].buildingsType);
+		}
+		printf("*\n");
+	}
+	
+	for (int j = 1; j <= Map.NKolEff+2 ; j++){
+		printf("*");
+	}
+	printf("\n");
+>>>>>>> 105fe9200047b7fb2c417231b9cfb8098ca7f7f4
 }
 /*
 {I.S Map defined}
