@@ -16,7 +16,7 @@ int main()
     Kata command;
     BuildMap Map;
     GetInfoDariFile (&n, &m, &nbangunan, &ArrOfBuildings, &mgraf);
-    MakeValidMap(&Map);
+    MakeBMap(&Map);
     while(NotEnd(ArrOfBuildings)){
         
         PrintMap(Map);
@@ -35,12 +35,12 @@ int main()
              do
             {
                  InputString(&command);
-                 EksekusiCommand(OlahString(command));
+                 EksekusiCommand(OlahString(command),Turn,&ArrOfBuildings);
                 
             } while (NotEndTurn(OlahString(command)));
             
             ChangeTurn(&Turn);
         }
-        UpdateMap(&Map);
+        UpdateMap(&Map,ArrOfBuildings);
     }
 }//main app Command Line Interface

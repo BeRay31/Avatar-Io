@@ -25,6 +25,12 @@ void MakeBMap(BuildMap *Map);
 {F.S Matrix of Building Initiated}
 */
 
+void UpdateMap (BuildMap *Map,BuildingsArr b);
+/*
+{I.S Defined}
+{F.S Update Map with new Building Information}
+*/
+
 void PrintMap(BuildMap Map);
 /*
 {I.S Map defined}

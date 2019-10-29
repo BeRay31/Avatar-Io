@@ -63,6 +63,33 @@ void MakeBMap(BuildMap *Map)
 {F.S Matrix of Building Initiated by empty Building}
 */
 
+void UpdateMap (BuildMap *Map,BuildingsArr b)
+{
+    for (int i = 1 ; i<= b.MaxEl ; i++) //add Building From File
+    {
+        Buildings Temp;
+        char type = b.T[i].buildingsType;
+        int x = b.T[i].position.X;
+        int y = b.T[i].position.Y;
+        CreateBuildings(&Temp,type);
+        Temp.position.X = x;
+        Temp.position.Y = y;
+        if (i == 1)
+        {
+            Temp.owner = 1;
+        }
+        else if (i == 2)
+        {
+            Temp.owner = 2;
+        }
+        (*Map).M[x][y] = Temp;
+    }
+}
+/*
+{I.S Defined}
+{F.S Update Map with new Building Information}
+*/
+
 void PrintMap(BuildMap Map)
 {
     for (int j = 1; j <= Map.NKolEff+2 ; j++){
