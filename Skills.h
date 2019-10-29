@@ -1,9 +1,19 @@
-#ifndef __SKILLS_H__
-#define __SKILLS_H__
+#ifndef __SKILL_H__
+#define __SKILL_H__
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-//#include "queue.h"
+#include "Queue.h"
+//SKILL ALGORITHM
+typedef struct {
+    int SkillCode;
+}Skill;
+
+actvteCrntSkill(Queue *S,Skill Act);
+/*
+{I.S }
+{F.S }
+*/
+addSkill(Queue *S,Skill New);
+
+
 
 #endif

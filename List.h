@@ -2,29 +2,54 @@
 #define __LIST_H__
 
 #include "Buildings.h"
-
+// LInked List for Buildings
 //TYPEDEF
-typedef struct tElmtlist *address;
-typedef struct tElmtlist {
-	Buildings info;
+typedef struct bElmtlist *address;  //define *address as struct tElmtList
+typedef struct bElmtlist {  //define ELmtList as Struct tElmtList
+	int info;
 	address next;
-} ElmtList;
+} BElmtList;
 typedef struct {
 	address First;
 } List;
-//SELECTOR
-#define Info(P) (P)->info
-#define Next(P) (P)->next
-#define First(L) ((L).First)
 
-address Alokasi (Buildings X); //pastiin nextnya NULL
+address AllocateL (int X);
+/*
+{I.S Anything}
+{F.S X allocated}
+*/
+
+void CreateEmptyL (List *L);
+/*
+{I.S Anything}
+{F.S Building Defined}
+*/
 
 void InsertFirst (List *L, address P);
+/*
+{I.S List defined}
+{F.S First Elmt B is P}
+*/
 
 void InsertAfter (List *L, address P, address Prec);
+/*
+{I.S List defined}
+{F.S Elmt after Prec is P}
+*/
 
 void DelFirst (List *L, address *P);
-
+/*
+{I.S List defined}
+{F.S First element of List deleted and saved in P} 
+*/
 void DelAfter (List *L, address *Pdel, address Prec);
-
+/*
+{I.S List Defined}
+{F.S Elmt After Prec Deleted and saved in Pdel}
+*/
+void InsertLast (List *L, address P);
+/*
+{I.S List Defined}
+{F.S Last Elmt of List updated by P}
+*/
 #endif
