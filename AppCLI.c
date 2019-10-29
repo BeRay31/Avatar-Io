@@ -27,9 +27,7 @@ int main()
                  EksekusiCommand(OlahString(command),Turn, &ArrOfBuildings);
                 
             } while (NotEndTurn(OlahString(command)));
-            
-            ChangeTurn(&Turn);
-            
+            ChangeTurn(&Turn);       
         }
         else{
              do

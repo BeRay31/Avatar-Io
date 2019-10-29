@@ -6,9 +6,13 @@ void MakeEmpty (TabInt * T)
 	int i;
 
 	for (i = IdxMin ; (i <= (IdxMax-IdxMin+1)) ; i++){
-		Elmt(*T, i).X = -999;
+		Elmt(*T, i).position.X = -999;
 	}
 }
+/*
+{I.S Anything}
+{F.S Make Empty Array}
+*/
 
 int NbOfBuildings (TabInt T)
 
@@ -16,53 +20,49 @@ int NbOfBuildings (TabInt T)
 	int i;
 	int count = 0;
 	for (i = IdxMin ; (i <= (IdxMax-IdxMin+1)) ; i++){
-		if(Elmt(T, i).X != -999){
+		if(Elmt(T, i).position.X != -999){
 			count++;
 		}
 	}
 	return count;
 }
+/*
+{I.S T defined}
+{F.S return NBElmt of T}
+*/
 
 boolean IsPointBuilding (TabInt T, int x, int y)
 
 {
 	int i;
 	for (i = IdxMin ; (i <= (IdxMax-IdxMin+1)) ; i++){
-		if(Elmt(T, i).X == x && Elmt(T, i).Y == y){
+		if(Elmt(T, i).position.X == x && Elmt(T, i).position.Y == y){
 			return true;
 		}
 	}
 	return false;
 }
+/*
+{I.S T defined}
+{F.S return true if x,y are position of Building}
+*/
 
-void AddBuilding(TabInt *T, int owner, int armies, boolean defenses, char type, int x, int y){
+void AddBuilding(TabInt *T, Buildings B){
 	int i;
 	for (i = IdxMin ; (i <= (IdxMax-IdxMin+1)) ; i++){
-		if(Elmt(*T, i).X == -999){
+		if(Elmt(*T, i).position.X == -999){
 			break;
 		}
 	}
-	Elmt(*T,i).X = x;
-	Elmt(*T,i).Y = y;
-	Elmt(*T,i).owner = owner;
-	Elmt(*T,i).armies = armies;
-	Elmt(*T,i).defenses = defenses;
-	Elmt(*T,i).buildingsType = type;
+	Elmt(*T,i).position.X = B.position.X;
+	Elmt(*T,i).position.Y = B.position.Y;
+	Elmt(*T,i).owner = B.owner;
+	Elmt(*T,i).armies = B.armies;
+	Elmt(*T,i).defenses = B.defenses;
+	Elmt(*T,i).buildingsType = B.buildingsType;
 	Elmt(*T,i).level = 1;
-	if(type == 'C'){
-		Elmt(*T,i).minArmiesToOccupy = 40;
-		Elmt(*T,i).incArmy = 10;
-	}
-	else if(type == 'F'){
-		Elmt(*T,i).minArmiesToOccupy = 80;
-		Elmt(*T,i).incArmy = 10;
-	}
-	else if(type == 'T'){
-		Elmt(*T,i).minArmiesToOccupy = 30;
-		Elmt(*T,i).incArmy = 5;
-	}
-	else if(type == 'V'){
-		Elmt(*T,i).minArmiesToOccupy = 20;
-		Elmt(*T,i).incArmy = 5;
-	}
 }
+/*
+{I.S T defined}
+{F.S Added new elmt on T}
+*/

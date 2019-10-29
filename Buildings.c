@@ -7,7 +7,7 @@ void CreateBuildings (Buildings *B,char type)
 */
 {
 	unsigned short int P;
-	if(type=='C'){
+	if(type=='C'){ //Castle Type
 		(*B).buildingsIndex = 0;
 		(*B).buildingsType = type;
 		(*B).level = 1;
@@ -18,7 +18,7 @@ void CreateBuildings (Buildings *B,char type)
 		(*B).minArmiesToOccupy = 40;
 		(*B).armies = 0;
 	}
-	else if (type=='T'){
+	else if (type=='T'){ //Tower Type
 		(*B).buildingsIndex = 0;
 		(*B).buildingsType = type;
 		(*B).level = 1;
@@ -29,7 +29,7 @@ void CreateBuildings (Buildings *B,char type)
 		(*B).minArmiesToOccupy = 30;
 		(*B).armies = 0;
 	}
-	else if(type=='F'){
+	else if(type=='F'){ //Fottres Type
 		(*B).buildingsIndex = 0;
 		(*B).buildingsType = type;
 		(*B).level = 1;
@@ -40,7 +40,7 @@ void CreateBuildings (Buildings *B,char type)
 		(*B).minArmiesToOccupy = 80;
 		(*B).armies = 0;
 	}
-	else if(type=='V'){
+	else if(type=='V'){ //Vilage Type
 		(*B).buildingsIndex = 0;
 		(*B).buildingsType = type;
 		(*B).level = 1;
@@ -51,7 +51,7 @@ void CreateBuildings (Buildings *B,char type)
 		(*B).minArmiesToOccupy = 20;
 		(*B).armies = 0;
 	}
-	else if(type==' '){
+	else if(type==' '){ //Blank Type
 		(*B).buildingsIndex = 0;
 		(*B).buildingsType = type;
 		(*B).level = 0;
@@ -70,14 +70,17 @@ void LevelUp (Buildings *B)
 {F.S level++ and <=4}
 */
 {
-	if((*B).level <4 && (*B).armies>=((*B).maxArmyOnBuildings/2)){
+	if( ((*B).level < 4) && ((*B).armies>=((*B).maxArmyOnBuildings/2)) && ((*B).owner!=0)) //Check Level
+	{
 		(*B).armies -= ((*B).maxArmyOnBuildings/2);
-		if((*B).buildingsType == 'C'){
+		if((*B).buildingsType == 'C') //LevelUp Castle
+		{
 			(*B).incArmy += 5;
 			(*B).maxArmyOnBuildings += 20;
 			(*B).minArmiesToOccupy = -999;		
 		}	
-		else if((*B).buildingsType == 'T'){
+		else if((*B).buildingsType == 'T') //LevelUp Tower
+		{
 			if((*B).level==1){
 				(*B).incArmy += 5;
 			}
@@ -87,7 +90,8 @@ void LevelUp (Buildings *B)
 			(*B).maxArmyOnBuildings += 10;
 			(*B).minArmiesToOccupy = -999;
 		}
-		else if((*B).buildingsType == 'F'){
+		else if((*B).buildingsType == 'F') //LevelUp Fotress
+		{
 			(*B).incArmy += 10;
 			(*B).maxArmyOnBuildings += 20;
 			(*B).minArmiesToOccupy = -999;	
@@ -95,7 +99,8 @@ void LevelUp (Buildings *B)
 				(*B).defenses = true;
 			}
 		}
-		else if((*B).buildingsType == 'V'){
+		else if((*B).buildingsType == 'V') //LevelUp Village
+		{
 			(*B).incArmy += 5;
 			(*B).maxArmyOnBuildings += 10;
 			(*B).minArmiesToOccupy = -999;	
@@ -113,7 +118,7 @@ void IncTroops (Buildings *B)
 {
 	(*B).armies += (*B).incArmy;
 }
-void Attacked (Buildings *B, Buildings *BL, int Narmies)
+void Attacked (Buildings *B, Buildings *BL, int Narmies) //not verified
 /*
 {I.S Building defined, }
 {F.S state Attacked based on defenses}
