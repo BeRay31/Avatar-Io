@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 //preprocessor
-
+#define MaxEl 10
 typedef struct sElmtlist *address;  //define *address as struct tElmtList
 typedef struct sElmtlist {  //define ELmtList as Struct tElmtList
 	Skill info;
@@ -20,6 +20,11 @@ address AllocateQ (Skill S);
 {I.S anything}
 {F.S S alocated}
 */
+int NbQElmt (Queue Q);
+/*
+{I.S Q Defined}
+{F.S Return NbELmt}
+*/
 
 bool IsQEmpty (Queue Q);
 /*
@@ -27,6 +32,11 @@ bool IsQEmpty (Queue Q);
 {F.S True if Q Empty && False if Q not Empty}
 */
 
+bool IsQFull (Queue Q);
+/*
+{I.S Q Defined}
+{F.S True If ElmtQ = MaxEl}
+*/
 void QCreateEmpty(Queue *Q);
 /*
 {I.S Anything}

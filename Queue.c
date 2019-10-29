@@ -21,6 +21,24 @@ address AllocateQ (Skill S)
 {F.S S alocated}
 */
 
+int NbQElmt (Queue Q)
+{
+    int x = 0;
+    address P;
+    P = Q.Head;
+    while (P != Q.Tail)
+    {
+        x++;
+        P = P->next;
+    }
+    return x;
+}
+/*
+{I.S Q Defined}
+{F.S Return NbELmt}
+*/
+
+
 bool IsQEmpty (Queue Q)
 {
     return ((Q.Head == NULL)&&(Q.Tail == NULL));
@@ -28,6 +46,15 @@ bool IsQEmpty (Queue Q)
 /*
 {I.S Q defined}
 {F.S True if Q Empty && False if Q not Empty}
+*/
+
+bool IsQFull (Queue Q)
+{
+    return (NbQElmt(Q)==MaxEl);
+}
+/*
+{I.S Q Defined}
+{F.S True If ElmtQ = MaxEl}
 */
 
 void QCreateEmpty(Queue *Q)
@@ -43,16 +70,19 @@ void QCreateEmpty(Queue *Q)
 void QAddElmt (Queue *Q, Skill S)
 {
     address newSkill;
-    newSkill = Allocate (S);
-    if (IsQEmpty(*Q))
+    if (!IsQEmpty(*Q))
     {
-        (*Q).Head = newSkill;
-        (*Q).Tail = newSkill;        
-    }
-    else
-    {
-        (*Q).Tail->next = newSkill;
-        (*Q).Tail = (*Q).Tail->next;
+        newSkill = Allocate (S);
+        if (IsQEmpty(*Q))
+        {
+            (*Q).Head = newSkill;
+            (*Q).Tail = newSkill;        
+        }
+        else
+        {
+            (*Q).Tail->next = newSkill;
+            (*Q).Tail = (*Q).Tail->next;
+        }
     }
 }
 /*
