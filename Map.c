@@ -65,8 +65,6 @@ void MakeBMap(BuildMap *Map)
 
 void PrintMap(BuildMap Map)
 {
-<<<<<<< HEAD
-=======
     for (int j = 1; j <= Map.NKolEff+2 ; j++){
 		printf("*");
 	}
@@ -89,7 +87,6 @@ void PrintMap(BuildMap Map)
 		printf("*");
 	}
 	printf("\n");
->>>>>>> 105fe9200047b7fb2c417231b9cfb8098ca7f7f4
 }
 /*
 {I.S Map defined}

@@ -70,7 +70,7 @@ void QCreateEmpty(Queue *Q)
 void QAddElmt (Queue *Q, Skill S)
 {
     address newSkill;
-    if (!IsQEmpty(*Q))
+    if (!IsQFull(*Q))
     {
         newSkill = Allocate (S);
         if (IsQEmpty(*Q))
