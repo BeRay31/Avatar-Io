@@ -65,7 +65,6 @@ void MakeValidMap(BuildMap *Map)
 
 void PrintMap(BuildMap Map)
 {
-    
 }
 /*
 {I.S Map defined}

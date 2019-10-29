@@ -128,7 +128,7 @@ int PanjangString (char str[]) {
 void InputString (Kata *kata)
 {
     char str[100];
-    printf("Masukan string: ");
+    printf("ENTER COMMAND: ");
     fgets(str, sizeof(str), stdin);
     int n = PanjangString(str);
     for (int i=0; i<n; i++){
