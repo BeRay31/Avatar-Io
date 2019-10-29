@@ -9,39 +9,26 @@ typedef int IdxType;
 typedef int ElType;   
  
 typedef struct { 
-  ElType TI[IdxMax+1];
+  Buildings TI[IdxMax+1];
 } TabInt;
+typedef struct{
+    unsigned short int owner; //owner 1 or 2 or 0
+    int armies; // total army in building
+    unsigned short int level; //building's level 1 2 3 4
+    int incArmy; //increment army depends on levels (A) / turn
+    int maxArmyOnBuildings; //Max Army in Building (M)
+    int X; // valUndef = -999
+    int Y; // valUndef = -999
+    boolean defenses; //defenses status yes = true , no = false
+    int minArmiesToOccupy; //precondition to occupy an free building (total army) auto to level 1
+    char buildingsType; //
+} Buildings;
+    
 
 #define Elmt(T,i) (T).TI[(i)]
 
 void MakeEmpty (TabInt * T);
-int NbElmt (TabInt T);
-int MaxNbEl (TabInt T);
-
-IdxType GetFirstIdx (TabInt T);
-IdxType GetLastIdx (TabInt T);
-boolean IsIdxValid (TabInt T, IdxType i);
-boolean IsIdxEff (TabInt T, IdxType i);
-boolean IsEmpty (TabInt T);
-boolean IsFull (TabInt T);
-void TulisIsiTab (TabInt T);
-
-boolean IsEQ (TabInt T1, TabInt T2);
-
-IdxType Search1 (TabInt T, ElType X);
-
-boolean SearchB (TabInt T, ElType X);
-
-void MaxMin (TabInt T, ElType * Max, ElType * Min);
-
-ElType SumTab (TabInt T);
-
-int CountX (TabInt T, ElType X);
-
-void Sort (TabInt * T, boolean asc);
-
-void AddAsLastEl (TabInt * T, ElType X);
-
-void DelLastEl (TabInt * T, ElType * X);
-
+int NbOfBuildings (TabInt T);
+boolean IsPointBuilding (TabInt T, int x, int y);
+void AddBuilding(TabInt *T, int owner, int armies, boolean defenses, char type, int x, int y);
 #endif

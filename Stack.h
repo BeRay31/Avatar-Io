@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #ifndef __STACK_H__
 #define __STACK_H__
 
@@ -42,3 +43,5 @@ void Pop (Stack *S,infotype *X);
 
 
 #endif
+=======
+>>>>>>> 7aad60ce807376edee2cd665ec2989bfd7f78ff7
