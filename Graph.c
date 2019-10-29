@@ -2,7 +2,7 @@
 
 void CreateEmptyGraph(GraphArr *G,int NElmt)
 {
-    (*G).Arr = (GraphArr*)malloc(NElmt*(sizeof(GraphArr)));
+    G = (GraphArr*)malloc(NElmt*(sizeof(GraphArr)));
     if ((*G).Arr != NULL)
     {
         (*G).NbElmt = NElmt;

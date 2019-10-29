@@ -11,9 +11,9 @@
 #include "pcolor.h"
 
 typedef int indeks; /* indeks baris, kolom */
-typedef Buildings ElType;
+typedef Buildings ElmtType;
 typedef struct {
-    ElType M[BrsMax+1][KolMax+1];
+    ElmtType M[BrsMax+1][KolMax+1];
     GraphArr *G;
     int NBrsEff; /* banyaknya/ukuran baris yg terdefinisi */
     int NKolEff; /* banyaknya/ukuran kolom yg terdefinisi */
