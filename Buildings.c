@@ -6,8 +6,8 @@ void CreateBuildings (Buildings *B,char type)
 {F.S Building Created Based on Type}
 */
 {
-	unsigned short int P;
-	if(type=='C'){ //Castle Type
+	
+	if(type=='C'){
 		(*B).buildingsIndex = 0;
 		(*B).buildingsType = type;
 		(*B).level = 1;
@@ -18,7 +18,7 @@ void CreateBuildings (Buildings *B,char type)
 		(*B).minArmiesToOccupy = 40;
 		(*B).armies = 0;
 	}
-	else if (type=='T'){ //Tower Type
+	else if (type=='T'){
 		(*B).buildingsIndex = 0;
 		(*B).buildingsType = type;
 		(*B).level = 1;
@@ -29,7 +29,7 @@ void CreateBuildings (Buildings *B,char type)
 		(*B).minArmiesToOccupy = 30;
 		(*B).armies = 0;
 	}
-	else if(type=='F'){ //Fottres Type
+	else if(type=='F'){
 		(*B).buildingsIndex = 0;
 		(*B).buildingsType = type;
 		(*B).level = 1;
@@ -40,7 +40,7 @@ void CreateBuildings (Buildings *B,char type)
 		(*B).minArmiesToOccupy = 80;
 		(*B).armies = 0;
 	}
-	else if(type=='V'){ //Vilage Type
+	else if(type=='V'){
 		(*B).buildingsIndex = 0;
 		(*B).buildingsType = type;
 		(*B).level = 1;
@@ -51,7 +51,7 @@ void CreateBuildings (Buildings *B,char type)
 		(*B).minArmiesToOccupy = 20;
 		(*B).armies = 0;
 	}
-	else if(type==' '){ //Blank Type
+	else if(type==' '){
 		(*B).buildingsIndex = 0;
 		(*B).buildingsType = type;
 		(*B).level = 0;
@@ -70,17 +70,14 @@ void LevelUp (Buildings *B)
 {F.S level++ and <=4}
 */
 {
-	if( ((*B).level < 4) && ((*B).armies>=((*B).maxArmyOnBuildings/2)) && ((*B).owner!=0)) //Check Level
-	{
+	if((*B).level <4 && (*B).armies>=((*B).maxArmyOnBuildings/2)){
 		(*B).armies -= ((*B).maxArmyOnBuildings/2);
-		if((*B).buildingsType == 'C') //LevelUp Castle
-		{
+		if((*B).buildingsType == 'C'){
 			(*B).incArmy += 5;
 			(*B).maxArmyOnBuildings += 20;
 			(*B).minArmiesToOccupy = -999;		
 		}	
-		else if((*B).buildingsType == 'T') //LevelUp Tower
-		{
+		else if((*B).buildingsType == 'T'){
 			if((*B).level==1){
 				(*B).incArmy += 5;
 			}
@@ -90,8 +87,7 @@ void LevelUp (Buildings *B)
 			(*B).maxArmyOnBuildings += 10;
 			(*B).minArmiesToOccupy = -999;
 		}
-		else if((*B).buildingsType == 'F') //LevelUp Fotress
-		{
+		else if((*B).buildingsType == 'F'){
 			(*B).incArmy += 10;
 			(*B).maxArmyOnBuildings += 20;
 			(*B).minArmiesToOccupy = -999;	
@@ -99,8 +95,7 @@ void LevelUp (Buildings *B)
 				(*B).defenses = true;
 			}
 		}
-		else if((*B).buildingsType == 'V') //LevelUp Village
-		{
+		else if((*B).buildingsType == 'V'){
 			(*B).incArmy += 5;
 			(*B).maxArmyOnBuildings += 10;
 			(*B).minArmiesToOccupy = -999;	
@@ -116,9 +111,11 @@ void IncTroops (Buildings *B)
 {F.S Total Army incremented by (A)}
 */
 {
-	(*B).armies += (*B).incArmy;
+	if((*B).owner!=0){  
+		(*B).armies += (*B).incArmy;
+	}
 }
-void Attacked (Buildings *B, Buildings *BL, int Narmies) //not verified
+void Attacked (Buildings *B, Buildings *BL, int Narmies)
 /*
 {I.S Building defined, }
 {F.S state Attacked based on defenses}
@@ -126,29 +123,28 @@ void Attacked (Buildings *B, Buildings *BL, int Narmies) //not verified
 {
 	int army;  
 
-	(*BL).armies -= Narmies; //jumlah pasukan penyerang bberkurang sebanyak narmies
-	//jika bangunan yang diserang (B) tidak bukan pemilik lawan
-	if((*B).owner==0){
-		
-		(*B).minArmiesToOccupy -= Narmies;
-		if ((*B).minArmiesToOccupy=0){
-			(*B).owner = (*BL).owner; 
-			(*B).armies = 0; 
-		}
-		else if((*B).minArmiesToOccupy < 0){
-			(*B).owner = (*BL).owner; 
-			(*B).armies = -1*((*B).minArmiesToOccupy);
-
-		}
-	}
+	(*BL).armies -= Narmies; 
 	//jika bangunan yang diserang (B) pemilik lawan
-	else{
+	
 		if((*B).defenses){
-			(*B).armies -= (Narmies*3/4);
+			if((*B).owner==0){
+				(*B).minArmiesToOccupy -= Narmies;
+				Occupy(B);
+			}
+			else if(SkillAct==AttackUp){
+				(*B).defenses=false;
+			}
+			else if(SkillAct==CriticalHit){
+				
+			}
+			else{   
+				(*B).armies -= (Narmies*3/4);
+			}
 		}
-		else{
+		else if (!(*B).defenses){
 			(*B).armies -= Narmies;
 		}
+		
 		
 		
 
@@ -159,15 +155,26 @@ void Attacked (Buildings *B, Buildings *BL, int Narmies) //not verified
 			
 			(*B).armies += army; 
 		}
-
-	}
-	
 }
-void Occupy (Buildings *B)
+void Occupy (Buildings *B, Buildings *BL, Narmies)
 /*
 {I.S Building not occupied or owner = 0}
 {F.S Building Occupied owner = 1 || 2}
 */
 {
 	
+		if ((*B).minArmiesToOccupy=0){
+			
+			(*B).armies = 0; 
+		}
+		else if((*B).minArmiesToOccupy < 0){
+			
+			(*B).armies = (*B).minArmiesToOccupy;
+
+		}
+}
+void Move (Buildings *B, Buildings *B2, Narmies)
+{
+	(*B).armies -= Narmies;
+	(*B2).armies += Narmies;
 }
