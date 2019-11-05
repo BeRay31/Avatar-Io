@@ -1,64 +1,43 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "boolean.h"
-#include "mesinkata.h"
-#include "matriks.h"
+#include "loadinfoawal.h"
 
-/*  Kamus Umum */
 #define IdxMax 10000
 /* Indeks maksimum array, sekaligus ukuran maksimum array dalam C */
 #define IdxMin 1
 /* Indeks minimum array */
 
-/* KONSTRUKTOR ARRAY PENYIMPAN INFO BANGUNAN */
-typedef struct {
-  char building;
-  int indeks;
-  int kolom;
-} InfoBangunan;
-
-typedef struct {
-  InfoBangunan *T;
-  int MaxEl; 
-} Bangunan;
-/********************************************/
-
-/* KONSTRUKTOR ARRAY PENYIMPAN ELEMEN GRAF */
-typedef struct { 
-  int TI[IdxMax+1];
-  int Neff;
-} TabGraf;
-/*******************************************/
-
-/* ********** SELEKTOR ********** */
-#define Isi(B,i)	   (B).T[(i)]
-#define Maxel(B)       (B).MaxEl
-#define Building(e)    (e).building
-#define Indeks(e)      (e).indeks
-#define Kolom(e)       (e).kolom
-/* ****************************** */
-
 /******** BANGUNAN *********/
-void CreateEmptyBangunan (Bangunan *b, int MaksEl)
+void CreateEmptyBangunan (BuildingsArr *b, int MaksEl)
 {
-	(*b).T = (InfoBangunan*) malloc ((MaksEl+1) * sizeof(InfoBangunan));
+	(*b).T = (Buildings*) malloc ((MaksEl+1) * sizeof(Buildings));
 	if ((*b).T != NULL){
-		Maxel(*b) = MaksEl;
+		(*b).MaxEl = MaksEl;
 	} else {
-		Maxel(*b) = 0;	
+		(*b).MaxEl = 0;	
 	}
 }
-void TulisIsiBangunan (Bangunan b)
+void TulisIsiBangunan (BuildingsArr b)
 {
 	for (int i=1; i<=b.MaxEl; i++){
-		printf("%c", b.T[i].building);
-		printf(" %d", b.T[i].indeks);
-		printf(" %d\n", b.T[i].kolom);
+		printf("%d.", b.T[i].buildingsIndex);
+		printf(" %c", b.T[i].buildingsType);
+		printf(" (%d,%d)\n", b.T[i].position.X,b.T[i].position.Y);
 	}
 }
-void DealokasiBangunan (Bangunan *b)
+void CopyBangunan (BuildingsArr bin, BuildingsArr *bout)
 {
-	Maxel(*b) = 0;
+	CreateEmptyBangunan (bout, bin.MaxEl);
+	for (int i=1; i<=bin.MaxEl; i++){
+		(*bout).T[i].buildingsType = bin.T[i].buildingsType;
+		(*bout).T[i].buildingsIndex = bin.T[i].buildingsIndex;
+		(*bout).T[i].position = bin.T[i].position;
+	}
+}
+void DealokasiBangunan (BuildingsArr *b)
+{
+	(*b).MaxEl = 0;
 	free((*b).T);
 }
 boolean IsTipeBangunan (Kata src)
@@ -99,6 +78,25 @@ void CharToInt(int *res, Kata src)
 	}
 	*res = num;
 }
+
+void CharToUnShortInt(unsigned short int *res, Kata src)
+{
+	unsigned short int num = 0;
+	for (int i=1; i<=src.Length; i++){
+		num = ((num*10) + (src.TabKata[i]-'0'));
+	}
+	*res = num;
+}
+
+int BoolToInt (boolean True)
+{
+	if (True){
+		return 1;
+	} else {
+		return 0;
+	}
+}
+
 void Salin(Kata* dest, Kata src)
 /* Menyalin kata
    I.S. : dest sembarang, src sebuah kata yang valid
@@ -149,7 +147,7 @@ int PanjangString (char str[]) {
 void InputString (Kata *kata)
 {
     char str[100];
-    printf("Masukan string: ");
+    printf("ENTER COMMAND: ");
     fgets(str, sizeof(str), stdin);
     int n = PanjangString(str);
     for (int i=0; i<n; i++){
@@ -157,23 +155,29 @@ void InputString (Kata *kata)
     }
     (*kata).Length = n;
 }
-/** test ***/
-int main(){
+
+void GetInfoDariFile (int *n, int *m, int *nbangunan, BuildingsArr *b, MATRIKS *mgraf)
+{
 	/*** KAMUS ***/
+
 	// kamus tinggi dan lebar peta
 	int N, M;
+
 	// kamus banyaknya bangunan
 	int NBangunan;
+
 	// kamus bangunan
-	Bangunan B;
-	InfoBangunan e;
+	BuildingsArr B;
+	Buildings e;
 	char tipe; // tipe bangunan
-	int idx, kol; // baris, kolom
+	int idx, kol; // baris, kolom (posisi)
 	int j; // indeks elemen array Bangunan
+
 	// kamus graf
 	TabGraf tg;
 	int elmtGraf; // nilai elemen 1 atau 0
 	int idks; // indeks elemen array Tabgraf
+
 	// kamus umum
 	int countKata; // menghitung kata yg telah dibaca
 	int count;
@@ -202,17 +206,18 @@ int main(){
 			if (count == 1){// && (IsTipeBangunan(CKata))){
 				count = 2; // = 2
 				GetTipeBangunan(&tipe, CKata);
-				e.building = tipe;
+				e.buildingsType = tipe;
 			} else if (count == 2) {
 				count = 3; // = 3;
 				Salin(&KataTemp, CKata);
 				CharToInt(&idx, KataTemp);
-				e.indeks = idx;
+				e.position.X = idx;
 			} else if (count == 3){
 				count = 1;
 				Salin(&KataTemp, CKata);
 				CharToInt(&kol, KataTemp);
-				e.kolom = kol;
+				e.position.Y = kol;
+				e.buildingsIndex = j;
 				B.T[j] = e;
 				j++;
 			}
@@ -225,67 +230,6 @@ int main(){
 		}
 		ADVKATA();
 	}
-	printf("tinggi peta %d\n",N);
-	printf("lebar peta %d\n",M);
-	printf("banyaknya bangunan %d\n",NBangunan);
-	printf("info bangunan <tipe bangunan, baris, kolom>\n");
-	TulisIsiBangunan(B);
-	printf("info graf\n");
-	TulisIsiTabGraf(tg, NBangunan);
-	// kamus command
-	Kata ATTACK, LEVEL_UP, SKILL, UNDO, END_TURN, SAVE;
-	// ATTTACK
-	ATTACK.TabKata[1] = 'A';
-	ATTACK.TabKata[2] = 'T';
-	ATTACK.TabKata[3] = 'T';
-	ATTACK.TabKata[4] = 'A';
-	ATTACK.TabKata[5] = 'C';
-	ATTACK.TabKata[6] = 'K';
-	ATTACK.Length = 6;
-	// LEVEL_UP
-	LEVEL_UP.TabKata[1] = 'L';
-	LEVEL_UP.TabKata[2] = 'E';
-	LEVEL_UP.TabKata[3] = 'V';
-	LEVEL_UP.TabKata[4] = 'E';
-	LEVEL_UP.TabKata[5] = 'L';
-	LEVEL_UP.TabKata[6] = '_';
-	LEVEL_UP.TabKata[7] = 'U';
-	LEVEL_UP.TabKata[8] = 'P';
-	LEVEL_UP.Length = 8;
-	// SKILL
-	SKILL.TabKata[1] = 'S';
-	SKILL.TabKata[2] = 'K';
-	SKILL.TabKata[3] = 'I';
-	SKILL.TabKata[4] = 'L';
-	SKILL.TabKata[5] = 'L';
-	SKILL.Length = 5;
-	// UNDO
-	UNDO.TabKata[1] = 'U';
-	UNDO.TabKata[2] = 'N';
-	UNDO.TabKata[3] = 'D';
-	UNDO.TabKata[4] = 'O';
-	UNDO.Length = 4;
-	// END_TURN
-	END_TURN.TabKata[1] = 'E';
-	END_TURN.TabKata[2] = 'N';
-	END_TURN.TabKata[3] = 'D';
-	END_TURN.TabKata[4] = '_';
-	END_TURN.TabKata[5] = 'T';
-	END_TURN.TabKata[6] = 'U';
-	END_TURN.TabKata[7] = 'R';
-	END_TURN.TabKata[8] = 'N';
-	END_TURN.Length = 8;
-	// SAVE
-	SAVE.TabKata[1] = 'S';
-	SAVE.TabKata[2] = 'A';
-	SAVE.TabKata[3] = 'V';
-	SAVE.TabKata[4] = 'E';
-	SAVE.Length = 4; 
-	// kamus coba
-	Kata serang;
-	InputString(&serang);
-	TampilkanKata(serang);
-	printf("\n");
 	// MATRIKS GRAF
 	// kamus
 	MATRIKS MGraf;
@@ -299,6 +243,9 @@ int main(){
 			k++;
 		}
 	}
-	TulisMATRIKS(MGraf);
-	return 0;
+	(*n) = N;
+	(*m) = M;
+	(*nbangunan) = NBangunan;
+	CopyMATRIKS (MGraf, mgraf);
+	CopyBangunan (B, b);
 }

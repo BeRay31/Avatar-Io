@@ -3,7 +3,7 @@
 
 #include "boolean.h"
 #include "Map.h"
-#include "infofileeksternal.h"
+#include "loadinfoawal.h"
 
 boolean NotEnd (BuildingsArr B);
 void ChangeTurn(int *Turn);

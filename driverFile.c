@@ -14,8 +14,8 @@ int main()
     printf("%d\n",nbuildings);
     TulisIsiBangunan(arrBuildings);
     TulisMATRIKS(graf);
-    Save(arrBuildings, graf);
+    Save(arrBuildings, graf, n, m, nbuildings);
     return 0;
 }
 
-// gcc driverFile.c mesinkar.c mesinkata.c Buildings.c matriks.c infofileeksternal.c point.c -o p
+// gcc driverFile.c mesinkar.c mesinkata.c loadinfoawal.c Buildings.c point.c matriks.c save.c load.c -o run

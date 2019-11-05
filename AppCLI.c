@@ -4,7 +4,7 @@
 #include "matriks.h"
 #include "Map.h"
 #include "Graph.h"
-#include "infofileeksternal.h"
+#include "loadinfoawal.h"
 #include "GameMech.h"
 #include <stdio.h>
 int main()

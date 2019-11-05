@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include "matriks.h"
 #include "Buildings.h"
-#include "infofileeksternal.h"
+#include "loadinfoawal.h"
 #include "Graph.h"
 #include "pcolor.h"
 

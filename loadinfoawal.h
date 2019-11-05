@@ -39,7 +39,7 @@ void TulisIsiTabGraf (TabGraf tg, int NBangunan);
 /************************/
 /*** FUNGSI LAIN ***/
 void CharToInt(int *res, Kata src);
-void CharToUnShortInt(int *res, Kata src);
+void CharToUnShortInt(unsigned short int *res, Kata src);
 int BoolToInt (boolean True);
 void Salin(Kata* dest, Kata src);
 /* Menyalin kata

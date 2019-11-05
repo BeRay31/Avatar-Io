@@ -2,12 +2,10 @@
 #define SAVE_H
 
 #include "boolean.h"
-#include "infofileeksternal.h"
+#include "loadinfoawal.h"
 
 static FILE * fp; // dalam main program dipake
 
-int BoolToInt (boolean True);
-
-void Save (BuildingsArr CurrentBuilding, MATRIKS Graf);
+void Save (BuildingsArr CurrentBuilding, MATRIKS Graf, int N, int M, int NBuilding);
 
 #endif
