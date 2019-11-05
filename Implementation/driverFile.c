@@ -1,11 +1,13 @@
 #include <stdio.h>
-#include "boolean.h"
-//#include "infofileeksternal.h"
+#include "../include1/boolean.h"
+#include "../include1/loadinfoawal.h"
 #include "../include1/save.h"
+#include "../include1/Map.h"
 
 
 int main()
 {
+    BuildMap Peta;
     int n,m,nbuildings;
     BuildingsArr arrBuildings;
     MATRIKS graf;
@@ -14,8 +16,13 @@ int main()
     printf("%d\n",nbuildings);
     TulisIsiBangunan(arrBuildings);
     TulisMATRIKS(graf);
-    Save(arrBuildings, graf, n, m, nbuildings);
-    return 0;
+    printf("\n");
+   /* Save(arrBuildings, graf, n, m, nbuildings);
+    return 0;*/
+
+
+    
+
 }
 
 // gcc driverFile.c mesinkar.c mesinkata.c loadinfoawal.c Buildings.c point.c matriks.c save.c load.c -o run

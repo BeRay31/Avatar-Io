@@ -1,4 +1,4 @@
-
+#include "../include1/Map.h"
 
 void MakeBMap(BuildMap *Map)
 {

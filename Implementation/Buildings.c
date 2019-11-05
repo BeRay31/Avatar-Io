@@ -121,7 +121,7 @@ void Attacked (Buildings *B, Buildings *BL, int Narmies)
 {F.S state Attacked based on defenses}
 */
 {
-	int army;  
+	/*int army;  
 
 	(*BL).armies -= Narmies; 
 	//jika bangunan yang diserang (B) pemilik lawan
@@ -154,14 +154,14 @@ void Attacked (Buildings *B, Buildings *BL, int Narmies)
 			(*B).owner = (*BL).owner;//kepemilikan di rubah
 			
 			(*B).armies += army; 
-		}
+		}*/
 }
-void Occupy (Buildings *B, Buildings *BL, Narmies)
+//void Occupy (Buildings *B, Buildings *BL, int Narmies)
 /*
 {I.S Building not occupied or owner = 0}
 {F.S Building Occupied owner = 1 || 2}
 */
-{
+/*{
 	
 		if ((*B).minArmiesToOccupy=0){
 			
@@ -173,8 +173,8 @@ void Occupy (Buildings *B, Buildings *BL, Narmies)
 
 		}
 }
-void Move (Buildings *B, Buildings *B2, Narmies)
+void Move (Buildings *B, Buildings *B2, int Narmies)
 {
 	(*B).armies -= Narmies;
 	(*B2).armies += Narmies;
-}
+}*/
