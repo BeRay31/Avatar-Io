@@ -6,7 +6,7 @@ void CreateBuildings (Buildings *B,char type)
 {F.S Building Created Based on Type}
 */
 {
-	unsigned short int P;
+	
 	if(type=='C'){
 		(*B).buildingsIndex = 0;
 		(*B).buildingsType = type;
@@ -111,7 +111,9 @@ void IncTroops (Buildings *B)
 {F.S Total Army incremented by (A)}
 */
 {
-	(*B).armies += (*B).incArmy;
+	if((*B).owner!=0){  
+		(*B).armies += (*B).incArmy;
+	}
 }
 void Attacked (Buildings *B, Buildings *BL, int Narmies)
 /*
@@ -121,29 +123,28 @@ void Attacked (Buildings *B, Buildings *BL, int Narmies)
 {
 	int army;  
 
-	(*BL).armies -= Narmies; //jumlah pasukan penyerang bberkurang sebanyak narmies
-	//jika bangunan yang diserang (B) tidak bukan pemilik lawan
-	if((*B).owner==0){
-		
-		(*B).minArmiesToOccupy -= Narmies;
-		if ((*B).minArmiesToOccupy=0){
-			(*B).owner = (*BL).owner; 
-			(*B).armies = 0; 
-		}
-		else if((*B).minArmiesToOccupy < 0){
-			(*B).owner = (*BL).owner; 
-			(*B).armies = -1*((*B).minArmiesToOccupy);
-
-		}
-	}
+	(*BL).armies -= Narmies; 
 	//jika bangunan yang diserang (B) pemilik lawan
-	else{
+	
 		if((*B).defenses){
-			(*B).armies -= (Narmies*3/4);
+			if((*B).owner==0){
+				(*B).minArmiesToOccupy -= Narmies;
+				Occupy(B);
+			}
+			else if(SkillAct==AttackUp){
+				(*B).defenses=false;
+			}
+			else if(SkillAct==CriticalHit){
+				
+			}
+			else{   
+				(*B).armies -= (Narmies*3/4);
+			}
 		}
-		else{
+		else if (!(*B).defenses){
 			(*B).armies -= Narmies;
 		}
+		
 		
 		
 
@@ -154,15 +155,26 @@ void Attacked (Buildings *B, Buildings *BL, int Narmies)
 			
 			(*B).armies += army; 
 		}
-
-	}
-	
 }
-void Occupy (Buildings *B)
+void Occupy (Buildings *B, Buildings *BL, Narmies)
 /*
 {I.S Building not occupied or owner = 0}
 {F.S Building Occupied owner = 1 || 2}
 */
 {
 	
+		if ((*B).minArmiesToOccupy=0){
+			
+			(*B).armies = 0; 
+		}
+		else if((*B).minArmiesToOccupy < 0){
+			
+			(*B).armies = (*B).minArmiesToOccupy;
+
+		}
+}
+void Move (Buildings *B, Buildings *B2, Narmies)
+{
+	(*B).armies -= Narmies;
+	(*B2).armies += Narmies;
 }
