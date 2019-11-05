@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "loadinfoawal.h"
+#include "../include1/loadinfoawal.h"
 
 void load (int *n, int *m, int *nbangunan, BuildingsArr *b, MATRIKS *mgraf)
 {

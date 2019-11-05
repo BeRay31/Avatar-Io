@@ -1,6 +1,6 @@
 
-#include "ArrayImp.h"
 #include <stdio.h>
+#include "../include1/ArrayImp.h"
 void MakeEmpty (TabInt * T)
 {
 	int i;

@@ -1,5 +1,5 @@
-#include "skill.h"
-#include "infofileeksternal.h"
+#include "../include1/Skills.h"
+#include "../include1/infofileeksternal.h"
 
 /*
 	1. Instant Upgrade

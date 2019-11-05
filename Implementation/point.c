@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include "boolean.h"
-#include "point.h"
+#include "../include1/boolean.h"
+#include "../include1/point.h"
 #include <math.h>
 POINT MakePOINT (float X, float Y)
 {

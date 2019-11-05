@@ -1,4 +1,4 @@
-#include "Queue.h"
+#include "../include1/Queue.h"
 //IMPLEMENTATION
 
 address AllocateQ (Skill S)

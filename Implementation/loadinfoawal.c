@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "boolean.h"
-#include "loadinfoawal.h"
+#include "../include1/boolean.h"
+#include "../include1/loadinfoawal.h"
 
 #define IdxMax 10000
 /* Indeks maksimum array, sekaligus ukuran maksimum array dalam C */

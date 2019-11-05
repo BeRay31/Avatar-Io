@@ -1,7 +1,7 @@
 #include <stdio.h>
-#include "boolean.h"
-#include "loadinfoawal.h"
-#include "save.h"
+#include "../include1/boolean.h"
+#include "../include1/loadinfoawal.h"
+#include "../include1/save.h"
 
 // gcc driverFile.c mesinkar.c mesinkata.c loadinfoawal.c Buildings.c point.c matriks.c save.c -o run
 

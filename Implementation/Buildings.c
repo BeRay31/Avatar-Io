@@ -1,4 +1,4 @@
-#include "Buildings.h"
+#include "../include1/Buildings.h"
 
 void CreateBuildings (Buildings *B,char type)
 /*

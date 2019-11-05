@@ -1,0 +1,15 @@
+{
+    "files.associations": {
+        "stdio.h": "c",
+        "arrayimp.h": "c",
+        "loadinfoawal.h": "c",
+        "boolean.h": "c",
+        "mesinkar.h": "c",
+        "mesinkata.h": "c",
+        "pcolor.h": "c",
+        "point.h": "c",
+        "save.h": "c",
+        "stack.h": "c",
+        "infofileeksternal.h": "c"
+    }
+}

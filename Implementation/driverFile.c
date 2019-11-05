@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "boolean.h"
 //#include "infofileeksternal.h"
-#include "save.h"
+#include "../include1/save.h"
 
 
 int main()

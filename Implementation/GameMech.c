@@ -1,5 +1,5 @@
-#include "GameMech.h"
-#include "point.h"
+#include "../include1/GameMech.h"
+#include "../include1/point.h"
 boolean NotEnd(BuildingsArr B)
 {
     int i;
