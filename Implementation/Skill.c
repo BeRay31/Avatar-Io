@@ -1,11 +1,5 @@
-<<<<<<< HEAD:Skill.c
-#include "skill.h"
-#include "infofileeksternal.h"
-#include "GameMech.h"
-=======
 #include "../include1/Skills.h"
 #include "../include1/infofileeksternal.h"
->>>>>>> 027ad3e79d3682cc5c45f0eb0ab08dfe361517c7:Implementation/Skill.c
 
 /*
 	1. Instant Upgrade
@@ -14,7 +8,7 @@
 	4. Attack Up
 	5. Critical Hit
 	6. Instant Reinforcement
-	7. Barrage
+	7. Barragemdwhuwe
 	*/
 
 actvteCrntSkill(Queue *S,Skill Act)
