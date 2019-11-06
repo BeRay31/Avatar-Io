@@ -1,25 +1,23 @@
 #include <stdio.h>
-#include "boolean.h"
-#include "infofileeksternal.h"
-#include "save.h"
+#include "../include1/boolean.h"
+#include "../include1/loadinfoawal.h"
+#include "../include1/save.h"
 
-int BoolToInt (boolean True)
-{
-	if (True){
-		return 1;
-	} else {
-		return 0;
-	}
-}
+// gcc driverFile.c mesinkar.c mesinkata.c loadinfoawal.c Buildings.c point.c matriks.c save.c -o run
 
-void Save (BuildingsArr CurrentBuilding, MATRIKS Graf)
+void Save (BuildingsArr CurrentBuilding, MATRIKS Graf, int N, int M, int NBuilding)
 // p.s. dalam main program dipake
-// include header dari infofileeksternal
+// include header dari loadinfoawal
 // untuk dapet position
 {
 	/* open file for writing */
 	fp = fopen("save_file.dat","w");
 	/* write into file */
+	/* write ukuran peta */
+	fprintf(fp, "%d ", N);
+	fprintf(fp, "%d\n",M);
+	/* write banyak building */
+	fprintf(fp, "%d\n", NBuilding);
 	/* write building info */
 	for (int i=1; i<=CurrentBuilding.MaxEl; i++){
 		fprintf(fp, "%d ", CurrentBuilding.T[i].owner);

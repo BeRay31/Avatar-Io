@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "matriks.h"
+#include "../include1/matriks.h"
 /* ********** DEFINISI PROTOTIPE PRIMITIF ********** */
 /* *** Konstruktor membentuk MATRIKS *** */
 void MakeMATRIKS (int NB, int NK, MATRIKS * M)

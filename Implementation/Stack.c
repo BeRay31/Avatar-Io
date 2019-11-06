@@ -1,4 +1,4 @@
-#include "Stack.h"
+#include "../include1/Stack.h"
 
 void SCreateEmpty(Stack *S)
 {

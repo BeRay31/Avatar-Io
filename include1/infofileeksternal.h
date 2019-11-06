@@ -1,5 +1,5 @@
-#ifndef INFOFILEEKSTERNAL_H
-#define INFOFILEEKSTERNAL_H
+#ifndef LOADINFOAWAL_H
+#define LOADINFOAWAL_H
 
 #include "boolean.h"
 #include "mesinkata.h"
@@ -39,6 +39,8 @@ void TulisIsiTabGraf (TabGraf tg, int NBangunan);
 /************************/
 /*** FUNGSI LAIN ***/
 void CharToInt(int *res, Kata src);
+void CharToUnShortInt(int *res, Kata src);
+int BoolToInt (boolean True);
 void Salin(Kata* dest, Kata src);
 /* Menyalin kata
    I.S. : dest sembarang, src sebuah kata yang valid

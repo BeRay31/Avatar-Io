@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "boolean.h"
-#include "infofileeksternal.h"
+#include "../include1/boolean.h"
+#include "../include1/loadinfoawal.h"
 
 #define IdxMax 10000
 /* Indeks maksimum array, sekaligus ukuran maksimum array dalam C */
@@ -78,6 +78,25 @@ void CharToInt(int *res, Kata src)
 	}
 	*res = num;
 }
+
+void CharToUnShortInt(unsigned short int *res, Kata src)
+{
+	unsigned short int num = 0;
+	for (int i=1; i<=src.Length; i++){
+		num = ((num*10) + (src.TabKata[i]-'0'));
+	}
+	*res = num;
+}
+
+int BoolToInt (boolean True)
+{
+	if (True){
+		return 1;
+	} else {
+		return 0;
+	}
+}
+
 void Salin(Kata* dest, Kata src)
 /* Menyalin kata
    I.S. : dest sembarang, src sebuah kata yang valid

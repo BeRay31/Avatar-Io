@@ -3,9 +3,9 @@
 /* File: mesinkata.C */
 /* Definisi Mesin Kata: Model Akuisisi Versi I */
 #include <stdio.h>
-#include "boolean.h"
-#include "mesinkar.h"
-#include "mesinkata.h"
+#include "../include1/boolean.h"
+#include "../include1/mesinkar.h"
+#include "../include1/mesinkata.h"
 
 #define NMax 50
 #define BLANK ' '

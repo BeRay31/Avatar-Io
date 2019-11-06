@@ -1,12 +1,12 @@
-#include "Buildings.h"
 #include <stdlib.h>
 #include <stdbool.h>
-#include "matriks.h"
-#include "Map.h"
-#include "Graph.h"
-#include "infofileeksternal.h"
-#include "GameMech.h"
 #include <stdio.h>
+#include "../include1/Buildings.h"
+#include "../include1/matriks.h"
+#include "../include1/Map.h"
+#include "../include1/Graph.h"
+#include "../include1/loadinfoawal.h"
+#include "../include1/GameMech.h"
 int main()
 {
     int n, m, nbangunan;

@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "boolean.h"
-#include "infofileeksternal.h"
+#include "../include1/boolean.h"
+#include "../include1/infofileeksternal.h"
 
 int main(){
 	/*** KAMUS ***/
 	int n, m, nbangunan;
-	Bangunan b;
+	Buildings b;
 	MATRIKS mgraf;
 	/*** test ***/
 	GetInfoDariFile (&n, &m, &nbangunan, &b, &mgraf);
