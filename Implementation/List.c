@@ -86,7 +86,6 @@ void DelP (List *L, address *Pdel, address P)
 */
 void InsertLast (List *L, address P)
 {
-	printf("Here\n");
     address Last;
     if (!IsEmpty(*L))
     {

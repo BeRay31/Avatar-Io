@@ -44,9 +44,12 @@ void MakeBMap(BuildMap *Map)
     }
 	
     //EDIT GRAPH
+    address templ;
     CreateEmptyGraph((*Map).G,Nbuildings);
     for (int i = 1; i <= Nbuildings;i++)
     {
+        templ = AllocateL(i);
+        Map->G->Arr[i].First = templ; 
         for (int j = 1;j<= Nbuildings ;j++)
         {
             if (Mgraf.Mem[i][j]==1)

@@ -1,16 +1,8 @@
 #include "../include1/Graph.h"
 
-void CreateEmptyGraph(GraphArr *G,int NElmt)
-{
-    G = (GraphArr*)malloc(NElmt*(sizeof(GraphArr)));
-    if ((*G).Arr != NULL)
-    {
-        (*G).NbElmt = NElmt;
-    }
-    else
-    {
-        (*G).NbElmt = 0;
-    }
+void CreateEmptyGraph(GraphArr *G)
+{  
+    (*G).Arr.First = NULL;
 }
 /*
 {I.S Anything}
@@ -19,12 +11,24 @@ void CreateEmptyGraph(GraphArr *G,int NElmt)
 
 void addGraph (GraphArr *Ga,int src,int NewElm)
 {
-    address NewElmt;
-    NewElmt = AllocateL(NewElm);
-    if (NewElmt != NULL)
+    addressG currentNode = (*Ga).Arr.First;
+    addressG NewElmt = (addressG)malloc(sizeof(GElmtList));
+    if (NewElmt!=NULL)
     {
-        InsertLast(&(*Ga).Arr[src],NewElmt);
+        NewElmt->info = NewElm;
+        NewElmt->nextNode = currentNode->nextNode;
+        NewElmt->next = NULL;
     }
+    while(currentNode->info != src)
+    {
+        currentNode = currentNode->nextNode;
+    }
+    while(currentNode->next != NULL)
+    {
+        currentNode = currentNode->next;
+    }
+    currentNode->next = NewElmt;
+
 }
 /*
 {I.S Graph defined}

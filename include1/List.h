@@ -2,7 +2,6 @@
 #define __LIST_H__
 
 #include "Buildings.h"
-// LInked List for Buildings
 //TYPEDEF
 typedef struct bElmtlist *address;  //define *address as struct tElmtList
 typedef struct bElmtlist {  //define ELmtList as Struct tElmtList

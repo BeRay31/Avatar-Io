@@ -19,7 +19,8 @@ int main()
     printf("\n");
    /* Save(arrBuildings, graf, n, m, nbuildings);
     return 0;*/
-
+    MakeBMap(&Peta);
+    PrintMap(Peta);
 
     
 
