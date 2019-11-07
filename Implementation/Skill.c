@@ -8,7 +8,7 @@
 	4. Attack Up
 	5. Critical Hit
 	6. Instant Reinforcement
-	7. Barrage
+	7. Barragemdwhuwe
 	*/
 
 actvteCrntSkill(Queue *S,Skill Act)
