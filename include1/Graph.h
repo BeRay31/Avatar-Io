@@ -2,21 +2,13 @@
 #define __GRAPH_H__
 
 #include "List.h"
-typedef struct gElmtlist *addressG;  //define *address as struct tElmtList
-typedef struct gElmtlist {  //define ELmtList as Struct tElmtList
-	int info;
-	addressG next;
-    addressG nextNode;
-} GElmtList;
-typedef struct {
-	addressG First;
-} ListG;
+
 typedef struct ArrGraph{
     int NbElmt;
-    ListG Arr;
+    List Arr[100];
 }GraphArr;
 
-void CreateEmptyGraph(GraphArr *G);
+GraphArr CreateBaseGraph(int NBuilding);
 /*
 {I.S Anything}
 {F.S graph defined}

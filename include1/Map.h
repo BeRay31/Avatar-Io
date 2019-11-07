@@ -14,7 +14,7 @@ typedef int indeks; /* indeks baris, kolom */
 typedef Buildings ElmtType;
 typedef struct {
     ElmtType M[BrsMax+1][KolMax+1];
-    GraphArr *G;
+    GraphArr G;
     int NBrsEff; /* banyaknya/ukuran baris yg terdefinisi */
     int NKolEff; /* banyaknya/ukuran kolom yg terdefinisi */
 } BuildMap;

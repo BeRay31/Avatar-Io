@@ -1,8 +1,14 @@
 #include "../include1/Graph.h"
 
-void CreateEmptyGraph(GraphArr *G)
+GraphArr CreateBaseGraph(int NBuilding)
 {  
-    (*G).Arr.First = NULL;
+    GraphArr G;
+    (G).NbElmt = NBuilding;
+    for (int i = 0; i<=NBuilding;i++)
+    {
+        (G).Arr[i].First = NULL;
+    }
+    return G;
 }
 /*
 {I.S Anything}
@@ -11,24 +17,11 @@ void CreateEmptyGraph(GraphArr *G)
 
 void addGraph (GraphArr *Ga,int src,int NewElm)
 {
-    addressG currentNode = (*Ga).Arr.First;
-    addressG NewElmt = (addressG)malloc(sizeof(GElmtList));
-    if (NewElmt!=NULL)
+    address  NewElmt = AllocateL(NewElm);
+    if (NewElmt != NULL)
     {
-        NewElmt->info = NewElm;
-        NewElmt->nextNode = currentNode->nextNode;
-        NewElmt->next = NULL;
+        InsertLast(&(*Ga).Arr[src],NewElmt);
     }
-    while(currentNode->info != src)
-    {
-        currentNode = currentNode->nextNode;
-    }
-    while(currentNode->next != NULL)
-    {
-        currentNode = currentNode->next;
-    }
-    currentNode->next = NewElmt;
-
 }
 /*
 {I.S Graph defined}
@@ -37,17 +30,15 @@ void addGraph (GraphArr *Ga,int src,int NewElm)
 
 void printGraph (GraphArr Ga)
 {
-    address currentPrint = Ga.Arr->First;
-    for (int i = 1; i<=Ga.NbElmt ;i++ )
+    address current;
+    for (int i = 1;i<=Ga.NbElmt;i++)
     {
-        while(currentPrint != NULL)
+        printf("%d",i);
+        current =Ga.Arr[i].First; 
+        while(current != NULL)
         {
-            printf("%d",currentPrint->info);
-            if(currentPrint->next != NULL)
-            {
-                printf("->");
-            }
-            currentPrint = currentPrint->next;
+            printf("->%d",current->info);
+            current = current->next;
         }
         printf("\n");
     }
