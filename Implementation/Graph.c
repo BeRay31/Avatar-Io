@@ -1,5 +1,7 @@
 #include "../include1/Graph.h"
 
+//Building Relation
+
 GraphArr CreateBaseGraph(int NBuilding)
 {  
     GraphArr G;

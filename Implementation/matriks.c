@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include "../include1/matriks.h"
+
+//Map Representation
+
 /* ********** DEFINISI PROTOTIPE PRIMITIF ********** */
 /* *** Konstruktor membentuk MATRIKS *** */
 void MakeMATRIKS (int NB, int NK, MATRIKS * M)

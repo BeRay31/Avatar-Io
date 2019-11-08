@@ -1,6 +1,8 @@
 #include "../include1/List.h"
 //IMPLEMENTATION
 
+//Save list of index Player Buildings
+
 address AllocateL (int X)
 {
     address P;

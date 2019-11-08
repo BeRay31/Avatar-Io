@@ -1,7 +1,4 @@
-/* NIM/NAMA		: 13518004/QURRATA A'YUNI   */
-/* HARI/TANGGAL : MINGGU, 29 SEPTEMBER 2019 */
-/* File: mesinkata.C */
-/* Definisi Mesin Kata: Model Akuisisi Versi I */
+//Load File info
 #include <stdio.h>
 #include "../include1/boolean.h"
 #include "../include1/mesinkar.h"

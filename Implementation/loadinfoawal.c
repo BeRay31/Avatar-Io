@@ -2,11 +2,9 @@
 #include <stdlib.h>
 #include "../include1/boolean.h"
 #include "../include1/loadinfoawal.h"
+#include "../include1/dinamicArr.h"
 
-#define IdxMax 10000
-/* Indeks maksimum array, sekaligus ukuran maksimum array dalam C */
-#define IdxMin 1
-/* Indeks minimum array */
+
 
 /******** BANGUNAN *********/
 void CreateEmptyBangunan (BuildingsArr *b, int MaksEl)

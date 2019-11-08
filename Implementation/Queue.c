@@ -1,6 +1,8 @@
 #include "../include1/Queue.h"
 //IMPLEMENTATION
 
+//SKILL Mech
+
 address AllocateQ (Skill S)
 {
     address P;

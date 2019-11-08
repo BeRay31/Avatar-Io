@@ -57,91 +57,91 @@ int OlahString(Kata Kata)
     char MOVE[] = "MOVE"; // 7
     char EXIT[] = "EXIT"; // 8
     int i;
-    for(i=0;i<Kata.Length;i++)
+    for(i=0;i<6;i++)
     {
         if(Kata.TabKata[i] != atk[i])
         {
             break;
         }
     }
-    if(i == Kata.Length)
+    if(i == 6)
     {
         return 1;
     }
-    for(i=0;i<Kata.Length;i++)
+    for(i=0;i<8;i++)
     {
         if(Kata.TabKata[i] != lvl[i])
         {
             break;
         }
     }
-    if(i == Kata.Length)
+    if(i == 6)
     {
         return 2;
     }
-    for(i=0;i<Kata.Length;i++)
+    for(i=0;i<5;i++)
     {
         if(Kata.TabKata[i] != skill[i])
         {
             break;
         }
     }
-    if(i == Kata.Length)
+    if(i == 5)
     {
         return 3;
     }
-    for(i=0;i<Kata.Length;i++)
+    for(i=0;i<4;i++)
     {
         if(Kata.TabKata[i] != UNDO[i])
         {
             break;
         }
     }
-    if(i == Kata.Length)
+    if(i == 4)
     {
         return 4;
     }
-    for(i=0;i<Kata.Length;i++)
+    for(i=0;i<8;i++)
     {
         if(Kata.TabKata[i] != END_TURN[i])
         {
             break;
         }
     }
-    if(i == Kata.Length)
+    if(i == 8)
     {
         return 5;
     }
-    for(i=0;i<Kata.Length;i++)
+    for(i=0;i<4;i++)
     {
         if(Kata.TabKata[i] != SAVE[i])
         {
             break;
         }
     }
-    if(i == Kata.Length)
+    if(i == 4)
     {
         return 6;
     }
-    for(i=0;i<Kata.Length;i++)
+    for(i=0;i<4;i++)
     {
         if(Kata.TabKata[i] != MOVE[i])
         {
             break;
         }
     }
-    if(i == Kata.Length)
+    if(i == 4)
     {
         return 7;
     }
-    for(i=0;i<Kata.Length;i++)
+    for(i=0;i<4;i++)
     {
         if(Kata.TabKata[i] != EXIT[i])
         {
             break;
         }
     }
-    if(i == Kata.Length)
+    if(i == 4)
     {
         return 8;
     }

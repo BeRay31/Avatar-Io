@@ -1,6 +1,6 @@
 /* File: mesinkar.c */
 /* Implementasi Mesin Karakter */
-
+//Load File Info
 #include "../include1/mesinkar.h"
 #include <stdio.h>
 #include <stdlib.h>
