@@ -5,6 +5,6 @@
 #include "save.h"
 #include "mesinkata.h"
 
-void load (int *n, int *m, int *nbangunan, BuildingsArr *b, MATRIKS *mgraf);
+void load (int *n, int *m, int *nbangunan, TabBuildings *b, MATRIKS *mgraf);
 
 #endif

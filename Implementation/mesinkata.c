@@ -81,3 +81,82 @@ void SalinKata()
 	}
 	CKata.Length = i;
 }
+
+/* FUNGSI LAIN */
+void CharToInt(int *res, Kata src)
+{
+	int num = 0;
+	for (int i=1; i<=src.Length; i++){
+		num = ((num*10) + (src.TabKata[i]-'0'));
+	}
+	*res = num;
+}
+
+void CharToUnShortInt(unsigned short int *res, Kata src)
+{
+	unsigned short int num = 0;
+	for (int i=1; i<=src.Length; i++){
+		num = ((num*10) + (src.TabKata[i]-'0'));
+	}
+	*res = num;
+}
+
+int BoolToInt (boolean True)
+{
+	if (True){
+		return 1;
+	} else {
+		return 0;
+	}
+}
+
+void Salin(Kata* dest, Kata src)
+/* Menyalin kata
+   I.S. : dest sembarang, src sebuah kata yang valid
+   F.S. : dest merupakan kata dengan panjang yang sama dengan src
+          dan tiap karakter dest sama dengan src */
+{
+	(*dest).Length = src.Length;
+	for (int i=1; i<=src.Length; i++){
+		(*dest).TabKata[i] = src.TabKata[i];
+	}
+}
+
+boolean IsKataSama (Kata k1, Kata k2)
+{
+	if (k1.Length == k2.Length) {
+		for (int i=1; i<=k1.Length; i++){
+			if (k1.TabKata[i] != k2.TabKata[i]) {
+				return false;
+			}
+		}
+		return true;
+	} else {
+		return false;
+	}
+}
+
+int PanjangString (char str[]) {
+    int c = 0;
+    while (str[c] != '\0'){
+        c++;
+    }
+    return (c-1);
+}
+
+void InputString (Kata *kata)
+{
+    char str[100];
+    printf("ENTER COMMAND: ");
+    fgets(str, sizeof(str), stdin);
+    int n = PanjangString(str);
+    for (int i=0; i<n; i++){
+    	(*kata).TabKata[i+1] = str[i];
+    }
+    (*kata).Length = n;
+}
+
+void GetTipeBangunan (char *tipe, Kata src)
+{
+	*tipe = src.TabKata[src.Length];
+}

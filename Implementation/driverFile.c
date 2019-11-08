@@ -9,12 +9,12 @@ int main()
 {
     BuildMap Peta;
     int n,m,nbuildings;
-    BuildingsArr arrBuildings;
+    TabBuildings arrBuildings;
     MATRIKS graf;
     GetInfoDariFile(&n,&m,&nbuildings,&arrBuildings,&graf);
     printf("%d %d\n",n,m );
     printf("%d\n",nbuildings);
-    TulisIsiBangunan(arrBuildings);
+    TulisIsiTab(arrBuildings);
     TulisMATRIKS(graf);
     printf("\n");
    /* Save(arrBuildings, graf, n, m, nbuildings);

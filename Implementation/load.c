@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "../include1/loadinfoawal.h"
 
-void load (int *n, int *m, int *nbangunan, BuildingsArr *b, MATRIKS *mgraf)
+void load (int *n, int *m, int *nbangunan, TabBuildings *b, MATRIKS *mgraf)
 {
 	/* KAMUS */
 	int CountKata = 0;
@@ -16,10 +16,10 @@ void load (int *n, int *m, int *nbangunan, BuildingsArr *b, MATRIKS *mgraf)
 	int NBangunan;
 	int j; // indeks bangunan
 	char tipe;
-	BuildingsArr B;
+	TabBuildings B;
 	Buildings e;
 	// graf
-	TabGraf tg;
+	TabBuildings tg;
 	int elmtGraf;
 	int idks;
 	MATRIKS MGraf;
@@ -37,11 +37,11 @@ void load (int *n, int *m, int *nbangunan, BuildingsArr *b, MATRIKS *mgraf)
 		} else if (CountKata == 3) {
 			Salin(&KataTemp, CKata);
 			CharToInt(&NBangunan, KataTemp);
-			CreateEmptyBangunan(&B, NBangunan);
-			CreateEmptyTabGraf(&tg);
+			MakeEmpty (&B, NBangunan);//CreateEmptyBangunan(&B, NBangunan);
+			MakeEmpty(&tg, NBangunan*NBangunan); //CreateEmptyTabGraf(&tg);
 			CountAtribut = 1;
-			j = 1;
-			idks = 1;
+			j = IdxMin;
+			idks = IdxMin;
 		} else if ((CountKata > 3) && (CountKata <= (3+(NBangunan*11)))){
 			if (CountAtribut == 1) {
 				Salin(&KataTemp, CKata);
@@ -102,8 +102,9 @@ void load (int *n, int *m, int *nbangunan, BuildingsArr *b, MATRIKS *mgraf)
 		} else if (CountKata > (3+(NBangunan*11))) {
 			Salin(&KataTemp, CKata);
 			CharToInt(&elmtGraf, KataTemp);
-			tg.TI[idks] = elmtGraf;
-			tg.Neff++;
+			// e.armies menyimpan 0 or 1 UNTUK GRAF SEMENTARA
+			e.armies = elmtGraf;
+			tg.TI[idks] = e;
 			idks++;
 		}
 		ADVKATA();
@@ -112,13 +113,14 @@ void load (int *n, int *m, int *nbangunan, BuildingsArr *b, MATRIKS *mgraf)
 	k = 1;
 	for (int i=1; i<=NBangunan; i++){
 		for (int j=1; j<=NBangunan; j++){
-			MGraf.Mem[i][j] = tg.TI[k];
+			MGraf.Mem[i][j] = tg.TI[k].armies;
 			k++;
 		}
 	}
 	(*n) = N;
 	(*m) = M;
 	(*nbangunan) = NBangunan;
-	CopyBangunan(B, b);
+	CopyTab(B, b);
 	CopyMATRIKS(MGraf, mgraf);
+	Dealokasi(&tg);
 }

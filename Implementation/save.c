@@ -5,7 +5,7 @@
 
 // gcc driverFile.c mesinkar.c mesinkata.c loadinfoawal.c Buildings.c point.c matriks.c save.c -o run
 
-void Save (BuildingsArr CurrentBuilding, MATRIKS Graf, int N, int M, int NBuilding)
+void Save (TabBuildings CurrentBuilding, MATRIKS Graf, int N, int M, int NBuilding)
 // p.s. dalam main program dipake
 // include header dari loadinfoawal
 // untuk dapet position
@@ -20,18 +20,18 @@ void Save (BuildingsArr CurrentBuilding, MATRIKS Graf, int N, int M, int NBuildi
 	fprintf(fp, "%d\n", NBuilding);
 	/* write building info */
 	for (int i=1; i<=CurrentBuilding.MaxEl; i++){
-		fprintf(fp, "%d ", CurrentBuilding.T[i].owner);
-		fprintf(fp, "%d ", CurrentBuilding.T[i].armies);
-		fprintf(fp, "%d ", CurrentBuilding.T[i].level);
-		fprintf(fp, "%d ", CurrentBuilding.T[i].incArmy);
-		fprintf(fp, "%d ", CurrentBuilding.T[i].maxArmyOnBuildings);
+		fprintf(fp, "%d ", CurrentBuilding.TI[i].owner);
+		fprintf(fp, "%d ", CurrentBuilding.TI[i].armies);
+		fprintf(fp, "%d ", CurrentBuilding.TI[i].level);
+		fprintf(fp, "%d ", CurrentBuilding.TI[i].incArmy);
+		fprintf(fp, "%d ", CurrentBuilding.TI[i].maxArmyOnBuildings);
 		// p.s. defense dikonverse dari bool jadi integer
-		fprintf(fp, "%d ", BoolToInt(CurrentBuilding.T[i].defenses));
-		fprintf(fp, "%d ", CurrentBuilding.T[i].minArmiesToOccupy);
-		fprintf(fp, "%c ", CurrentBuilding.T[i].buildingsType);
-		fprintf(fp, "%d ", CurrentBuilding.T[i].buildingsIndex);
-		fprintf(fp, "%d ", CurrentBuilding.T[i].position.X);
-		fprintf(fp, "%d\n", CurrentBuilding.T[i].position.Y);
+		fprintf(fp, "%d ", BoolToInt(CurrentBuilding.TI[i].defenses));
+		fprintf(fp, "%d ", CurrentBuilding.TI[i].minArmiesToOccupy);
+		fprintf(fp, "%c ", CurrentBuilding.TI[i].buildingsType);
+		fprintf(fp, "%d ", CurrentBuilding.TI[i].buildingsIndex);
+		fprintf(fp, "%d ", CurrentBuilding.TI[i].position.X);
+		fprintf(fp, "%d\n", CurrentBuilding.TI[i].position.Y);
 	}
 	/* write graf keterhubungan */
 	for (int i=1; i<=Graf.NBrsEff; i++){

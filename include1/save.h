@@ -6,6 +6,6 @@
 
 static FILE * fp; // dalam main program dipake
 
-void Save (BuildingsArr CurrentBuilding, MATRIKS Graf, int N, int M, int NBuilding);
+void Save (TabBuildings CurrentBuilding, MATRIKS Graf, int N, int M, int NBuilding);
 
 #endif

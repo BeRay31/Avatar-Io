@@ -15,30 +15,7 @@ typedef struct {
   char TabKata[NMax+1]; /* container penyimpan kata, indeks yang dipakai [1..NMax] */
     int Length;
 } Kata;
-/*
-typedef struct {
-  float x;
-  float y;
-} Point;
 
-typedef struct {
-  char building;
-  Point point;
-} ElType;
-
-typedef struct {
-  ElType TabBangunan[NMax+1];
-} Bangunan;
-*/
-/* ****************************** */
-/* ********** SELEKTOR ********** */
-/*
-#define Elmt(T,i)      (T).TabBangunan[(i)]
-#define Building(T,i)  (T).TabBangunan[(i)].building
-#define Point(T,i)     (T).TabBangunan[(i)].point
-#define Absis(T,i)     (T).TabBangunan[(i)].point.x
-#define Ordinat(T,i)   (T).TabBangunan[(i)].point.y
-*/
 /* ****************************** */
 
 /* State Mesin Kata */
@@ -70,4 +47,20 @@ void SalinKata();
           CC = BLANK atau CC = MARK;
           CC adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
+
+/* FUNGSI LAIN */
+void CharToInt(int *res, Kata src);
+void CharToUnShortInt(unsigned short int *res, Kata src);
+int BoolToInt (boolean True);
+void Salin(Kata* dest, Kata src);
+/* Menyalin kata
+   I.S. : dest sembarang, src sebuah kata yang valid
+   F.S. : dest merupakan kata dengan panjang yang sama dengan src
+          dan tiap karakter dest sama dengan src */
+
+int PanjangString (char str[]);
+void InputString (Kata *kata);
+boolean IsKataSama (Kata k1, Kata k2);
+void GetTipeBangunan (char *tipe, Kata src);
+
 #endif
