@@ -4,7 +4,7 @@ void MakeBMap(BuildMap *Map)
 {
     //GRABBING INFO FROM FILE
     int n,m,Nbuildings;
-    BuildingsArr Arrb;
+    TabBuildings Arrb;
     MATRIKS Mgraf;
     Buildings BTemp;
     GetInfoDariFile(&n,&m,&Nbuildings,&Arrb,&Mgraf);
@@ -26,9 +26,9 @@ void MakeBMap(BuildMap *Map)
     for (int i = 1 ; i<= Nbuildings ; i++) //add Building From File
     {
         Buildings Temp;
-        char type = Arrb.T[i].buildingsType;
-        int x = Arrb.T[i].position.X;
-        int y = Arrb.T[i].position.Y;
+        char type = Arrb.TI[i].buildingsType;
+        int x = Arrb.TI[i].position.X;
+        int y = Arrb.TI[i].position.Y;
         CreateBuildings(&Temp,type);
         Temp.position.X = x;
         Temp.position.Y = y;
@@ -63,14 +63,14 @@ void MakeBMap(BuildMap *Map)
 {F.S Matrix of Building Initiated by empty Building}
 */
 
-void UpdateMap (BuildMap *Map,BuildingsArr b)
+void UpdateMap (BuildMap *Map,TabBuildings b)
 {
     for (int i = 1 ; i<= b.MaxEl ; i++) //add Building From File
     {
         Buildings Temp;
-        char type = b.T[i].buildingsType;
-        int x = b.T[i].position.X;
-        int y = b.T[i].position.Y;
+        char type = b.TI[i].buildingsType;
+        int x = b.TI[i].position.X;
+        int y = b.TI[i].position.Y;
         CreateBuildings(&Temp,type);
         Temp.position.X = x;
         Temp.position.Y = y;

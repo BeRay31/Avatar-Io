@@ -54,16 +54,11 @@ void MakeEmpty(TabBuildings *T, int maxel);
 void Dealokasi(TabBuildings *T);
 /* I.S. T terdefinisi; */
 /* F.S. TI(T) dikembalikan ke system, MaxEl(T)=0; Neff(T)=0 */
-
-void TulisIsiTab(TabBuildings T);
-/* Proses : Menuliskan isi tabel dengan traversal, tabel ditulis di antara kurung siku;
-   antara dua elemen dipisahkan dengan separator "koma", tanpa tambahan karakter di depan,
-   di tengah, atau di belakang, termasuk spasi dan enter */
-/* I.S. T boleh kosong */
-/* F.S. Jika T tidak kosong: [e1,e2,...,en] */
-/* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
-/* Jika tabel kosong : menulis [] */
-/* ********** OPERASI LAIN ********** */
+void TulisTabBuilding (TabBuildings T);
+/*
+{I.S Tab Defined}
+{F.S Tab Printed}
+*/
 void CopyTab(TabBuildings Tin, TabBuildings *Tout);
 /* I.S. Tin terdefinisi tidak kosong, Tout sembarang */
 /* F.S. Tout berisi salinan dari Tin (identik, Neff dan MaxEl sama) */

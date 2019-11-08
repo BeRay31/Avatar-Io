@@ -46,7 +46,7 @@ void GetInfoDariFile (int *n, int *m, int *nbangunan, TabBuildings *b, MATRIKS *
 			Salin(&KataTemp, CKata);
 			CharToInt(&NBangunan, KataTemp);
 			MakeEmpty (&B, NBangunan);//CreateEmptyBangunan(&B, NBangunan);
-			MakeEmpty(&tg, NBangunan*NBangunan); //CreateEmptyTabGraf(&tg);
+			MakeEmpty(&tg, (NBangunan*NBangunan)); //CreateEmptyTabGraf(&tg);
 			idks = IdxMin; // indeks pertama array graf
 			j = IdxMin; // indeks pertama bangunan
 			count = 1;
@@ -68,6 +68,7 @@ void GetInfoDariFile (int *n, int *m, int *nbangunan, TabBuildings *b, MATRIKS *
 				e.buildingsIndex = j;
 				B.TI[j] = e;
 				j++;
+				B.Neff++;
 			}
 		} else if (countKata > (3*NBangunan+3)){
 			Salin(&KataTemp, CKata);
@@ -77,6 +78,7 @@ void GetInfoDariFile (int *n, int *m, int *nbangunan, TabBuildings *b, MATRIKS *
 			tg.TI[idks] = e;
 			//tg.Neff++;
 			idks++;
+			
 		}
 		ADVKATA();
 	}
@@ -98,5 +100,4 @@ void GetInfoDariFile (int *n, int *m, int *nbangunan, TabBuildings *b, MATRIKS *
 	(*nbangunan) = NBangunan;
 	CopyMATRIKS (MGraf, mgraf);
 	CopyTab (B, b);
-	Dealokasi(&tg);
 }
