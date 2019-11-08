@@ -11,14 +11,14 @@
 	7. Barragemdwhuwe
 	*/
 
-actvteCrntSkill(Queue *S,Skill Act)
+actvteCrntSkill(Skill Act,BuildingsArr BArr,BuildingsArr BArr2, Buildings *B,)
 /*
 {I.S }
 {F.S }
 */
 {
-	BuildingsArr BArr;//pemain
-	BuildingsArr BArr2; //lawan
+	//BuildingsArr BArr;//pemain
+	//BuildingsArr BArr2; //lawan
 
 	switch(Act.SkillCode){   
 		case 1 : 
@@ -62,7 +62,7 @@ addSkill(Queue *SP, Queue *SL, BuildingsArr BArr, BuildingsArr BArr2)
 			QAddElmt (SL,3);
 		}else if(command==1 && *B.buildingsType=='T' && *B.owner==*BP.owner && NbBuild(BArr,'T')==3){
 			QAddElmt (SP,4);
-		}else if(Act.SkillCode==3){
+		}else if(Act.SkillCode==3 && command==3){
 			QAddElmt (SL,5);
 		}else if(command==5){
 			boolean allmaxlev = true;

@@ -15,7 +15,7 @@
 /* KONSTRUKTOR ARRAY PENYIMPAN INFO BANGUNAN */
 typedef struct {
   Buildings *T;
-  int MaxEl; 
+  int MaxElmt; 
 } BuildingsArr;
 /********************************************/
 

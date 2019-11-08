@@ -75,7 +75,9 @@ void LevelUp (Buildings *B)
 		if((*B).buildingsType == 'C'){
 			(*B).incArmy += 5;
 			(*B).maxArmyOnBuildings += 20;
-			(*B).minArmiesToOccupy = -999;		
+			(*B).minArmiesToOccupy = -999;
+			(*B).level ++;
+			printf("Level Castle-mu meningkat menjadi %d!\n", (*B).level);		
 		}	
 		else if((*B).buildingsType == 'T'){
 			if((*B).level==1){
@@ -86,6 +88,8 @@ void LevelUp (Buildings *B)
 			}
 			(*B).maxArmyOnBuildings += 10;
 			(*B).minArmiesToOccupy = -999;
+			(*B).level ++;
+			printf("Level Tower-mu meningkat menjadi %d!\n", (*B).level);
 		}
 		else if((*B).buildingsType == 'F'){
 			(*B).incArmy += 10;
@@ -94,16 +98,31 @@ void LevelUp (Buildings *B)
 			if((*B).level > 1){
 				(*B).defenses = true;
 			}
+			(*B).level ++;
+			printf("Level Fort-mu meningkat menjadi %d!\n", (*B).level);
 		}
 		else if((*B).buildingsType == 'V'){
 			(*B).incArmy += 5;
 			(*B).maxArmyOnBuildings += 10;
 			(*B).minArmiesToOccupy = -999;	
+			(*B).level ++;
+			printf("Level Village-mu meningkat menjadi %d!\n", (*B).level);
 		}
-		(*B).level ++;
-
 	}
-	
+	else{
+		if((*B).buildingsType == 'C'){
+			printf("Jumlah pasukan Castle kurang untuk level up");	
+		}
+		else if((*B).buildingsType == 'F'){
+			printf("Jumlah pasukan Fort kurang untuk level up");	
+		}
+		else if((*B).buildingsType == 'T'){
+			printf("Jumlah pasukan Tower kurang untuk level up");	
+		}
+		else if((*B).buildingsType == 'V'){
+			printf("Jumlah pasukan Village kurang untuk level up");	
+		}
+	}
 }
 void IncTroops (Buildings *B)
 /*
@@ -124,7 +143,7 @@ void Attacked (Buildings *B, Buildings *BL, int Narmies)
 	/*int army;  
 
 	(*BL).armies -= Narmies; 
-	//jika bangunan yang diserang (B) pemilik lawan
+	
 	
 		if((*B).defenses){
 			if((*B).owner==0){
@@ -154,14 +173,18 @@ void Attacked (Buildings *B, Buildings *BL, int Narmies)
 			(*B).owner = (*BL).owner;//kepemilikan di rubah
 			
 			(*B).armies += army; 
+			printf("Bangunan menjadi milikmu!");
+		}
+		else{
+			printf("Bangunan gagal direbut.");
 		}*/
 }
-//void Occupy (Buildings *B, Buildings *BL, int Narmies)
+void Occupy (Buildings *B)
 /*
 {I.S Building not occupied or owner = 0}
 {F.S Building Occupied owner = 1 || 2}
 */
-/*{
+{
 	
 		if ((*B).minArmiesToOccupy=0){
 			
@@ -177,4 +200,4 @@ void Move (Buildings *B, Buildings *B2, int Narmies)
 {
 	(*B).armies -= Narmies;
 	(*B2).armies += Narmies;
-}*/
+}

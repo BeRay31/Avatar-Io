@@ -192,27 +192,57 @@ void PrintPBuildings(int player, BuildingsArr B){
 {F.S Players Building Printed}
 */
 
-void EksekusiCommand(int command, int player, BuildingsArr *B){
+void EksekusiCommand(int command, int player, BuildingsArr *B, BuildingsArr *BL, Queue *QP){
+    
     if(command == 1){//ATTACK
-        
+        int op1,op2, Narmies;
+
+        printf("Daftar bangunan:\n");
+        PrintPBuildings(player, *B);
+        printf("Bangunan yang digunakan untuk menyerang: ");
+        scanf("%d", op1);
+        //jika ada graf keterhubungan bangunan 
+            printf("Daftar bangunan yang dapat diserang: ");
+            //print hasil graf
+            printf("Bangunan yang diserang: "); scanf("%d", op2);
+            printf("Jumlah pasukan: "); scanf("%d", Narmies);
+            if(Narmies<=(*B).T[op1].armies){   
+                Attacked ((*BL).T[op2],(*B).T[op1],Narmies);
+            }
+        //jika tidak ada
+            printf("Tidak ada bangunan yang dapat diserang");
     }
     else if(command == 2){//LEVEL_UP
-
+        int op;
+        printf("Daftar bangunan:  ");
+        PrintPBuildings(player, *B);
+        printf("Bangunan yang akan di level up: "); scanf("%d", op);
+        LevelUp (&((*B).T[op]));
     }
     else if(command == 3){//SKILL
-
+        Skill Act;
+        QDelElmt (QP, &Act);
+        actvteCrntSkill(Act,BuildingsArr BArr,BuildingsArr BArr2, Buildings *B,);
     }
     else if(command == 4){//UNDO
         
     }
     else if(command == 5){//END_TURN
-    
+        
     }
     else if(command == 6){//SAVE
         
     }
     else if(command == 7){//MOVE
-        
+        int Narmies, op1,op2;
+        printf("Daftar bangunan:  ");
+        PrintPBuildings(player, *B);
+        printf("Pilih bangunan: "); scanf("%d", op1);
+        printf("Daftar bangunan terdekat: "); 
+        //menampilkan bangunan terdekat jika ada 
+            scanf("%d", op2);
+            scanf("%d", &Narmies);
+            Move (Buildings *B, Buildings *B2, int Narmies);
     }
     else if(command == 8){//EXIT
         
