@@ -20,10 +20,10 @@
 
 /* Definisi elemen dan koleksi objek */
 typedef int IdxType; /* type indeks */
-typedef Buildings ElType;  /* type elemen tabel */
+typedef Buildings ArrType;  /* type elemen tabel */
 typedef struct
 {
-  ElType *TI; /* memori tempat penyimpan elemen (container) */
+  ArrType *TI; /* memori tempat penyimpan elemen (container) */
   int Neff;   /* >=0, banyaknya elemen efektif */
   int MaxEl;  /* ukuran elemen */
 } TabBuildings;
@@ -55,50 +55,6 @@ void Dealokasi(TabBuildings *T);
 /* I.S. T terdefinisi; */
 /* F.S. TI(T) dikembalikan ke system, MaxEl(T)=0; Neff(T)=0 */
 
-/* ********** SELEKTOR (TAMBAHAN) ********** */
-/* *** Banyaknya elemen *** */
-int NbElmt(TabBuildings T);
-/* Mengirimkan banyaknya elemen efektif tabel */
-/* Mengirimkan nol jika tabel kosong */
-/* *** Daya tampung container *** */
-int MaxElement(TabBuildings T);
-/* Mengirimkan maksimum elemen yang dapat ditampung oleh tabel */
-/* *** Selektor INDEKS *** */
-IdxType GetFirstIdx(TabBuildings T);
-/* Prekondisi : Tabel T tidak kosong */
-/* Mengirimkan indeks elemen T pertama */
-IdxType GetLastIdx(TabBuildings T);
-/* Prekondisi : Tabel T tidak kosong */
-/* Mengirimkan indeks elemen T terakhir */
-
-/* ********** Test Indeks yang valid ********** */
-boolean IsIdxValid(TabBuildings T, IdxType i);
-/* Mengirimkan true jika i adalah indeks yang valid utk ukuran tabel */
-/* yaitu antara indeks yang terdefinisi utk container*/
-boolean IsIdxEff(TabBuildings T, IdxType i);
-/* Mengirimkan true jika i adalah indeks yang terdefinisi utk tabel */
-/* yaitu antara FirstIdx(T)..LastIdx(T) */
-
-/* ********** TEST KOSONG/PENUH ********** */
-/* *** Test tabel kosong *** */
-boolean IsEmpty(TabBuildings T);
-/* Mengirimkan true jika tabel T kosong, mengirimkan false jika tidak */
-/* *** Test tabel penuh *** */
-boolean IsFull(TabBuildings T);
-/* Mengirimkan true jika tabel T penuh, mengirimkan false jika tidak */
-
-/* ********** BACA dan TULIS dengan INPUT/OUTPUT device ********** */
-/* *** Mendefinisikan isi tabel dari pembacaan *** */
-void BacaIsi(TabBuildings *T);
-/* I.S. T sembarang dan sudah dialokasikan sebelumnya */
-/* F.S. Tabel T terdefinisi */
-/* Proses : membaca banyaknya elemen T dan mengisi nilainya */
-/* 1. Baca banyaknya elemen diakhiri enter, misalnya N */
-/*    Pembacaan diulangi sampai didapat N yang benar yaitu 0 <= N <= MaxElement(T) */
-/*    Jika N tidak valid, tidak diberikan pesan kesalahan */
-/* 2. Jika 0 < N <= MaxElement(T); Lakukan N kali: Baca elemen mulai dari indeks
-      IdxMin satu per satu diakhiri enter */
-/*    Jika N = 0; hanya terbentuk T kosong */
 void TulisIsiTab(TabBuildings T);
 /* Proses : Menuliskan isi tabel dengan traversal, tabel ditulis di antara kurung siku;
    antara dua elemen dipisahkan dengan separator "koma", tanpa tambahan karakter di depan,
