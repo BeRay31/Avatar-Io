@@ -4,8 +4,6 @@
 #include "../include1/loadinfoawal.h"
 #include "../include1/dinamicArr.h"
 
-
-
 /******** BANGUNAN *********/
 void CreateEmptyBangunan (BuildingsArr *b, int MaksEl)
 {
