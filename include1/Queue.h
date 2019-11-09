@@ -6,13 +6,13 @@
 #include <stdbool.h>
 //preprocessor
 #define MaxElQueue 10
-typedef struct sElmtlist *address;  //define *address as struct tElmtList
+typedef struct sElmtlist *Saddress;  //define *address as struct tElmtList
 typedef struct sElmtlist {  //define ELmtList as Struct tElmtList
 	Skill info;
-	address next;
+	Saddress next;
 } ElmtQueue;
 typedef struct {
-	address Head,Tail;
+	Saddress Head,Tail;
 } Queue;
 
 address AllocateQ (Skill S);

@@ -108,3 +108,27 @@ void InsertLast (List *L, address P)
 {I.S List Defined}
 {F.S Last Elmt of List updated by P}
 */
+address Search (List L, int X)
+{
+    address P;
+    P = L.First;
+    if (P==NULL)
+    {
+        return NULL;
+    }
+    else
+    {
+        while (((P)->info != X) && (P != NULL))
+        {
+            P = P->next;
+            if (P == NULL)
+            {
+                return NULL;
+            }
+        }
+        return P;
+    }
+}
+/* Mencari apakah ada elemen list dengan Info(P)= X */
+/* Jika ada, mengirimkan address elemen tersebut. */
+/* Jika tidak ada, mengirimkan Nil */

@@ -29,21 +29,31 @@ boolean NotEndTurn(int i);
 {F.S Check the Turn if End return False, if !end return true}
 */
 
-void EksekusiCommand(int command, int player, TabBuildings *B);
+void EksekusiCommand(int command,GraphArr G, int player,List *PList, TabBuildings *B, Queue *QP,StackElmt *S);
 /*
 {I.S Command Defined}
 {F.S Execute Command}
 */
 
-void PrintPBuildings(int player, TabBuildings B);
+void PrintOwnedBuildings(TabBuildings PBuildings, List PBIndex,int *NbofBuilding);
 /*
 {I.S Building Defined}
 {F.S Players Building Printed}
 */
 
-void PrintLinkedBuildings (Buildings B,GraphArr G,int Owner);//not implemented yet
+void PrintLinkedBuildingsA (int turn,GraphArr G,TabBuildings Buildings,int index,int *NbofBuilding);//for attack mech
 /*
-{I.S Graph Defined and Building Defined}
+{I.S Graph Defined and Building Defined for attack mech}
+{F.S Printed Linked Building}
+*/
+void UpdateListBuilding(int index , List *PlayerB);
+/*
+{I.S List Index of Building defined}
+{F.S List Index of Building updated}
+*/
+void PrintLinkedBuildingsM (int turn,GraphArr G,TabBuildings Buildings,int index,int *NbofBuilding);//for attack mech
+/*
+{I.S Graph Defined and Building Defined for move mech}
 {F.S Printed Linked Building}
 */
 #endif

@@ -15,15 +15,22 @@ int main()
 	MATRIKS mgraf;
     Kata command;
     BuildMap Map;
+    List P1Buildings,P2Buildings;
+    Queue SkillP1;
+    Queue SkillP2;
+    StackElmt S;
     GetInfoDariFile (&n, &m, &nbangunan, &ArrOfBuildings, &mgraf);
     MakeBMap(&Map);
+    InsertLast(&P1Buildings,AllocateL(1));//Initiate and allocate Building index 1 == owner P1
+    InsertLast(&P2Buildings,AllocateL(2));//Initiate and allocate Building index 2 == owner P2
     while(NotEnd(ArrOfBuildings)){
         PrintMap(Map);
         if(Turn == 1){    
            do
             {
                  InputString(&command);
-                 EksekusiCommand(OlahString(command),Turn, &ArrOfBuildings);
+                 EksekusiCommand(OlahString(command),Turn,&P1Buildings,&ArrOfBuildings,&SkillP1,&S);
+                 UpdateListBuilding(Turn,&P1Buildings,ArrOfBuildings);
                 
             } while (NotEndTurn(OlahString(command)));     
         }
@@ -31,7 +38,8 @@ int main()
              do
             {
                  InputString(&command);
-                 EksekusiCommand(OlahString(command),Turn,&ArrOfBuildings);
+                 EksekusiCommand(OlahString(command),Turn,&P2Buildings,&ArrOfBuildings,&SkillP2,&S);
+                 UpdateListBuilding(Turn,&P2Buildings,ArrOfBuildings);
                 
             } while (NotEndTurn(OlahString(command)));
         }

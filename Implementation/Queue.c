@@ -3,10 +3,10 @@
 
 //SKILL Mech
 
-address AllocateQ (Skill S)
+Saddress AllocateQ (Skill S)
 {
-    address P;
-    P = (address)malloc(sizeof(ElmtQueue));
+    Saddress P;
+    P = (Saddress)malloc(sizeof(ElmtQueue));
     if (P != NULL)
     {
         P->info = S;
@@ -26,7 +26,7 @@ address AllocateQ (Skill S)
 int NbQElmt (Queue Q)
 {
     int x = 0;
-    address P;
+    Saddress P;
     P = Q.Head;
     while (P != Q.Tail)
     {
@@ -52,7 +52,7 @@ bool IsQEmpty (Queue Q)
 
 bool IsQFull (Queue Q)
 {
-    return (NbQElmt(Q)==MaxEl);
+    return (NbQElmt(Q)==MaxElQueue);
 }
 /*
 {I.S Q Defined}
@@ -71,7 +71,7 @@ void QCreateEmpty(Queue *Q)
 
 void QAddElmt (Queue *Q, Skill S)
 {
-    address newSkill;
+    Saddress newSkill;
     if (!IsQFull(*Q))
     {
         newSkill = Allocate (S);

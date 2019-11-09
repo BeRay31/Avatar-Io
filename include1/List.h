@@ -52,4 +52,5 @@ void InsertLast (List *L, address P);
 {I.S List Defined}
 {F.S Last Elmt of List updated by P}
 */
+address Search (List L, infotype X);
 #endif

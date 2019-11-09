@@ -164,92 +164,236 @@ boolean NotEndTurn(int i){
 {I.S Game Launched}
 {F.S Check the Turn if End return False, if !end return true}
 */
+void EksekusiCommand(int command,GraphArr G, int player,List *PList, TabBuildings *B, Queue *QP,StackElmt *S)
+{
+    
+    if(command == 1)
+    {//ATTACK
+        int current = 1;
+        int NbOfB;
+        int selected;
+        int tempBIndex;
+        Buildings Attck;//Building that attack
+        Buildings Target;//Target Building
+        address x;
+        printf("Daftar Bangunan : \n");
+        PrintOwnedBuildings(*B,*PList,&NbOfB);
+        printf ("Bangunan yang digunakan untuk menyerang: ");
+        scanf("%d",&selected);
+        //Select Building That attack
+        while(selected>NbOfB)
+        {
+            printf("Bangunan yang anda pilih tidaklah ada\n");
+            printf("Masukkan kembali bangunan yang digunakan untuk menyerang :");
+            scanf("%d",&selected);
+        }
+        x = (*PList).First;
+        while(current!=selected)//search selected building index
+        {
+            x = x->next;
+            current++;
+        }
+        tempBIndex = x->info;
+        Attck = (*B).TI[tempBIndex];//building that attack
+        printf("Daftar bangunan yang dapat diserang : \n");
+        PrintLinkedBuildingsA(player,G,*B,Attck.buildingsIndex,&NbOfB);
+        //Select Target Building
+        while(selected>NbOfB)
+        {
+            printf("Bangunan yang anda pilih tidaklah ada\n");
+            printf("Masukkan kembali bangunan untuk diserang :");
+            scanf("%d",&selected);
+        }
+        while(current!=selected)//search selected building index
+        {
+            x = x->next;
+            current++;
+        }
+        tempBIndex = x->info;
+        Target = (*B).TI[tempBIndex];
+        //NbOfArmies used and validate
+        
+    }
+    else if(command == 2)
+    {//LEVEL_UP
+        int op;
+    }
+    else if(command == 3)
+    {//SKILL
+    
+    }
+    else if(command == 4)
+    {//UNDO
+        
+    }
+    else if(command == 5)
+    {//END_TURN
+        
+    }
+    else if(command == 6)
+    {//SAVE
+        
+    }
+    else if(command == 7)
+    {//MOVE
 
-void PrintPBuildings(int player, TabBuildings B){
-    int j = 1;
-    for(int i=1;i<=B.MaxEl;i++){
-        if(B.TI[i].owner == player){
-            if(B.TI[i].buildingsType == 'C'){
-                printf('%d. Castle (%d,%d) %d lv. %d',j,B.TI[i].position.X,B.TI[i].position.Y,B.TI[i].armies,B.TI[i].level);
-                j++;
+    }
+    else if(command == 8)
+    {//EXIT
+        
+    }
+}
+/*
+{I.S Building Defined}
+{F.S Players Building Printed}
+*/
+void UpdateListBuilding(int index , List *PlayerB)
+{
+    InsertLast(PlayerB,AllocateL(index));
+}
+/*
+{I.S List Index of Building defined}
+{F.S List Index of Building updated}
+*/
+
+void PrintOwnedBuildings(TabBuildings PBuildings, List PBIndex,int *NbofBuilding)
+{
+    int i = 1;
+    int indexB;
+    address current = PBIndex.First;
+    if (current != NULL)
+    {
+        while(current!=NULL)
+        {
+            indexB = current->info;
+            printf("%d. ",i);
+            if (PBuildings.TI[indexB].buildingsType == 'C')
+            {
+                printf("Castle (%d,%d) %d lv. %d\n",PBuildings.TI[indexB].position.X,PBuildings.TI[indexB].position.Y,PBuildings.TI[indexB].armies,PBuildings.TI[indexB].level);
             }
-            else if(B.TI[i].buildingsType == 'T'){
-                printf('%d. Tower (%d,%d) %d lv. %d',j,B.TI[i].position.X,B.TI[i].position.Y,B.TI[i].armies,B.TI[i].level);
-                j++;
+            else if (PBuildings.TI[indexB].buildingsType == 'T')
+            {
+                printf("Tower (%d,%d) %d lv. %d\n",PBuildings.TI[indexB].position.X,PBuildings.TI[indexB].position.Y,PBuildings.TI[indexB].armies,PBuildings.TI[indexB].level);
             }
-            else if(B.TI[i].buildingsType == 'F'){
-                printf('%d. Fort (%d,%d) %d lv. %d',j,B.TI[i].position.X,B.TI[i].position.Y,B.TI[i].armies,B.TI[i].level);
-                j++;
+            else if (PBuildings.TI[indexB].buildingsType == 'F')
+            {
+                printf("Fort (%d,%d) %d lv. %d\n",PBuildings.TI[indexB].position.X,PBuildings.TI[indexB].position.Y,PBuildings.TI[indexB].armies,PBuildings.TI[indexB].level);
             }
-            else if(B.TI[i].buildingsType == 'V'){
-                printf('%d. Village (%d,%d) %d lv. %d',j,B.TI[i].position.X,B.TI[i].position.Y,B.TI[i].armies,B.TI[i].level);
-                j++;
+            else if (PBuildings.TI[indexB].buildingsType == 'V')
+            {
+                printf("Village (%d,%d) %d lv. %d\n",PBuildings.TI[indexB].position.X,PBuildings.TI[indexB].position.Y,PBuildings.TI[indexB].armies,PBuildings.TI[indexB].level);
             }
+            i++;
+            current = current->next;
         }
     }
+    NbofBuilding = i;
+    printf("\n");
 }
 /*
 {I.S Building Defined}
 {F.S Players Building Printed}
 */
 
-void EksekusiCommand(int command, int player, TabBuildings *B, TabBuildings *BL, Queue *QP,StackElmt *S){
-    
-    if(command == 1){//ATTACK
-        int op1,op2, Narmies;
-
-        printf("Daftar bangunan:\n");
-        PrintPBuildings(player, *B);
-        printf("Bangunan yang digunakan untuk menyerang: ");
-        scanf("%d", op1);
-        //jika ada graf keterhubungan bangunan 
-            printf("Daftar bangunan yang dapat diserang: ");
-            //print hasil graf
-            printf("Bangunan yang diserang: "); scanf("%d", op2);
-            printf("Jumlah pasukan: "); scanf("%d", Narmies);
-            if(Narmies<=(*B).TI[op1].armies){   
-                Attacked (&(*BL).TI[op2],&(*B).TI[op1],Narmies);
+void PrintLinkedBuildingsA (int turn,GraphArr G,TabBuildings Buildings,int index,int *NbofBuilding)//for attack mech
+{
+    int i = 1;
+    address currentIndex = G.Arr[index].First;
+    int EnemyIndex;
+    int indexB ;
+    if (turn == 1)
+    {
+        EnemyIndex = 2;
+    }
+    else 
+    {
+        EnemyIndex = 1;
+    }
+    while(currentIndex != NULL)
+    {
+        index = currentIndex->info;
+        if (Buildings.TI[indexB].owner == EnemyIndex)
+        {
+            printf("%d. ",i);
+            if (Buildings.TI[indexB].buildingsType == 'C')
+            {
+                printf("Castle (%d,%d) %d lv. %d\n",Buildings.TI[indexB].position.X,Buildings.TI[indexB].position.Y,Buildings.TI[indexB].armies,Buildings.TI[indexB].level);
             }
-        //jika tidak ada
-            printf("Tidak ada bangunan yang dapat diserang");
+            else if (Buildings.TI[indexB].buildingsType == 'T')
+            {
+                printf("Tower (%d,%d) %d lv. %d\n",Buildings.TI[indexB].position.X,Buildings.TI[indexB].position.Y,Buildings.TI[indexB].armies,Buildings.TI[indexB].level);
+            }
+            else if (Buildings.TI[indexB].buildingsType == 'F')
+            {
+                printf("Fort (%d,%d) %d lv. %d\n",Buildings.TI[indexB].position.X,Buildings.TI[indexB].position.Y,Buildings.TI[indexB].armies,Buildings.TI[indexB].level);
+            }
+            else if (Buildings.TI[indexB].buildingsType == 'V')
+            {
+                printf("Village (%d,%d) %d lv. %d\n",Buildings.TI[indexB].position.X,Buildings.TI[indexB].position.Y,Buildings.TI[indexB].armies,Buildings.TI[indexB].level);
+            }            
+        }
+        else if(Buildings.TI[indexB].owner == 0)
+        {
+            printf("%d. ",i);
+            if (Buildings.TI[indexB].buildingsType == 'C')
+            {
+                printf("Castle (%d,%d) %d lv. %d\n",Buildings.TI[indexB].position.X,Buildings.TI[indexB].position.Y,Buildings.TI[indexB].minArmiesToOccupy,Buildings.TI[indexB].level);
+            }
+            else if (Buildings.TI[indexB].buildingsType == 'T')
+            {
+                printf("Tower (%d,%d) %d lv. %d\n",Buildings.TI[indexB].position.X,Buildings.TI[indexB].position.Y,Buildings.TI[indexB].minArmiesToOccupy,Buildings.TI[indexB].level);
+            }
+            else if (Buildings.TI[indexB].buildingsType == 'F')
+            {
+                printf("Fort (%d,%d) %d lv. %d\n",Buildings.TI[indexB].position.X,Buildings.TI[indexB].position.Y,Buildings.TI[indexB].minArmiesToOccupy,Buildings.TI[indexB].level);
+            }
+            else if (Buildings.TI[indexB].buildingsType == 'V')
+            {
+                printf("Village (%d,%d) %d lv. %d\n",Buildings.TI[indexB].position.X,Buildings.TI[indexB].position.Y,Buildings.TI[indexB].minArmiesToOccupy,Buildings.TI[indexB].level);
+            }            
+        }
+        currentIndex=currentIndex->next;
+        i++;
     }
-    else if(command == 2){//LEVEL_UP
-        int op;
-        printf("Daftar bangunan:  ");
-        PrintPBuildings(player, *B);
-        printf("Bangunan yang akan di level up: "); scanf("%d", op);
-        LevelUp (&((*B).TI[op]));
-    }
-    else if(command == 3){//SKILL
-        Skill Act;
-        QDelElmt (QP, &Act);
-        actvteCrntSkill(Act,TabBuildings BArr,TabBuildings BArr2, Buildings *B,);
-    }
-    else if(command == 4){//UNDO
-        
-    }
-    else if(command == 5){//END_TURN
-        
-    }
-    else if(command == 6){//SAVE
-        
-    }
-    else if(command == 7){//MOVE
-        int Narmies, op1,op2;
-        printf("Daftar bangunan:  ");
-        PrintPBuildings(player, *B);
-        printf("Pilih bangunan: "); scanf("%d", op1);
-        printf("Daftar bangunan terdekat: "); 
-        //menampilkan bangunan terdekat jika ada 
-            scanf("%d", op2);
-            scanf("%d", &Narmies);
-            Move (Buildings *B, Buildings *B2, int Narmies);
-    }
-    else if(command == 8){//EXIT
-        
-    }
+    NbofBuilding = i;
+    printf("\n");
 }
 /*
-{I.S Building Defined}
-{F.S Players Building Printed}
+{I.S Graph Defined and Building Defined}
+{F.S Printed Linked Building}
 */
+void PrintLinkedBuildingsM (int turn,GraphArr G,TabBuildings Buildings,int index,int *NbofBuilding)
+{
+    int i = 1;
+    int tempturn = turn;
+    address currentIndex = G.Arr[index].First;
+    int indexB ;
+    while(currentIndex != NULL)
+    {
+        index = currentIndex->info;
+        if (Buildings.TI[indexB].owner == turn)
+        {
+            printf("%d. ",i);
+            if (Buildings.TI[indexB].buildingsType == 'C')
+            {
+                printf("Castle (%d,%d) %d lv. %d\n",Buildings.TI[indexB].position.X,Buildings.TI[indexB].position.Y,Buildings.TI[indexB].armies,Buildings.TI[indexB].level);
+            }
+            else if (Buildings.TI[indexB].buildingsType == 'T')
+            {
+                printf("Tower (%d,%d) %d lv. %d\n",Buildings.TI[indexB].position.X,Buildings.TI[indexB].position.Y,Buildings.TI[indexB].armies,Buildings.TI[indexB].level);
+            }
+            else if (Buildings.TI[indexB].buildingsType == 'F')
+            {
+                printf("Fort (%d,%d) %d lv. %d\n",Buildings.TI[indexB].position.X,Buildings.TI[indexB].position.Y,Buildings.TI[indexB].armies,Buildings.TI[indexB].level);
+            }
+            else if (Buildings.TI[indexB].buildingsType == 'V')
+            {
+                printf("Village (%d,%d) %d lv. %d\n",Buildings.TI[indexB].position.X,Buildings.TI[indexB].position.Y,Buildings.TI[indexB].armies,Buildings.TI[indexB].level);
+            }            
+        }
+        currentIndex = currentIndex->next;
+        i++;
+    }
+    NbofBuilding = i;
+    printf("\n");
+}
