@@ -4,8 +4,10 @@
 #include "boolean.h"
 #include "Map.h"
 #include "loadinfoawal.h"
+#include "Queue.h"
+#include "Stack.h"
 
-boolean NotEnd (BuildingsArr B);
+boolean NotEnd (TabBuildings B);
 /*
 {I.S Game Launched}
 {F.S Check the game if end return false if !end return true}
@@ -27,13 +29,13 @@ boolean NotEndTurn(int i);
 {F.S Check the Turn if End return False, if !end return true}
 */
 
-void EksekusiCommand(int command, int player, BuildingsArr *B);
+void EksekusiCommand(int command, int player, TabBuildings *B);
 /*
 {I.S Command Defined}
 {F.S Execute Command}
 */
 
-void PrintPBuildings(int player, BuildingsArr B);
+void PrintPBuildings(int player, TabBuildings B);
 /*
 {I.S Building Defined}
 {F.S Players Building Printed}

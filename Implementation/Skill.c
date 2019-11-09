@@ -1,5 +1,5 @@
 #include "../include1/Skills.h"
-#include "../include1/infofileeksternal.h"
+#include "../include1/loadinfoawal.h"
 
 /*
 	1. Instant Upgrade
@@ -11,19 +11,19 @@
 	7. Barragemdwhuwe
 	*/
 
-actvteCrntSkill(Skill Act,BuildingsArr BArr,BuildingsArr BArr2, Buildings *B,)
+actvteCrntSkill(Skill Act,TabBuildings BArr,TabBuildings BArr2, Buildings *B,)
 /*
 {I.S }
 {F.S }
 */
 {
-	//BuildingsArr BArr;//pemain
-	//BuildingsArr BArr2; //lawan
+	//TabBuildings BArr;//pemain
+	//TabBuildings BArr2; //lawan
 
 	switch(Act.SkillCode){   
 		case 1 : 
 			for(int i=IdxMin; i<=(BArr).MaxEl){
-				LevelUp (&(BArr.T[i]));}
+				LevelUp (&(BArr.TI[i]));}
 			break;
 		case 2 :
 
@@ -40,20 +40,20 @@ actvteCrntSkill(Skill Act,BuildingsArr BArr,BuildingsArr BArr2, Buildings *B,)
 			break;
 		case 6 :
 			for(i=IdxMin; i<=(BArr).MaxEl){
-				(BArr.T[i]).armies += 5;
+				(BArr.TI[i]).armies += 5;
 			}
 			break;
 		case 7 :
 			for(i=IdxMin; i<=(BArr2).MaxEl){
-				(BArr2.T[i]).armies -= 10;
+				(BArr2.TI[i]).armies -= 10;
 			}
 			break;
 	}
 }
-addSkill(Queue *SP, Queue *SL, BuildingsArr BArr, BuildingsArr BArr2)
+addSkill(Queue *SP, Queue *SL, TabBuildings BArr, TabBuildings BArr2)
 {
 	if(NbQElmt (*SP)!=10 || NbQElmt(*SL)!= 10){ 
-		//EksekusiCommand(int command, int player, BuildingsArr *B)
+		//EksekusiCommand(int command, int player, TabBuildings *B)
 		//Attacked (Buildings *B, Buildings *BP, int Narmies)
 		//actvteCrntSkill(Queue *S,Skill Act)
 		if(command==1 && *B.owner==*BP.owner && NbElmt(BArr2)==2){
@@ -68,7 +68,7 @@ addSkill(Queue *SP, Queue *SL, BuildingsArr BArr, BuildingsArr BArr2)
 			boolean allmaxlev = true;
 			int i = IdxMin;
 			while(i<=MaxEl && allmaxlev){
-				if((BArr.T[i]).level != 4){
+				if((BArr.TI[i]).level != 4){
 					allmaxlev = false;
 				}
 				i++;

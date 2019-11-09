@@ -11,14 +11,13 @@ int main()
 {
     int n, m, nbangunan;
     int Turn = 1;
-	BuildingsArr ArrOfBuildings;
+	TabBuildings ArrOfBuildings;
 	MATRIKS mgraf;
     Kata command;
     BuildMap Map;
     GetInfoDariFile (&n, &m, &nbangunan, &ArrOfBuildings, &mgraf);
     MakeBMap(&Map);
     while(NotEnd(ArrOfBuildings)){
-        
         PrintMap(Map);
         if(Turn == 1){    
            do
@@ -26,8 +25,7 @@ int main()
                  InputString(&command);
                  EksekusiCommand(OlahString(command),Turn, &ArrOfBuildings);
                 
-            } while (NotEndTurn(OlahString(command)));
-            ChangeTurn(&Turn);       
+            } while (NotEndTurn(OlahString(command)));     
         }
         else{
              do
@@ -36,9 +34,8 @@ int main()
                  EksekusiCommand(OlahString(command),Turn,&ArrOfBuildings);
                 
             } while (NotEndTurn(OlahString(command)));
-            
-            ChangeTurn(&Turn);
         }
+        ChangeTurn(&Turn);
         UpdateMap(&Map,ArrOfBuildings);
     }
 }//main app Command Line Interface

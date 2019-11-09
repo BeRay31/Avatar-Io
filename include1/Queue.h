@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 //preprocessor
-#define MaxEl 10
+#define MaxElQueue 10
 typedef struct sElmtlist *address;  //define *address as struct tElmtList
 typedef struct sElmtlist {  //define ELmtList as Struct tElmtList
 	Skill info;

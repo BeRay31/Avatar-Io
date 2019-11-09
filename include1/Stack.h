@@ -4,7 +4,8 @@
 #include <stdlib.h>
 
 typedef struct{
-    int command,srcBuilding,destBuilding,player,deltaArmies;
+    Buildings B;
+    int Player;
 }infotype;
 typedef struct StElmtList *stackAddress;
 typedef struct StElmtList{
