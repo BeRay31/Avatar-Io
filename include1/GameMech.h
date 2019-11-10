@@ -27,7 +27,7 @@ boolean NotEndTurn(int i);
 {F.S Check the Turn if End return False, if !end return true}
 */
 
-void EksekusiCommand(int command,GraphArr G, int player,List *PList, TabBuildings *B);
+void EksekusiCommand(int command,GraphArr G, int player,List *P1List,List *P2List, TabBuildings *B);
 /*
 {I.S Command Defined}
 {F.S Execute Command}
@@ -54,7 +54,7 @@ void PrintLinkedBuildingsM (int turn,GraphArr G,TabBuildings Buildings,int index
 {I.S Graph Defined and Building Defined for move mech}
 {F.S Printed Linked Building}
 */
-void resetAttack(TabBuildings *B);
+void resetAttacknMove(TabBuildings *B);
 /*
 {I.S attck true or false}
 {F.S attack false}

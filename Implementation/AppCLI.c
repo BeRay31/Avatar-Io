@@ -16,10 +16,8 @@ int main()
     Kata command;
     BuildMap Map;
     List P1Buildings,P2Buildings;
-    Queue SkillP1;
-    Queue SkillP2;
-    StackElmt S;
     GetInfoDariFile (&n, &m, &nbangunan, &ArrOfBuildings, &mgraf);
+    UpdateLoadBuilding(&ArrOfBuildings);
     MakeBMap(&Map);
     InsertLast(&P1Buildings,AllocateL(1));//Initiate and allocate Building index 1 == owner P1
     InsertLast(&P2Buildings,AllocateL(2));//Initiate and allocate Building index 2 == owner P2
@@ -29,8 +27,7 @@ int main()
            do
             {
                  InputString(&command);
-                 EksekusiCommand(OlahString(command),Turn,&P1Buildings,&ArrOfBuildings,&SkillP1,&S);
-                 UpdateListBuilding(Turn,&P1Buildings,ArrOfBuildings);
+                 EksekusiCommand(OlahString(command),Map.G,Turn,&P1Buildings,&P2Buildings,&ArrOfBuildings);
                 
             } while (NotEndTurn(OlahString(command)));     
         }
@@ -38,12 +35,12 @@ int main()
              do
             {
                  InputString(&command);
-                 EksekusiCommand(OlahString(command),Turn,&P2Buildings,&ArrOfBuildings,&SkillP2,&S);
-                 UpdateListBuilding(Turn,&P2Buildings,ArrOfBuildings);
+                 EksekusiCommand(OlahString(command),Map.G,Turn,&P1Buildings,&P2Buildings,&ArrOfBuildings);
                 
             } while (NotEndTurn(OlahString(command)));
         }
         ChangeTurn(&Turn);
+        resetAttacknMove(&ArrOfBuildings);
         UpdateMap(&Map,ArrOfBuildings);
     }
 }//main app Command Line Interface

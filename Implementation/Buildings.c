@@ -167,6 +167,7 @@ void Attack (Buildings *B, Buildings *BL, int Narmies)//*BL = Target
 		{
 			(*B).armies -= Narmies;
 			(*BL).armies -= Narmies;
+			printf("Bangunan gagal direbut.\n");
 		}
 	}	
 	else
@@ -195,6 +196,7 @@ void Attack (Buildings *B, Buildings *BL, int Narmies)//*BL = Target
 		{
 			(*B).armies -= Narmies;
 			(*BL).armies -= nerfedNarmies;
+			printf("Bangunan gagal direbut.\n");
 		}
 	}
 }
@@ -230,6 +232,7 @@ void Occupy (Buildings *B,Buildings *BL,int Narmies)//BL target
 		{
 			(*B).armies -= Narmies;
 			(*BL).minArmiesToOccupy -= Narmies;
+			printf("Bangunan gagal dikuasai.\n");
 		}
 	}	
 	else

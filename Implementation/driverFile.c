@@ -33,9 +33,9 @@ int main()
     UpdateMap(&Peta,arrBuildings);
     PrintMap(Peta);
     EksekusiCommand(1,Peta.G,1,&P1Buildings,&arrBuildings);
-
-    
-
+    UpdateMap(&Peta,arrBuildings);
+    PrintMap(Peta);
+    EksekusiCommand(1,Peta.G,1,&P1Buildings,&arrBuildings);
 }
 
 // gcc driverFile.c mesinkar.c mesinkata.c loadinfoawal.c Buildings.c point.c matriks.c save.c load.c -o run

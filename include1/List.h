@@ -36,6 +36,7 @@ void InsertAfter (List *L, address P, address Prec);
 {I.S List defined}
 {F.S Elmt after Prec is P}
 */
+void DelP (List *L, address *Pdel, address P);
 
 void DelFirst (List *L, address *P);
 /*

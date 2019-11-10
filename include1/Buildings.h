@@ -20,6 +20,7 @@ typedef struct{
     int buildingsIndex; // Index Of Building
     POINT position; // building position (X,Y)
     bool attck; //true if can be used to attck
+    bool move;//true if can be used to move
 }Buildings;
 //data structures for buildings
 

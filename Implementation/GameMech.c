@@ -163,7 +163,7 @@ boolean NotEndTurn(int i){
 {I.S Game Launched}
 {F.S Check the Turn if End return False, if !end return true}
 */
-void EksekusiCommand(int command,GraphArr G, int player,List *PList, TabBuildings *B)
+void EksekusiCommand(int command,GraphArr G, int player,List *P1List,List *P2List, TabBuildings *B)
 {
     
     if(command == 1)
@@ -179,7 +179,7 @@ void EksekusiCommand(int command,GraphArr G, int player,List *PList, TabBuilding
         address x;
         //IMPLMN
         printf("Daftar Bangunan : \n");
-        PrintOwnedBuildings(*B,*PList,&NbOfB);
+        PrintOwnedBuildings(*B,*P1List,&NbOfB);
         printf ("Bangunan yang digunakan untuk menyerang: ");
         scanf("%d",&selected);
         //Select Building That attack
@@ -189,7 +189,7 @@ void EksekusiCommand(int command,GraphArr G, int player,List *PList, TabBuilding
             printf("Masukkan kembali bangunan yang digunakan untuk menyerang :");
             scanf("%d",&selected);
         }
-        x = (*PList).First;
+        x = (*P1List).First;
         while(current!=selected)//search selected building index
         {
             x = x->next;
@@ -198,7 +198,7 @@ void EksekusiCommand(int command,GraphArr G, int player,List *PList, TabBuilding
         tempBIndex = x->info;
         Attck = (*B).TI[tempBIndex];//building that attack
 
-        if (Attck.attck = true)
+        if (Attck.attck)
         {
             printf("Daftar bangunan yang dapat diserang : \n");
             PrintLinkedBuildingsA(player,G,*B,tempBIndex,&NbOfB);
@@ -231,18 +231,44 @@ void EksekusiCommand(int command,GraphArr G, int player,List *PList, TabBuilding
             if(Target.owner == 0)
             {
                 Occupy(&Attck,&Target,armiesUsed);
+                if (Attck.owner == Target.owner)
+                {
+                    if(player==1)
+                    {
+                        printf("Bangunan Jadi Milikmu!!!!\n");
+                        InsertLast(P1List,AllocateL(Target.buildingsIndex));
+                    }
+                    else
+                    {
+                        printf("Bangunan Jadi Milikmu!!!!\n");
+                        InsertLast(P2List,AllocateL(Target.buildingsIndex));
+                    }
+                }
             }
             else
             {
                 Attack(&Attck,&Target,armiesUsed);
+                if (Attck.owner == Target.owner)
+                {
+                    if(player==1)
+                    {
+                        address del;
+                        printf("Bangunan Jadi Milikmu!!!!\n");
+                        InsertLast(P1List,AllocateL(Target.buildingsIndex));
+                        DelP(P2List,&del,Search(*P2List,Target.buildingsIndex));
+                    }
+                    else
+                    {
+                        address del;
+                        printf("Bangunan Jadi Milikmu!!!!\n");
+                        InsertLast(P2List,AllocateL(Target.buildingsIndex));
+                        DelP(P1List,&del,Search(*P1List,Target.buildingsIndex));
+                    }
+                }
             }
+            Attck.attck = false;
             (*B).TI[tempBIndex] = Attck;
             (*B).TI[tempBLIndex] = Target;
-            if (Attck.owner == Target.owner)
-            {
-                printf("Bangunan Jadi Milikmu!!!!\n");
-                InsertLast(PList,AllocateL(Target.buildingsIndex));
-            }
         }
         else
         {
@@ -388,8 +414,8 @@ void PrintLinkedBuildingsA (int turn,GraphArr G,TabBuildings Buildings,int index
                 printf("Village (%d,%d) %d lv. %d\n",Buildings.TI[indexB].position.X,Buildings.TI[indexB].position.Y,Buildings.TI[indexB].minArmiesToOccupy,Buildings.TI[indexB].level);
             }            
         }
-        currentIndex=currentIndex->next;
         i++;
+        currentIndex=currentIndex->next;
     }
     *NbofBuilding = i;
     printf("\n");
@@ -427,18 +453,19 @@ void PrintLinkedBuildingsM (int turn,GraphArr G,TabBuildings Buildings,int index
                 printf("Village (%d,%d) %d lv. %d\n",Buildings.TI[indexB].position.X,Buildings.TI[indexB].position.Y,Buildings.TI[indexB].armies,Buildings.TI[indexB].level);
             }            
         }
-        currentIndex = currentIndex->next;
         i++;
+        currentIndex = currentIndex->next;
     }
     *NbofBuilding = i;
     printf("\n");
 }
 
-void resetAttack(TabBuildings *B)
+void resetAttacknMove(TabBuildings *B)
 {
     for (int i =1 ; i<=(*B).Neff;i++)
     {
-        (*B).TI[i].attck = false;
+        (*B).TI[i].attck = true;
+        (*B).TI[i].move = true;
     }
 }
 /*
