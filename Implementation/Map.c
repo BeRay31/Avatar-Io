@@ -72,6 +72,9 @@ void UpdateMap (BuildMap *Map,TabBuildings b)
         int x = b.TI[i].position.X;
         int y = b.TI[i].position.Y;
         CreateBuildings(&Temp,type);
+        Temp.owner = b.TI[i].owner;
+        Temp.armies = b.TI[i].armies;
+        Temp.level = b.TI[i].level;
         Temp.position.X = x;
         Temp.position.Y = y;
         if (i == 1)

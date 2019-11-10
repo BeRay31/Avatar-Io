@@ -19,6 +19,7 @@ typedef struct{
     char buildingsType; //  buidling type
     int buildingsIndex; // Index Of Building
     POINT position; // building position (X,Y)
+    bool attck; //true if can be used to attck
 }Buildings;
 //data structures for buildings
 
@@ -44,14 +45,15 @@ void IncTroops (Buildings *B);
 {I.S Anything}
 {F.S Total Army incremented by (A)}
 */
-void Attacked (Buildings *B, Buildings *BL,int NArmies);
+void Attack (Buildings *B, Buildings *BL, int Narmies);
 /*
 {I.S Building defined}
 {F.S state Attacked based on defenses}
 */
-void Occupy (Buildings *B);
+void Occupy (Buildings *B,Buildings *BL,int Narmies);
 /*
 {I.S Building not occupied or owner = 0}
 {F.S Building Occupied owner = 1 || 2}
 */
+
 #endif

@@ -87,15 +87,16 @@ void LevelUp (Buildings *B)
 				(*B).incArmy += 10;	
 			}
 			(*B).maxArmyOnBuildings += 10;
-			(*B).minArmiesToOccupy = -999;
+			(*B).minArmiesToOccupy = 0;
 			(*B).level ++;
 			printf("Level Tower-mu meningkat menjadi %d!\n", (*B).level);
 		}
 		else if((*B).buildingsType == 'F'){
 			(*B).incArmy += 10;
 			(*B).maxArmyOnBuildings += 20;
-			(*B).minArmiesToOccupy = -999;	
-			if((*B).level > 1){
+			(*B).minArmiesToOccupy = 0;	
+			if((*B).level > 1)
+			{
 				(*B).defenses = true;
 			}
 			(*B).level ++;
@@ -104,7 +105,7 @@ void LevelUp (Buildings *B)
 		else if((*B).buildingsType == 'V'){
 			(*B).incArmy += 5;
 			(*B).maxArmyOnBuildings += 10;
-			(*B).minArmiesToOccupy = -999;	
+			(*B).minArmiesToOccupy = 0;	
 			(*B).level ++;
 			printf("Level Village-mu meningkat menjadi %d!\n", (*B).level);
 		}
@@ -134,67 +135,131 @@ void IncTroops (Buildings *B)
 		(*B).armies += (*B).incArmy;
 	}
 }
-void Attacked (Buildings *B, Buildings *BL, int Narmies)
+void Attack (Buildings *B, Buildings *BL, int Narmies)//*BL = Target
 /*
 {I.S Building defined, }
-{F.S state Attacked based on defenses}
+{F.S state Attack based on defenses}
 */
 {
-	/*int army;  
-
-	(*BL).armies -= Narmies; 
-	
-	
-		if((*B).defenses){
-			if((*B).owner==0){
-				(*B).minArmiesToOccupy -= Narmies;
-				Occupy(B);
-			}
-			else if(SkillAct==AttackUp){
-				(*B).defenses=false;
-			}
-			else if(SkillAct==CriticalHit){
-				
-			}
-			else{   
-				(*B).armies -= (Narmies*3/4);
-			}
+	POINT positionBL;
+	char typenewBL;
+	int tempArmies = 0;
+	int tempIndex;
+	int nerfedNarmies;
+	if((*BL).defenses = false)
+	{
+		if(Narmies>=(*BL).armies)
+		{
+			(*B).armies -= Narmies;//decrement armies
+			tempArmies = Narmies - (*BL).armies; //building(*BL)new armies
+			positionBL.X = (*BL).position.X;
+			positionBL.Y = (*BL).position.Y;
+			tempIndex = (*BL).buildingsIndex;
+			typenewBL = (*BL).buildingsType;
+			CreateBuildings(BL,typenewBL);
+			(*BL).owner = (*B).owner;
+			(*BL).position = positionBL;
+			(*BL).armies = tempArmies;
+			(*BL).buildingsIndex = tempIndex;
+			(*BL).minArmiesToOccupy = 0;//not defined building has been owned by somenone
 		}
-		else if (!(*B).defenses){
+		else
+		{
 			(*B).armies -= Narmies;
+			(*BL).armies -= Narmies;
 		}
-		
-		
-		
-
-		if((*B).armies <= 0){
-			army = -1*((*B).armies);
-			CreateBuildings(B, (*B).buildingsType); //bangunan dirubah ke kondisi level 1
-			(*B).owner = (*BL).owner;//kepemilikan di rubah
-			
-			(*B).armies += army; 
-			printf("Bangunan menjadi milikmu!");
+	}	
+	else
+	{
+		nerfedNarmies = Narmies*3/4;
+		if(nerfedNarmies>=(*BL).armies)
+		{
+			(*B).armies -= Narmies;//decrement armies
+			tempArmies = nerfedNarmies - (*BL).armies; //building(*BL)new armies
+			if(tempArmies >= 0)
+			{
+				tempArmies = tempArmies*4/3;
+			}
+			positionBL.X = (*BL).position.X;
+			positionBL.Y = (*BL).position.Y;
+			tempIndex = (*BL).buildingsIndex;
+			typenewBL = (*BL).buildingsType;
+			CreateBuildings(BL,typenewBL);
+			(*BL).owner = (*B).owner;
+			(*BL).position = positionBL;
+			(*BL).armies = tempArmies;
+			(*BL).buildingsIndex = tempIndex;
+			(*BL).minArmiesToOccupy = 0;//not defined building has been owned by somenone			
 		}
-		else{
-			printf("Bangunan gagal direbut.");
-		}*/
+		else
+		{
+			(*B).armies -= Narmies;
+			(*BL).armies -= nerfedNarmies;
+		}
+	}
 }
-void Occupy (Buildings *B)
+void Occupy (Buildings *B,Buildings *BL,int Narmies)//BL target
 /*
 {I.S Building not occupied or owner = 0}
 {F.S Building Occupied owner = 1 || 2}
 */
 {
-	
-		if ((*B).minArmiesToOccupy=0){
-			
-			(*B).armies = 0; 
+	POINT positionBL;
+	char typenewBL;
+	int tempArmies = 0;
+	int tempIndex;
+	int nerfedNarmies;
+	if((*BL).defenses = false)
+	{
+		if(Narmies>=(*BL).minArmiesToOccupy)
+		{
+			(*B).armies -= Narmies;//decrement armies
+			tempArmies = Narmies - (*BL).minArmiesToOccupy; //building(*BL)new armies
+			positionBL.X = (*BL).position.X;
+			positionBL.Y = (*BL).position.Y;
+			tempIndex = (*BL).buildingsIndex;
+			typenewBL = (*BL).buildingsType;
+			CreateBuildings(BL,typenewBL);
+			(*BL).owner = (*B).owner;
+			(*BL).position = positionBL;
+			(*BL).armies = tempArmies;
+			(*BL).buildingsIndex = tempIndex;
+			(*BL).minArmiesToOccupy = 0;//not defined building has been owned by somenone
 		}
-		else if((*B).minArmiesToOccupy < 0){
-			
-			(*B).armies = (*B).minArmiesToOccupy;
-
+		else
+		{
+			(*B).armies -= Narmies;
+			(*BL).minArmiesToOccupy -= Narmies;
 		}
+	}	
+	else
+	{
+		nerfedNarmies = Narmies*3/4;
+		if(nerfedNarmies>=(*BL).minArmiesToOccupy)
+		{
+			(*B).armies -= Narmies;//decrement armies
+			tempArmies = nerfedNarmies - (*BL).minArmiesToOccupy; //building(*BL)new armies
+			if(tempArmies >= 0)
+			{
+				tempArmies = tempArmies*4/3;
+			}
+			positionBL.X = (*BL).position.X;
+			positionBL.Y = (*BL).position.Y;
+			tempIndex = (*BL).buildingsIndex;
+			typenewBL = (*BL).buildingsType;
+			CreateBuildings(BL,typenewBL);
+			(*BL).owner = (*B).owner;
+			(*BL).position = positionBL;
+			(*BL).armies = tempArmies;
+			(*BL).buildingsIndex = tempIndex;
+			(*BL).minArmiesToOccupy = 0;//not defined building has been owned by somenone			
+		}
+		else
+		{
+			(*B).armies -= Narmies;
+			(*BL).minArmiesToOccupy -= nerfedNarmies;
+		}
+	}	
 }
 void Move (Buildings *B, Buildings *B2, int Narmies)
 {
