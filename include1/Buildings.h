@@ -56,5 +56,9 @@ void Occupy (Buildings *B,Buildings *BL,int Narmies);
 {I.S Building not occupied or owner = 0}
 {F.S Building Occupied owner = 1 || 2}
 */
-
+void Move (Buildings *B, Buildings *B2, int Narmies);
+/*
+{I.S Anything}
+{F.S Narmies from B moved into B2}
+*/
 #endif

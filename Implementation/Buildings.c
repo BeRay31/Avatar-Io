@@ -268,4 +268,68 @@ void Move (Buildings *B, Buildings *B2, int Narmies)
 {
 	(*B).armies -= Narmies;
 	(*B2).armies += Narmies;
+	if((*B).buildingsType == 'C')
+	{
+		if((*B2).buildingsType == 'T')
+		{
+			
+		}
+		else if((*B2).buildingsType == 'F')
+		{
+
+		}
+		else if((*B2).buildingsType == 'V')
+		{
+
+		}
+	}
+	else if ((*B).buildingsType == 'T')
+	{
+		if((*B2).buildingsType == 'C')
+		{
+
+		}
+		else if((*B2).buildingsType == 'F')
+		{
+
+		}
+		else if((*B2).buildingsType == 'V')
+		{
+			
+		}
+	}
+	else if ((*B).buildingsType == 'F')
+	{
+		if((*B2).buildingsType == 'C')
+		{
+
+		}
+		else if((*B2).buildingsType == 'T')
+		{
+
+		}
+		else if((*B2).buildingsType == 'V')
+		{
+			
+		}
+	}
+	else if ((*B).buildingsType == 'V')
+	{
+		if((*B2).buildingsType == 'C')
+		{
+
+		}
+		else if((*B2).buildingsType == 'F')
+		{
+
+		}
+		else if((*B2).buildingsType == 'T')
+		{
+			
+		}
+	}
 }
+/*
+{I.S Anything}
+{F.S Narmies from B moved into B2}
+*/

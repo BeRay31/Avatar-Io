@@ -369,7 +369,90 @@ void EksekusiCommand(int command,GraphArr G, int player,List *P1List,List *P2Lis
     }
     else if(command == 7)
     {//MOVE
-        
+        //{DICT}
+        int current = 1;
+        int selected;
+        address x;
+        int NbOfB;
+        int TempIndex,TempIndexB;
+        Buildings Src,Dest;
+        State St;
+        int Narmies;
+        //{IMPLEMENT}
+        if(player == 1)
+        {
+            PrintOwnedBuildings((*B),*P1List,&NbOfB);
+            x = (*P1List).First;
+        }
+        else
+        {
+            PrintOwnedBuildings((*B),*P2List,&NbOfB);
+            x = (*P2List).First;            
+        }
+        printf("Pilih Bangunan :");
+        scanf("%d",&selected);
+        while(selected>NbOfB || selected<= 0)
+        {
+            printf("Bangunan yang anda pilih tidaklah ada.\n");
+            printf("Masukkan kembali bangunan yang akan dipindah pasukannya : ");
+            scanf("%d",&selected);
+        }
+        current = 1;
+        while(current != selected)
+        {
+            x = x->next;
+            current++;
+        }
+        TempIndex = x->info;
+        Src = (*B).TI[TempIndex];
+        if (Src.move)
+        {
+            printf("Daftar bangunan yang terdekat : \n");
+            x = G.Arr[TempIndex].First;
+            PrintLinkedBuildingsM(player,G,(*B),TempIndex,&NbOfB);
+            printf("Bangunan yang akan menerima : ");
+            scanf("%d",&selected);
+            while(selected>NbOfB || selected<0)
+            {
+                printf("Bangunan yang anda pilih tidaklah ada.\n");
+                printf("Masukkan kembali bangunan yang akan menerima : ");
+                scanf("%d",&selected);
+            }
+            current = 1;
+            while(current != selected)
+            {
+                while((*B).TI[x->info].owner!=player)
+                {
+                    x = x->next;
+                }
+                x = x->next;
+                current ++;
+            }
+            TempIndexB = x->info;
+            Dest = (*B).TI[TempIndexB];
+            //Stack
+            St.B = (*B);
+            St.P1 = (*P1List);
+            St.P2 = (*P2List);
+            Push(S,St);
+            //Move MEch
+            printf("Jumlah Pasukan : ");
+            scanf("%d",&Narmies);
+            while(Narmies>Src.armies || Narmies<0)
+            {
+                printf("Jumlah pasukkan tidaklah valid.\n");
+                printf("Masukkan kembali jumlah pasukan : ");
+                scanf("%d",&Narmies);
+            }
+            Move(&Src,&Dest,Narmies);
+            Src.move = false;
+            (*B).TI[TempIndex] = Src;
+            (*B).TI[TempIndexB]= Dest;
+        }
+        else
+        {
+            printf("Bangunan sudah pernah dipindah pasukannya.\n");
+        }
     }
     else if(command == 8)
     {//EXIT
@@ -525,8 +608,8 @@ void PrintLinkedBuildingsM (int turn,GraphArr G,TabBuildings Buildings,int index
             {
                 printf("Village (%d,%d) %d lv. %d\n",Buildings.TI[indexB].position.X,Buildings.TI[indexB].position.Y,Buildings.TI[indexB].armies,Buildings.TI[indexB].level);
             }            
+            i++;
         }
-        i++;
         currentIndex = currentIndex->next;
     }
     *NbofBuilding = i;
