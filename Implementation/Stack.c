@@ -10,7 +10,7 @@ void SCreateEmpty(Stack *S)
 {F.S Stack S defined}
 */
 
-stackAddress Sallocate (infotype X)
+stackAddress Sallocate (State X)
 {
     stackAddress S;
     S = (stackAddress) malloc (sizeof(StackElmt));
@@ -31,7 +31,7 @@ stackAddress Sallocate (infotype X)
 */ 
 
 
-void Push (Stack *S,infotype X)
+void Push (Stack *S,State X)
 {
     stackAddress NewElmt;
     NewElmt = Sallocate(X);
@@ -43,7 +43,7 @@ void Push (Stack *S,infotype X)
 {F.S Stack Pushed with new Elmt X}
 */
 
-void Pop (Stack *S,infotype *X)
+void Pop (Stack *S,State *X)
 {
     if ((*S).top != NULL)
     {

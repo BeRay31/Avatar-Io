@@ -12,9 +12,12 @@ int main()
     int n,m,nbuildings;
     TabBuildings arrBuildings;
     MATRIKS graf;
+    Stack S;
+    SCreateEmpty(&S);
     InsertLast(&P1Buildings,AllocateL(1));//Initiate and allocate Building index 1 == owner P1
     InsertLast(&P2Buildings,AllocateL(2));//Initiate and allocate Building index 2 == owner P2
-    InsertLast(&P1Buildings,AllocateL(6));
+    InsertLast(&P1Buildings,AllocateL(13));
+    InsertLast(&P2Buildings,AllocateL(17));
     GetInfoDariFile(&n,&m,&nbuildings,&arrBuildings,&graf);
     printf("%d %d\n",n,m );
     printf("%d\n",nbuildings);
@@ -25,17 +28,20 @@ int main()
     return 0;*/
     UpdateLoadBuilding(&arrBuildings);
     arrBuildings.TI[1].armies = 80;
-    arrBuildings.TI[6].armies = 40;
+    arrBuildings.TI[13].armies = 40;
+    arrBuildings.TI[13].owner = 1;
+    arrBuildings.TI[17].armies =40;
+    arrBuildings.TI[17].owner=2;
     MakeBMap(&Peta);
-    PrintMap(Peta);
-    printf("%d",arrBuildings.TI[1].level);
-    EksekusiCommand(1,Peta.G,1,&P1Buildings,&arrBuildings);
     UpdateMap(&Peta,arrBuildings);
     PrintMap(Peta);
-    EksekusiCommand(1,Peta.G,1,&P1Buildings,&arrBuildings);
+    EksekusiCommand(1,Peta.G,1,&P1Buildings,&P2Buildings,&arrBuildings,&S);
     UpdateMap(&Peta,arrBuildings);
     PrintMap(Peta);
-    EksekusiCommand(1,Peta.G,1,&P1Buildings,&arrBuildings);
+    EksekusiCommand(1,Peta.G,1,&P1Buildings,&P2Buildings,&arrBuildings,&S);
+    UpdateMap(&Peta,arrBuildings);
+    PrintMap(Peta);
+    EksekusiCommand(1,Peta.G,2,&P1Buildings,&P2Buildings,&arrBuildings,&S);
 }
 
 // gcc driverFile.c mesinkar.c mesinkata.c loadinfoawal.c Buildings.c point.c matriks.c save.c load.c -o run

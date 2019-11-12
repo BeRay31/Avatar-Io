@@ -75,7 +75,7 @@ void LevelUp (Buildings *B)
 		if((*B).buildingsType == 'C'){
 			(*B).incArmy += 5;
 			(*B).maxArmyOnBuildings += 20;
-			(*B).minArmiesToOccupy = -999;
+			(*B).minArmiesToOccupy = 0;
 			(*B).level ++;
 			printf("Level Castle-mu meningkat menjadi %d!\n", (*B).level);		
 		}	

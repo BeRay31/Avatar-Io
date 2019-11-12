@@ -2,14 +2,17 @@
 #define __STACK_H__
 
 #include <stdlib.h>
+#include "dinamicArr.h"
+#include "List.h"
 
 typedef struct{
-    Buildings B;
-    int Player;
-}infotype;
+    TabBuildings B;
+    List P1,P2;
+}State;
+
 typedef struct StElmtList *stackAddress;
 typedef struct StElmtList{
-    infotype info;
+    State info;
     stackAddress next;
 }StackElmt;
 
@@ -23,19 +26,19 @@ void SCreateEmpty(Stack *S);
 {F.S Stack S defined}
 */
 
-stackAddress Sallocate (infotype X);
+stackAddress Sallocate (State X);
 /*
 {I.S Anything}
 {F.S X allocated as StackAddress}
 */ 
 
-void Push (Stack *S,infotype X);
+void Push (Stack *S,State X);
 /*
 {I.S Anything}
 {F.S Stack Pushed with new Elmt X}
 */
 
-void Pop (Stack *S,infotype *X);
+void Pop (Stack *S,State *X);
 /*
 {I.S Anything}
 {F.S Top Elmt of Stack Popped and Saved in X}

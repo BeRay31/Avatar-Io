@@ -1,58 +1,57 @@
-#ifndef __QUEUE_H__
-#define __QUEUE_H__
+/* File : queue.h */
+/* Definisi ADT Queue dengan representasi array secara eksplisit dan alokasi dinamik */
+/* Model Implementasi Versi III dengan circular buffer */
 
-#include "Skills.h"
-#include <stdlib.h>
-#include <stdbool.h>
-//preprocessor
-#define MaxElQueue 10
-typedef struct sElmtlist *Saddress;  //define *address as struct tElmtList
-typedef struct sElmtlist {  //define ELmtList as Struct tElmtList
-	Skill info;
-	Saddress next;
-} ElmtQueue;
-typedef struct {
-	Saddress Head,Tail;
-} Queue;
+#ifndef queue_H
+#define queue_H
 
-address AllocateQ (Skill S);
-/*
-{I.S anything}
-{F.S S alocated}
-*/
-int NbQElmt (Queue Q);
-/*
-{I.S Q Defined}
-{F.S Return NbELmt}
-*/
+#include "boolean.h"
 
-bool IsQEmpty (Queue Q);
-/*
-{I.S Q defined}
-{F.S True if Q Empty && False if Q not Empty}
-*/
+#define Nil 0
+/* Konstanta untuk mendefinisikan address tak terdefinisi */
 
-bool IsQFull (Queue Q);
-/*
-{I.S Q Defined}
-{F.S True If ElmtQ = MaxEl}
-*/
-void QCreateEmpty(Queue *Q);
-/*
-{I.S Anything}
-{F.S Q created and Q empty}
-*/
- 
-void QAddElmt (Queue *Q, Skill S);
-/*
-{I.S Q defined}
-{F.S Elmt of Q ++ Tail = new Elmt}
-*/
+/* Definisi elemen dan address */
+/* Contoh deklarasi variabel bertype Queue : */
+/* Versi I : tabel dinamik, Head dan Tail eksplisit, ukuran disimpan */
+typedef struct { int * T;   /* tabel penyimpan elemen */
+                 int HEAD,TAIL;  /* alamat penghapusan | alamat penambahan */
+                 int MaxEl;     /* Max elemen queue */
+               } Queue;
+/* Definisi Queue kosong: HEAD=Nil; TAIL=Nil. */
+/* Catatan implementasi: T[0] tidak pernah dipakai */
 
-void QDelElmt (Queue *Q, Skill *S);
-/*
-{I.S Q defined }
-{F.S Head deleted or 1st element deleted}
-*/
+/* ********* Prototype ********* */
+boolean IsEmptyQ (Queue Q);
+/* Mengirim true jika Q kosong: lihat definisi di atas */
+boolean IsFullQ (Queue Q);
+/* Mengirim true jika tabel penampung elemen Q sudah penuh */
+/* yaitu mengandung elemen sebanyak MaxEl */
+int NBElmtQ (Queue Q);
+/* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika Q kosong. */
+
+/* *** Kreator *** */
+void CreateEmptyQ (Queue * Q, int Max);
+/* I.S. sembarang */
+/* F.S. Sebuah Q kosong terbentuk dan salah satu kondisi sbb: */
+/* Jika alokasi berhasil, Tabel memori dialokasi berukuran Max+1 */
+/* atau : jika alokasi gagal, Q kosong dg MaxEl=0 */
+/* Proses : Melakukan alokasi, membuat sebuah Q kosong */
+
+/* *** Destruktor *** */
+void DeAlokasiQ(Queue * Q);
+/* Proses: Mengembalikan memori Q */
+/* I.S. Q pernah dialokasi */
+/* F.S. Q menjadi tidak terdefinisi lagi, MaxEl(Q) diset 0 */
+
+/* *** Primitif Add/Delete *** */
+void AddQ (Queue * Q, int X);
+/* Proses: Menambahkan X pada Q dengan aturan FIFO */
+/* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
+/* F.S. X menjadi TAIL yang baru, TAIL "maju" dengan mekanisme circular buffer */
+void DelQ (Queue * Q, int * X);
+/* Proses: Menghapus X pada Q dengan aturan FIFO */
+/* I.S. Q tidak mungkin kosong */
+/* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer; 
+        Q mungkin kosong */
 
 #endif
