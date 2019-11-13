@@ -1,5 +1,9 @@
 gcc -o test driverFile.c save.c Map.c loadinfoawal.c  matriks.c mesinkar.c mesinkata.c  Buildings.c pcolor.c Graph.c List.c dinamicArr.c GameMech.c Stack.c
+<<<<<<< HEAD
 ./test
 
 gcc -o testAppCLI AppCLI.c save.c Map.c loadinfoawal.c  matriks.c mesinkar.c mesinkata.c  Buildings.c pcolor.c Graph.c List.c dinamicArr.c GameMech.c Stack.c
 ./testAppCLI
+=======
+./test
+>>>>>>> 0ad5fde786dd11875a1c807236d02cbbff63680b
