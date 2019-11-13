@@ -14,33 +14,45 @@ int main()
 	TabBuildings ArrOfBuildings;
 	MATRIKS mgraf;
     Kata command;
+    Stack S;
+    int t;
     BuildMap Map;
     List P1Buildings,P2Buildings;
     GetInfoDariFile (&n, &m, &nbangunan, &ArrOfBuildings, &mgraf);
     UpdateLoadBuilding(&ArrOfBuildings);
     MakeBMap(&Map);
+    SCreateEmpty(&S);
     InsertLast(&P1Buildings,AllocateL(1));//Initiate and allocate Building index 1 == owner P1
     InsertLast(&P2Buildings,AllocateL(2));//Initiate and allocate Building index 2 == owner P2
+    ArrOfBuildings.TI[1].armies = 40;
+    ArrOfBuildings.TI[2].armies = 40;
     while(NotEnd(ArrOfBuildings)){
-        PrintMap(Map);
+        
         if(Turn == 1){    
            do
             {
-                 InputString(&command);
-                 EksekusiCommand(OlahString(command),Map.G,Turn,&P1Buildings,&P2Buildings,&ArrOfBuildings);
-                
+                PrintMap(Map);
+                printf("Player %d\n",Turn);
+                PrintOwnedBuildings(ArrOfBuildings,P1Buildings,&t);
+                printf("Skill Available : \n");
+                InputString(&command);
+                EksekusiCommand(OlahString(command),Map.G,Turn,&P1Buildings,&P2Buildings,&ArrOfBuildings,&S);
+                UpdateMap(&Map,ArrOfBuildings);
             } while (NotEndTurn(OlahString(command)));     
         }
         else{
              do
             {
-                 InputString(&command);
-                 EksekusiCommand(OlahString(command),Map.G,Turn,&P1Buildings,&P2Buildings,&ArrOfBuildings);
-                
+                PrintMap(Map);
+                printf("Player %d\n",Turn);
+                PrintOwnedBuildings(ArrOfBuildings,P2Buildings,&t);
+                printf("Skill Available : \n");
+                InputString(&command);
+                EksekusiCommand(OlahString(command),Map.G,Turn,&P1Buildings,&P2Buildings,&ArrOfBuildings,&S);
+                UpdateMap(&Map,ArrOfBuildings);
             } while (NotEndTurn(OlahString(command)));
         }
         ChangeTurn(&Turn);
         resetAttacknMove(&ArrOfBuildings);
-        UpdateMap(&Map,ArrOfBuildings);
     }
 }//main app Command Line Interface
