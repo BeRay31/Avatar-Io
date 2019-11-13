@@ -263,13 +263,11 @@ void EksekusiCommand(int command,GraphArr G, int player,List *P1List,List *P2Lis
                     {
                         printf("Bangunan Jadi Milikmu!!!!\n");
                         InsertLast(P1List,AllocateL(Target.buildingsIndex));
-                        DelP(P2List,&del,Search(*P2List,Target.buildingsIndex));
                     }
                     else
                     {
                         printf("Bangunan Jadi Milikmu!!!!\n");
                         InsertLast(P2List,AllocateL(Target.buildingsIndex));
-                        DelP(P1List,&del,Search(*P1List,Target.buildingsIndex));
                     }
                 }
             }

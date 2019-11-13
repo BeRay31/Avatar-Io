@@ -55,7 +55,6 @@ void MakeBMap(BuildMap *Map)
             }
         }
     }
-    printGraph((*Map).G);
 }
 /*
 {I.S Anything}
