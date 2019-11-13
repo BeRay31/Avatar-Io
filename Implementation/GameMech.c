@@ -1,5 +1,7 @@
 #include "../include1/GameMech.h"
 #include "../include1/point.h"
+#include "../include1/mesinkata.h"
+
 boolean NotEnd(TabBuildings B)
 {
     int i;
@@ -46,104 +48,88 @@ void ChangeTurn(int *Turn)
 {F.S Turn Changed}
 */
 
-int OlahString(Kata Kata)
+int OlahString(Kata command)
 {
-    char atk[] = "ATTACK"; // 1
-    char lvl[] = "LEVEL_UP"; // 2
-    char skill[] = "SKILL"; // 3
-    char UNDO[] = "UNDO"; // 4
-    char END_TURN[] = "END_TURN"; // 5
-    char SAVE[] = "SAVE"; // 6
-    char MOVE[] = "MOVE"; // 7
-    char EXIT[] = "EXIT"; // 8
-    int i;
-    for(i=0;i<6;i++)
-    {
-        if(Kata.TabKata[i] != atk[i])
-        {
-            break;
-        }
-    }
-    if(i == 5)
-    {
+    // kamus command
+	Kata ATTACK, LEVEL_UP, SKILL, UNDO, END_TURN, SAVE, MOVE, EXIT;
+	// ATTTACK
+	ATTACK.TabKata[1] = 'A';
+	ATTACK.TabKata[2] = 'T';
+	ATTACK.TabKata[3] = 'T';
+	ATTACK.TabKata[4] = 'A';
+	ATTACK.TabKata[5] = 'C';
+	ATTACK.TabKata[6] = 'K';
+	ATTACK.Length = 6;
+	// LEVEL_UP
+	LEVEL_UP.TabKata[1] = 'L';
+	LEVEL_UP.TabKata[2] = 'E';
+	LEVEL_UP.TabKata[3] = 'V';
+	LEVEL_UP.TabKata[4] = 'E';
+	LEVEL_UP.TabKata[5] = 'L';
+	LEVEL_UP.TabKata[6] = '_';
+	LEVEL_UP.TabKata[7] = 'U';
+	LEVEL_UP.TabKata[8] = 'P';
+	LEVEL_UP.Length = 8;
+	// SKILL
+	SKILL.TabKata[1] = 'S';
+	SKILL.TabKata[2] = 'K';
+	SKILL.TabKata[3] = 'I';
+	SKILL.TabKata[4] = 'L';
+	SKILL.TabKata[5] = 'L';
+	SKILL.Length = 5;
+	// UNDO
+	UNDO.TabKata[1] = 'U';
+	UNDO.TabKata[2] = 'N';
+	UNDO.TabKata[3] = 'D';
+	UNDO.TabKata[4] = 'O';
+	UNDO.Length = 4;
+	// END_TURN
+	END_TURN.TabKata[1] = 'E';
+	END_TURN.TabKata[2] = 'N';
+	END_TURN.TabKata[3] = 'D';
+	END_TURN.TabKata[4] = '_';
+	END_TURN.TabKata[5] = 'T';
+	END_TURN.TabKata[6] = 'U';
+	END_TURN.TabKata[7] = 'R';
+	END_TURN.TabKata[8] = 'N';
+	END_TURN.Length = 8;
+	// SAVE
+	SAVE.TabKata[1] = 'S';
+	SAVE.TabKata[2] = 'A';
+	SAVE.TabKata[3] = 'V';
+	SAVE.TabKata[4] = 'E';
+	SAVE.Length = 4; 
+    // MOVE
+    MOVE.TabKata[1] = 'M';
+	MOVE.TabKata[2] = 'O';
+	MOVE.TabKata[3] = 'V';
+	MOVE.TabKata[4] = 'E';
+	MOVE.Length = 4;
+    // EXIT
+    EXIT.TabKata[1] = 'E';
+	EXIT.TabKata[2] = 'X';
+	EXIT.TabKata[3] = 'I';
+	EXIT.TabKata[4] = 'T';
+	EXIT.Length = 4;
+
+    if (IsKataSama (command, ATTACK)) {
         return 1;
-    }
-    for(i=0;i<8;i++)
-    {
-        if(Kata.TabKata[i] != lvl[i])
-        {
-            break;
-        }
-    }
-    if(i == 7)
-    {
+    } else if (IsKataSama (command, LEVEL_UP)) {
         return 2;
-    }
-    for(i=0;i<5;i++)
-    {
-        if(Kata.TabKata[i] != skill[i])
-        {
-            break;
-        }
-    }
-    if(i == 4)
-    {
+    } else if (IsKataSama (command, SKILL)) {
         return 3;
-    }
-    for(i=0;i<4;i++)
-    {
-        if(Kata.TabKata[i] != UNDO[i])
-        {
-            break;
-        }
-    }
-    if(i == 3)
-    {
+    } else if (IsKataSama (command, UNDO)) {
         return 4;
-    }
-    for(i=0;i<8;i++)
-    {
-        if(Kata.TabKata[i] != END_TURN[i])
-        {
-            break;
-        }
-    }
-    if(i == 7)
-    {
+    } else if (IsKataSama (command, END_TURN)) {
         return 5;
-    }
-    for(i=0;i<4;i++)
-    {
-        if(Kata.TabKata[i] != SAVE[i])
-        {
-            break;
-        }
-    }
-    if(i == 3)
-    {
+    } else if (IsKataSama (command, SAVE)) {
         return 6;
-    }
-    for(i=0;i<4;i++)
-    {
-        if(Kata.TabKata[i] != MOVE[i])
-        {
-            break;
-        }
-    }
-    if(i == 3)
-    {
+    } else if (IsKataSama (command, MOVE)) {
         return 7;
-    }
-    for(i=0;i<4;i++)
-    {
-        if(Kata.TabKata[i] != EXIT[i])
-        {
-            break;
-        }
-    }
-    if(i == 3)
-    {
+    } else if (IsKataSama (command, EXIT)) {
         return 8;
+    } else {
+        return 0;
     }
 }
 /*
