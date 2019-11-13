@@ -426,6 +426,10 @@ void EksekusiCommand(int command,GraphArr G, int player,List *P1List,List *P2Lis
                     x = x->next;
                 }
                 x = x->next;
+                while((*B).TI[x->info].owner!=player)
+                {
+                    x = x->next;
+                }
                 current ++;
             }
             TempIndexB = x->info;

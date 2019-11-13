@@ -1,2 +1,2 @@
-gcc -o test driverFile.c save.c Map.c loadinfoawal.c  matriks.c mesinkar.c mesinkata.c  Buildings.c pcolor.c Graph.c List.c dinamicArr.c GameMech.c
+gcc -o test driverFile.c save.c Map.c loadinfoawal.c  matriks.c mesinkar.c mesinkata.c  Buildings.c pcolor.c Graph.c List.c dinamicArr.c GameMech.c Stack.c
 ./test
