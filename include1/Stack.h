@@ -8,7 +8,7 @@
 typedef struct{
     TabBuildings B;
     List P1,P2;
-    int Skill;
+    
 }State;
 
 typedef struct StElmtList *stackAddress;

@@ -237,7 +237,7 @@ void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1
             St.B = *B;
             St.P1 = *P1List;
             St.P2 = *P2List;
-            St.Skill = 0;
+            
             Push(S,St);
             //AttackMech
             if(Target.owner == 0)
@@ -332,7 +332,6 @@ void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1
         St.B = (*B);
         St.P1=(*P1List);
         St.P2=(*P2List);
-        St.Skill = 0;
         Push(S,St);
         //Level-Up Mech
         LevelUp(&LvlUp);
@@ -372,7 +371,7 @@ void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1
                     }
                 }
             }
-            // Menyimpan ke Stack
+            
         }
         else if(skill == 2){
            // Shield
