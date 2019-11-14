@@ -5,10 +5,16 @@ Prepared by: Asisten IF2110
 Created at: 17/10/2019
 **/
 
+//Windows
+/*
+#include <windows.h>
+*/
+
 #include <stdio.h>
-#include "../include1/pcolor.h"
+#include "pcolor.h"
 
 int main() {
+	int end;
     print_red('R');
     print_green('G');
     print_magenta('M');
@@ -16,5 +22,6 @@ int main() {
     print_yellow('Y');
     print_blue('B');
     printf("\n");
+    scanf("%d",&end);
     return 0;
 }
