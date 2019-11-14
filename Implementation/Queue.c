@@ -1,5 +1,15 @@
 #include "../include1/Queue.h"
 #include <stdlib.h>
+/* 
+    Skill List: 
+        1. Instant Upgrade
+        2. Shield
+        3. Extra Turn
+        4. Attack Up
+        5. Critical Hit
+        6. Instant Reinforcement
+        7. Barrage
+*/
 /*
 /* ********* Prototype ********* */
 boolean IsEmptyQ (Queue Q)

@@ -149,7 +149,7 @@ boolean NotEndTurn(int i){
 {I.S Game Launched}
 {F.S Check the Turn if End return False, if !end return true}
 */
-void EksekusiCommand(int command,GraphArr G, int player,List *P1List,List *P2List, TabBuildings *B,Stack *S)
+void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1List,List *P2List, TabBuildings *B,Stack *S, Queue *Q1, Queue *Q2)
 {
     
     if(command == 1)
@@ -237,6 +237,7 @@ void EksekusiCommand(int command,GraphArr G, int player,List *P1List,List *P2Lis
             St.B = *B;
             St.P1 = *P1List;
             St.P2 = *P2List;
+            St.Skill = 0;
             Push(S,St);
             //AttackMech
             if(Target.owner == 0)
@@ -293,6 +294,7 @@ void EksekusiCommand(int command,GraphArr G, int player,List *P1List,List *P2Lis
         //{DICT}
         int NbOfB;
         address x;
+        int skill;
         int current = 1;
         int selected;
         int TempIndex;
@@ -330,14 +332,112 @@ void EksekusiCommand(int command,GraphArr G, int player,List *P1List,List *P2Lis
         St.B = (*B);
         St.P1=(*P1List);
         St.P2=(*P2List);
+        St.Skill = 0;
         Push(S,St);
         //Level-Up Mech
         LevelUp(&LvlUp);
         (*B).TI[TempIndex] = LvlUp;
     }
     else if(command == 3)
-    {//SKILL
-    
+    {   
+        if(player == 1){
+            if(IsEmptyQ(*Q1)){
+                printf("Anda tidak memiliki skill sekarang");
+                
+            }
+            else
+            {
+                DelQ(&(*Q1),&skill);
+            }
+
+        }
+        else
+        {
+            if(IsEmptyQ(*Q2)){
+                printf("Anda tidak memiliki skill sekarang");
+            }
+            else
+            {
+                DelQ(&(*Q2),&skill);
+            }
+            
+        }
+        if(skill == 1 ){
+            // Instant Upgrade SKill
+            printf("Anda menggunakan skill Instant Upgrade");
+            for(int i=0; i < (*B).Neff ; i++){
+                if((*B).TI[i].owner == player){
+                    if((*B).TI[i].level <= 3){  // Hanya Level kurang dari sama dengan 3 yang dapat naik level
+                        (*B).TI[i].level++;
+                    }
+                }
+            }
+            // Menyimpan ke Stack
+        }
+        else if(skill == 2){
+           // Shield
+           // Menyimpan ke Stack
+        }
+        else if(skill == 3){
+            // Extra Turn
+            printf("Anda menggunakan skill extra turn");
+             if(*changeTurn == 1){
+                *changeTurn == 2;
+            }
+            else{
+                *changeTurn == 1;
+            }
+            // Menyimpan ke Stack
+        }
+        else if (skill == 4){
+            // Attack Up
+            // Menyimpan ke Stack
+        }
+        else if (skill == 5){
+            // Critical Hit
+            // Menyimpan ke Stack
+
+        }
+        else if (skill == 6){
+            // Instant Reinforcement
+            for(int i=0; i< (*B).Neff ; i++){
+                if((*B).TI[i].owner == player){
+                    if((*B).TI[i].armies + 5 >= (*B).TI[i].maxArmyOnBuildings){
+                        (*B).TI[i].armies = (*B).TI[i].maxArmyOnBuildings;
+                    }
+                    else
+                    {
+                        (*B).TI[i].armies += 5;
+                    }
+                    
+                }
+            }
+            // Menyimpan ke Stack
+        }
+        else if (skill == 7){
+            // Barrage
+            int lawan;
+            if(player == 1){
+                lawan = 2;
+            }
+            else
+            {
+                lawan = 1;
+            }
+            for(int i = 0; i <(*B).Neff;i++){
+                if((*B).TI[i].owner == lawan){
+                    if((*B).TI[i].armies - 10 <= 0 ){
+                        (*B).TI[i].armies = 0;
+                    }
+                    else
+                    {
+                        (*B).TI[i].armies -=10;
+                    }
+                    
+                }
+            }
+            // Menyimpan ke Stack
+        }
     }
     else if(command == 4)
     {//UNDO

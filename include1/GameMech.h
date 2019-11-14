@@ -29,7 +29,7 @@ boolean NotEndTurn(int i);
 {F.S Check the Turn if End return False, if !end return true}
 */
 
-void EksekusiCommand(int command,GraphArr G, int player,List *P1List,List *P2List, TabBuildings *B,Stack *S);
+void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1List,List *P2List, TabBuildings *B,Stack *S,Queue *Q1, Queue *Q2);
 /*
 {I.S Command Defined}
 {F.S Execute Command}

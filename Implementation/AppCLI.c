@@ -17,6 +17,7 @@ int main()
     Stack S;
     int t;
     BuildMap Map;
+    int changeTurn;
     List P1Buildings,P2Buildings;
     GetInfoDariFile (&n, &m, &nbangunan, &ArrOfBuildings, &mgraf);
     UpdateLoadBuilding(&ArrOfBuildings);
@@ -33,10 +34,11 @@ int main()
             {
                 PrintMap(Map);
                 printf("Player %d\n",Turn);
+                changeTurn = Turn;
                 PrintOwnedBuildings(ArrOfBuildings,P1Buildings,&t);
                 printf("Skill Available : \n");
                 InputString(&command);
-                EksekusiCommand(OlahString(command),Map.G,Turn,&P1Buildings,&P2Buildings,&ArrOfBuildings,&S);
+                EksekusiCommand(OlahString(command),Map.G,Turn,&changeTurn,&P1Buildings,&P2Buildings,&ArrOfBuildings,&S);
                 UpdateMap(&Map,ArrOfBuildings);
             } while (NotEndTurn(OlahString(command)));     
         }
@@ -52,6 +54,7 @@ int main()
                 UpdateMap(&Map,ArrOfBuildings);
             } while (NotEndTurn(OlahString(command)));
         }
+        Turn = changeTurn;
         ChangeTurn(&Turn);
         resetAttacknMove(&ArrOfBuildings);
     }
