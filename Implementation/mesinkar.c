@@ -9,7 +9,7 @@ char CC;
 boolean EOP;
 
 static FILE * pita;
-static char retval;
+static int retval;
 
 void START() {
 /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
@@ -19,7 +19,7 @@ void START() {
           Jika CC = MARK maka EOP akan menyala (true) */
 
     /* Algoritma */
-    pita = fopen("konfigurasi.txt","rt");
+    pita = fopen("konfigurasi.txt","r");
     ADV();
 }
 
@@ -29,11 +29,12 @@ void ADV() {
           CC, CC != MARK
    F.S. : CC adalah karakter berikutnya dari CC yang lama,
           CC mungkin = MARK.
-          Jika  CC = MARK maka EOP akan menyala (true) */
+          Jika  CC = EOF maka EOP akan menyala (true) */
 
     /* Algoritma */
-    CC = fgetc(pita);
-    if (CC == EOF) {
+    retval = fscanf(pita,"%c",&CC);
+    EOP = (CC == EOF);
+    if (EOP) {
        fclose(pita);
     }
 }

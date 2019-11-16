@@ -7,7 +7,7 @@ Created at: 17/10/2019
 
 
 //For Windows
-#include <windows.h>
+//#include <windows.h>
 #include <stdio.h>
 #include "pcolor.h"
 
