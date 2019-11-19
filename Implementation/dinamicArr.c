@@ -55,3 +55,12 @@ int NbOfBuildings (TabBuildings Tin, int owner){
     }
     return Nb;
 }
+boolean IsAllLvl4 (TabBuildings Tin, int owner){
+    boolean indicator = true;
+    for(int i=1;i<Tin.Neff;i++){
+        if((Tin).TI[i].owner == owner && (Tin).TI[i].level != 4){
+            indicator = false;
+        }
+    }
+    return indicator;
+}

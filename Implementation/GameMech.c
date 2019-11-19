@@ -354,6 +354,15 @@ void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1
         Push(S,St);
         //Level-Up Mech
         LevelUp(&LvlUp);
+        if(IsAllLvl4(*B,player)){
+            if (player == 1)
+            {
+                AddQ(&(*Q1),6);
+            }
+            else{
+                AddQ(&(*Q2),6);
+            }
+        }
         (*B).TI[TempIndex] = LvlUp;
     }
     else if(command == 3)
