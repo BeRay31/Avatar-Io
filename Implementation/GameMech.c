@@ -150,8 +150,7 @@ boolean NotEndTurn(int i){
 {F.S Check the Turn if End return False, if !end return true}
 */
 void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1List,List *P2List, TabBuildings *B,Stack *S, Queue *Q1, Queue *Q2)
-{
-    
+{   
     if(command == 1)
     {//ATTACK
         //{DICT}
@@ -209,10 +208,6 @@ void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1
             }
             x = G.Arr[Attck.buildingsIndex].First;
             current = 1;
-            while((*B).TI[x->info].owner==player)
-            {
-                x = x->next;
-            }
             while(current!=selected)//search selected building index
             {
                 while((*B).TI[x->info].owner==player)
@@ -220,6 +215,10 @@ void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1
                     x = x->next;
                 }
                 x = x->next;
+                while((*B).TI[x->info].owner==player)
+                {
+                    x = x->next;
+                }
                 current++;
             }
             tempBLIndex = x->info;
@@ -294,7 +293,6 @@ void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1
         //{DICT}
         int NbOfB;
         address x;
-        int skill;
         int current = 1;
         int selected;
         int TempIndex;
@@ -340,6 +338,7 @@ void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1
     }
     else if(command == 3)
     {   
+        int skill;
         if(player == 1){
             if(IsEmptyQ(*Q1)){
                 printf("Anda tidak memiliki skill sekarang");
@@ -676,7 +675,7 @@ void PrintLinkedBuildingsM (int turn,GraphArr G,TabBuildings Buildings,int index
     int indexB ;
     while(currentIndex != NULL)
     {
-        index = currentIndex->info;
+        indexB = currentIndex->info;
         if (Buildings.TI[indexB].owner == turn)
         {
             printf("%d. ",i);

@@ -16,8 +16,11 @@ int main()
     Kata command;
     Stack S;
     int t;
+    Queue Q1,Q2;
+    CreateEmptyQ(&Q1,10);
+    CreateEmptyQ(&Q2,10);
     BuildMap Map;
-    int changeTurn;
+    int changeTurn = 1;
     List P1Buildings,P2Buildings;
     GetInfoDariFile (&n, &m, &nbangunan, &ArrOfBuildings, &mgraf);
     UpdateLoadBuilding(&ArrOfBuildings);
@@ -25,8 +28,8 @@ int main()
     SCreateEmpty(&S);
     InsertLast(&P1Buildings,AllocateL(1));//Initiate and allocate Building index 1 == owner P1
     InsertLast(&P2Buildings,AllocateL(2));//Initiate and allocate Building index 2 == owner P2
-    ArrOfBuildings.TI[1].armies = 40;
-    ArrOfBuildings.TI[2].armies = 40;
+    ArrOfBuildings.TI[1].armies = 60;
+    ArrOfBuildings.TI[2].armies = 60;
     while(NotEnd(ArrOfBuildings)){
         
         if(Turn == 1){    
@@ -34,11 +37,14 @@ int main()
             {
                 PrintMap(Map);
                 printf("Player %d\n",Turn);
-                changeTurn = Turn;
                 PrintOwnedBuildings(ArrOfBuildings,P1Buildings,&t);
                 printf("Skill Available : \n");
                 InputString(&command);
-                EksekusiCommand(OlahString(command),Map.G,Turn,&changeTurn,&P1Buildings,&P2Buildings,&ArrOfBuildings,&S);
+                for (int i = 0 ; i<=command.Length;i++)
+                {
+                    printf("%c",command.TabKata[i]);
+                }
+                EksekusiCommand(OlahString(command),Map.G,Turn,&changeTurn,&P1Buildings,&P2Buildings,&ArrOfBuildings,&S,&Q1,&Q2);
                 UpdateMap(&Map,ArrOfBuildings);
             } while (NotEndTurn(OlahString(command)));     
         }
@@ -50,7 +56,7 @@ int main()
                 PrintOwnedBuildings(ArrOfBuildings,P2Buildings,&t);
                 printf("Skill Available : \n");
                 InputString(&command);
-                EksekusiCommand(OlahString(command),Map.G,Turn,&P1Buildings,&P2Buildings,&ArrOfBuildings,&S);
+                EksekusiCommand(OlahString(command),Map.G,Turn,&changeTurn,&P1Buildings,&P2Buildings,&ArrOfBuildings,&S,&Q1,&Q2);
                 UpdateMap(&Map,ArrOfBuildings);
             } while (NotEndTurn(OlahString(command)));
         }

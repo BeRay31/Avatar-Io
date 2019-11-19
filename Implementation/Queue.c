@@ -19,13 +19,13 @@ boolean IsEmptyQ (Queue Q)
 /* Mengirim true jika Q kosong: lihat definisi di atas */
 boolean IsFullQ (Queue Q)
 {
-    return (NBElmt(Q) == (Q).MaxEl);
+    return (NBElmtQ(Q) == (Q).MaxEl);
 }
 /* Mengirim true jika tabel penampung elemen Q sudah penuh */
 /* yaitu mengandung elemen sebanyak MaxEl */
 int NBElmtQ (Queue Q)
 {
-    if(IsEmpty(Q))
+    if(IsEmptyQ(Q))
     {
         return 0;
     }
@@ -74,7 +74,7 @@ void DeAlokasiQ(Queue * Q)
 /* *** Primitif Add/Delete *** */
 void AddQ (Queue * Q, int X)
 {
-    if(IsEmpty(*Q))
+    if(IsEmptyQ(*Q))
     {
         (*Q).HEAD = 1;
         (*Q).TAIL += 1;
