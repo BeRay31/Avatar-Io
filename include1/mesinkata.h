@@ -68,4 +68,9 @@ int BoolToInt (boolean True);
 
 void GetTipeBangunan (char *tipe, Kata src);
 
+void STARTCOMMAND();
+
+void Command (Kata *kata);
+/* F.S. : nilai command */
+
 #endif
