@@ -150,8 +150,8 @@ boolean NotEndTurn(int i){
 {F.S Check the Turn if End return False, if !end return true}
 */
 void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1List,List *P2List, TabBuildings *B,Stack *S, Queue *Q1, Queue *Q2)
-{
-    
+{   
+    *changeTurn = player;
     if(command == 1)
     {//ATTACK
         //{DICT}
@@ -294,7 +294,7 @@ void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1
         //{DICT}
         int NbOfB;
         address x;
-        int skill;
+        
         int current = 1;
         int selected;
         int TempIndex;
@@ -339,6 +339,7 @@ void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1
     }
     else if(command == 3)
     {   
+        int skill;
         if(player == 1){
             if(IsEmptyQ(*Q1)){
                 printf("Anda tidak memiliki skill sekarang");
@@ -371,7 +372,7 @@ void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1
                     }
                 }
             }
-            
+            SCreateEmpty(&(*S));
         }
         else if(skill == 2){
            // Shield
@@ -386,6 +387,7 @@ void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1
             else{
                 *changeTurn == 1;
             }
+             SCreateEmpty(&(*S));
             // Menyimpan ke Stack
         }
         else if (skill == 4){
@@ -411,6 +413,7 @@ void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1
                     
                 }
             }
+             SCreateEmpty(&(*S));
             // Menyimpan ke Stack
         }
         else if (skill == 7){
@@ -435,6 +438,7 @@ void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1
                     
                 }
             }
+             SCreateEmpty(&(*S));
             // Menyimpan ke Stack
         }
     }

@@ -15,6 +15,7 @@ int main()
 	MATRIKS mgraf;
     Kata command;
     Stack S;
+    Queue Q1,Q2;
     int t;
     BuildMap Map;
     int changeTurn;
@@ -22,23 +23,25 @@ int main()
     GetInfoDariFile (&n, &m, &nbangunan, &ArrOfBuildings, &mgraf);
     UpdateLoadBuilding(&ArrOfBuildings);
     MakeBMap(&Map);
+    InitializeQueue(&Q1,&Q2);
     SCreateEmpty(&S);
     InsertLast(&P1Buildings,AllocateL(1));//Initiate and allocate Building index 1 == owner P1
     InsertLast(&P2Buildings,AllocateL(2));//Initiate and allocate Building index 2 == owner P2
     ArrOfBuildings.TI[1].armies = 40;
     ArrOfBuildings.TI[2].armies = 40;
+    changeTurn = Turn;
     while(NotEnd(ArrOfBuildings)){
         
         if(Turn == 1){    
            do
             {
                 PrintMap(Map);
-                printf("Player %d\n",Turn);
-                changeTurn = Turn;
+                printf("Player %d\n",Turn);                
                 PrintOwnedBuildings(ArrOfBuildings,P1Buildings,&t);
                 printf("Skill Available : \n");
+                sleep(1);
                 InputString(&command);
-                EksekusiCommand(OlahString(command),Map.G,Turn,&changeTurn,&P1Buildings,&P2Buildings,&ArrOfBuildings,&S);
+                EksekusiCommand(OlahString(command),Map.G,Turn,&changeTurn,&P1Buildings,&P2Buildings,&ArrOfBuildings,&S,&Q1,&Q2);
                 UpdateMap(&Map,ArrOfBuildings);
             } while (NotEndTurn(OlahString(command)));     
         }
@@ -56,6 +59,7 @@ int main()
         }
         Turn = changeTurn;
         ChangeTurn(&Turn);
+        changeTurn = Turn;
         resetAttacknMove(&ArrOfBuildings);
     }
 }//main app Command Line Interface
