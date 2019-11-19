@@ -43,7 +43,7 @@ int main()
                 PrintOwnedBuildings(ArrOfBuildings,P1Buildings,&t);
                 printf("Skill Available : \n");
                 sleep(1);
-                InputString(&command);
+                Command(&command);
                 EksekusiCommand(OlahString(command),Map.G,Turn,&changeTurn,&P1Buildings,&P2Buildings,&ArrOfBuildings,&S,&Q1,&Q2);
                 UpdateMap(&Map,ArrOfBuildings);
             } while (NotEndTurn(OlahString(command)));     
@@ -55,7 +55,7 @@ int main()
                 printf("Player %d\n",Turn);
                 PrintOwnedBuildings(ArrOfBuildings,P2Buildings,&t);
                 printf("Skill Available : \n");
-                InputString(&command);
+                Command(&command);
                 EksekusiCommand(OlahString(command),Map.G,Turn,&changeTurn,&P1Buildings,&P2Buildings,&ArrOfBuildings,&S,&Q1,&Q2);
                 UpdateMap(&Map,ArrOfBuildings);
             } while (NotEndTurn(OlahString(command)));
