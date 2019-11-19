@@ -151,6 +151,7 @@ boolean NotEndTurn(int i){
 */
 void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1List,List *P2List, TabBuildings *B,Stack *S, Queue *Q1, Queue *Q2)
 {   
+    *changeTurn = player;
     if(command == 1)
     {//ATTACK
         //{DICT}
@@ -236,7 +237,7 @@ void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1
             St.B = *B;
             St.P1 = *P1List;
             St.P2 = *P2List;
-            St.Skill = 0;
+            
             Push(S,St);
             //AttackMech
             if(Target.owner == 0)
@@ -249,11 +250,17 @@ void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1
                     {
                         printf("Bangunan Jadi Milikmu!!!!\n");
                         InsertLast(P1List,AllocateL(Target.buildingsIndex));
+                        if(NbOfBuildings(*B,player) == 10){
+                            AddQ(&(*Q1),7);
+                        }
                     }
                     else
                     {
                         printf("Bangunan Jadi Milikmu!!!!\n");
                         InsertLast(P2List,AllocateL(Target.buildingsIndex));
+                        if(NbOfBuildings(*B,player) == 10){
+                            AddQ(&(*Q2),7);
+                        }
                     }
                 }
             }
@@ -266,15 +273,28 @@ void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1
                     {
                         address del;
                         printf("Bangunan Jadi Milikmu!!!!\n");
+                        if(Target.buildingsType == 'F'){
+                            AddQ(&(*Q2),3);
+                        }
                         InsertLast(P1List,AllocateL(Target.buildingsIndex));
                         DelP(P2List,&del,Search(*P2List,Target.buildingsIndex));
+                        if(NbOfBuildings(*B,player) == 10){
+                            AddQ(&(*Q1),7);
+                        }
                     }
                     else
                     {
                         address del;
                         printf("Bangunan Jadi Milikmu!!!!\n");
+                        if (Target.buildingsType == 'F')
+                        {
+                            AddQ(&(*Q1),3);
+                        }
                         InsertLast(P2List,AllocateL(Target.buildingsIndex));
                         DelP(P1List,&del,Search(*P1List,Target.buildingsIndex));
+                        if(NbOfBuildings(*B,player) == 10){
+                            AddQ(&(*Q2),7);
+                        }
                     }
                 }
             }
@@ -330,10 +350,18 @@ void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1
         St.B = (*B);
         St.P1=(*P1List);
         St.P2=(*P2List);
-        St.Skill = 0;
         Push(S,St);
         //Level-Up Mech
         LevelUp(&LvlUp);
+        if(IsAllLvl4(*B,player)){
+            if (player == 1)
+            {
+                AddQ(&(*Q1),6);
+            }
+            else{
+                AddQ(&(*Q2),6);
+            }
+        }
         (*B).TI[TempIndex] = LvlUp;
     }
     else if(command == 3)
@@ -371,7 +399,7 @@ void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1
                     }
                 }
             }
-            // Menyimpan ke Stack
+            SCreateEmpty(&(*S));
         }
         else if(skill == 2){
            // Shield
@@ -386,6 +414,7 @@ void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1
             else{
                 *changeTurn == 1;
             }
+             SCreateEmpty(&(*S));
             // Menyimpan ke Stack
         }
         else if (skill == 4){
@@ -411,6 +440,7 @@ void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1
                     
                 }
             }
+             SCreateEmpty(&(*S));
             // Menyimpan ke Stack
         }
         else if (skill == 7){
@@ -435,6 +465,7 @@ void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1
                     
                 }
             }
+             SCreateEmpty(&(*S));
             // Menyimpan ke Stack
         }
     }

@@ -94,6 +94,15 @@ void AddQ (Queue * Q, int X)
         }
     }
 }
+void IntializeQueue(Queue *Q1, Queue *Q2){
+    CreateEmptyQ(&(*Q1),10);
+    CreateEmptyQ(&(*Q2),10);
+    (*Q1).HEAD = 1;
+    (*Q1).TAIL = 1;
+    (*Q2).HEAD = 1;
+    (*Q2).TAIL = 1;
+
+}
 /* Proses: Menambahkan X pada Q dengan aturan FIFO */
 /* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
 /* F.S. X menjadi TAIL yang baru, TAIL "maju" dengan mekanisme circular buffer */
