@@ -63,6 +63,7 @@ void CopyTab(TabBuildings Tin, TabBuildings *Tout);
 /* I.S. Tin terdefinisi tidak kosong, Tout sembarang */
 /* F.S. Tout berisi salinan dari Tin (identik, Neff dan MaxEl sama) */
 /* Proses : Menyalin isi Tin ke Tout */
-
+int NbOfBuildings(TabBuildings Tin, int owner);
+boolean IsAllLvl4 (TabBuildings Tin, int owner);
 
 #endif

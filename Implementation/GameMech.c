@@ -150,8 +150,8 @@ boolean NotEndTurn(int i){
 {F.S Check the Turn if End return False, if !end return true}
 */
 void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1List,List *P2List, TabBuildings *B,Stack *S, Queue *Q1, Queue *Q2)
-{
-    
+{   
+    *changeTurn = player;
     if(command == 1)
     {//ATTACK
         //{DICT}
@@ -209,10 +209,6 @@ void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1
             }
             x = G.Arr[Attck.buildingsIndex].First;
             current = 1;
-            while((*B).TI[x->info].owner==player)
-            {
-                x = x->next;
-            }
             while(current!=selected)//search selected building index
             {
                 while((*B).TI[x->info].owner==player)
@@ -220,6 +216,10 @@ void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1
                     x = x->next;
                 }
                 x = x->next;
+                while((*B).TI[x->info].owner==player)
+                {
+                    x = x->next;
+                }
                 current++;
             }
             tempBLIndex = x->info;
@@ -250,11 +250,17 @@ void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1
                     {
                         printf("Bangunan Jadi Milikmu!!!!\n");
                         InsertLast(P1List,AllocateL(Target.buildingsIndex));
+                        if(NbOfBuildings(*B,player) == 10){
+                            AddQ(&(*Q1),7);
+                        }
                     }
                     else
                     {
                         printf("Bangunan Jadi Milikmu!!!!\n");
                         InsertLast(P2List,AllocateL(Target.buildingsIndex));
+                        if(NbOfBuildings(*B,player) == 10){
+                            AddQ(&(*Q2),7);
+                        }
                     }
                 }
             }
@@ -267,15 +273,28 @@ void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1
                     {
                         address del;
                         printf("Bangunan Jadi Milikmu!!!!\n");
+                        if(Target.buildingsType == 'F'){
+                            AddQ(&(*Q2),3);
+                        }
                         InsertLast(P1List,AllocateL(Target.buildingsIndex));
                         DelP(P2List,&del,Search(*P2List,Target.buildingsIndex));
+                        if(NbOfBuildings(*B,player) == 10){
+                            AddQ(&(*Q1),7);
+                        }
                     }
                     else
                     {
                         address del;
                         printf("Bangunan Jadi Milikmu!!!!\n");
+                        if (Target.buildingsType == 'F')
+                        {
+                            AddQ(&(*Q1),3);
+                        }
                         InsertLast(P2List,AllocateL(Target.buildingsIndex));
                         DelP(P1List,&del,Search(*P1List,Target.buildingsIndex));
+                        if(NbOfBuildings(*B,player) == 10){
+                            AddQ(&(*Q2),7);
+                        }
                     }
                 }
             }
@@ -294,7 +313,6 @@ void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1
         //{DICT}
         int NbOfB;
         address x;
-        int skill;
         int current = 1;
         int selected;
         int TempIndex;
@@ -335,10 +353,20 @@ void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1
         Push(S,St);
         //Level-Up Mech
         LevelUp(&LvlUp);
+        if(IsAllLvl4(*B,player)){
+            if (player == 1)
+            {
+                AddQ(&(*Q1),6);
+            }
+            else{
+                AddQ(&(*Q2),6);
+            }
+        }
         (*B).TI[TempIndex] = LvlUp;
     }
     else if(command == 3)
     {   
+        int skill;
         if(player == 1){
             if(IsEmptyQ(*Q1)){
                 printf("Anda tidak memiliki skill sekarang");
@@ -371,7 +399,7 @@ void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1
                     }
                 }
             }
-            
+            SCreateEmpty(&(*S));
         }
         else if(skill == 2){
            // Shield
@@ -386,6 +414,7 @@ void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1
             else{
                 *changeTurn == 1;
             }
+             SCreateEmpty(&(*S));
             // Menyimpan ke Stack
         }
         else if (skill == 4){
@@ -411,6 +440,7 @@ void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1
                     
                 }
             }
+             SCreateEmpty(&(*S));
             // Menyimpan ke Stack
         }
         else if (skill == 7){
@@ -435,6 +465,7 @@ void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1
                     
                 }
             }
+             SCreateEmpty(&(*S));
             // Menyimpan ke Stack
         }
     }
@@ -561,7 +592,7 @@ void UpdateListBuilding(int index , List *PlayerB)
 
 void PrintOwnedBuildings(TabBuildings PBuildings, List PBIndex,int *NbofBuilding)
 {
-    int i = 1;
+    int x = 1;
     int indexB;
     address current = PBIndex.First;
     if (current != NULL)
@@ -569,7 +600,7 @@ void PrintOwnedBuildings(TabBuildings PBuildings, List PBIndex,int *NbofBuilding
         while(current!=NULL)
         {
             indexB = current->info;
-            printf("%d. ",i);
+            printf("%d. ",x);
             if (PBuildings.TI[indexB].buildingsType == 'C')
             {
                 printf("Castle (%d,%d) %d lv. %d\n",PBuildings.TI[indexB].position.X,PBuildings.TI[indexB].position.Y,PBuildings.TI[indexB].armies,PBuildings.TI[indexB].level);
@@ -586,11 +617,11 @@ void PrintOwnedBuildings(TabBuildings PBuildings, List PBIndex,int *NbofBuilding
             {
                 printf("Village (%d,%d) %d lv. %d\n",PBuildings.TI[indexB].position.X,PBuildings.TI[indexB].position.Y,PBuildings.TI[indexB].armies,PBuildings.TI[indexB].level);
             }
-            i++;
+            x++;
             current = current->next;
         }
     }
-    *NbofBuilding = i;
+    *NbofBuilding = x;
     printf("\n");
 }
 /*
@@ -675,7 +706,7 @@ void PrintLinkedBuildingsM (int turn,GraphArr G,TabBuildings Buildings,int index
     int indexB ;
     while(currentIndex != NULL)
     {
-        index = currentIndex->info;
+        indexB = currentIndex->info;
         if (Buildings.TI[indexB].owner == turn)
         {
             printf("%d. ",i);
