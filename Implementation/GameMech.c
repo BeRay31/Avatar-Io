@@ -592,7 +592,7 @@ void UpdateListBuilding(int index , List *PlayerB)
 
 void PrintOwnedBuildings(TabBuildings PBuildings, List PBIndex,int *NbofBuilding)
 {
-    int i = 1;
+    int x = 1;
     int indexB;
     address current = PBIndex.First;
     if (current != NULL)
@@ -600,7 +600,7 @@ void PrintOwnedBuildings(TabBuildings PBuildings, List PBIndex,int *NbofBuilding
         while(current!=NULL)
         {
             indexB = current->info;
-            printf("%d. ",i);
+            printf("%d. ",x);
             if (PBuildings.TI[indexB].buildingsType == 'C')
             {
                 printf("Castle (%d,%d) %d lv. %d\n",PBuildings.TI[indexB].position.X,PBuildings.TI[indexB].position.Y,PBuildings.TI[indexB].armies,PBuildings.TI[indexB].level);
@@ -617,11 +617,11 @@ void PrintOwnedBuildings(TabBuildings PBuildings, List PBIndex,int *NbofBuilding
             {
                 printf("Village (%d,%d) %d lv. %d\n",PBuildings.TI[indexB].position.X,PBuildings.TI[indexB].position.Y,PBuildings.TI[indexB].armies,PBuildings.TI[indexB].level);
             }
-            i++;
+            x++;
             current = current->next;
         }
     }
-    *NbofBuilding = i;
+    *NbofBuilding = x;
     printf("\n");
 }
 /*
