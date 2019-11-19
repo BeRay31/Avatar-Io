@@ -15,17 +15,17 @@ Kata CKata;
 void IgnoreBlank()
 /* Mengabaikan satu atau beberapa BLANK
    I.S. : CC sembarang
-   F.S. : CC ≠ BLANK atau CC = EOF */
+   F.S. : CC ≠ BLANK atau CC = ENTER */
 {
 	/* KAMUS LOKAL */
 	/* ALGORITMA */
-	while (CC == BLANK || CC == ENTER) {
+	while (CC == BLANK || CC != ENTER) {
 		ADV();
 	}
 }
 void STARTKATA()
 /* I.S. : CC sembarang
-   F.S. : EndKata = true, dan CC = EOF;
+   F.S. : EndKata = true, dan CC = ENTER;
           atau EndKata = false, CKata adalah kata yang sudah diakuisisi,
           CC karakter pertama sesudah karakter terakhir kata */
 {
@@ -33,7 +33,7 @@ void STARTKATA()
 	/* ALGORITMA */
 	START();
 	IgnoreBlank();
-	if (CC == EOF){
+	if (CC == ENTER){
 		EndKata = true;
 	} else {
 		EndKata = false;
@@ -44,25 +44,25 @@ void STARTKATA()
 void ADVKATA()
 /* I.S. : CC adalah karakter pertama kata yang akan diakuisisi
    F.S. : CKata adalah kata terakhir yang sudah diakuisisi,
-          CC adalah karakter pertama dari kata berikutnya, mungkin EOF
-          Jika CC = EOF, EndKata = true.
+          CC adalah karakter pertama dari kata berikutnya, mungkin ENTER
+          Jika CC = ENTER, EndKata = true.
    Proses : Akuisisi kata menggunakan procedure SalinKata */
 {
 	/* KAMUS LOKAL */
 	/* ALGORITMA */
 	IgnoreBlank();
-	if (CC == EOF){
+	if (CC == ENTER){
 		EndKata = true;
 	} else {
 		SalinKata();
-		//IgnoreBlank();
+		IgnoreBlank();
 	}
 }
 void SalinKata()
 /* Mengakuisisi kata, menyimpan dalam CKata
    I.S. : CC adalah karakter pertama dari kata
    F.S. : CKata berisi kata yang sudah diakuisisi;
-          CC = BLANK atau CC = EOF;
+          CC = BLANK atau CC = ENTER;
           CC adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
 {
@@ -70,19 +70,92 @@ void SalinKata()
 	int i;
 	/* ALGORITMA */
 	i = 1;
-	for(;;) {
+	while (CC != ENTER && CC != BLANK) {
 		CKata.TabKata[i] = CC;
 		ADV();
-		if ((CC == EOF) || (CC == BLANK) || CC == ENTER) {
+		if (CC==ENTER || CC == BLANK || i==NMax){
 			break;
 		} else {
 			i++;
 		}
 	}
+	if (i==NMax) {
+		while (CC != BLANK && CC != ENTER) {
+			ADV();
+		}
+	}
 	CKata.Length = i;
 }
 
+void Salin(Kata* dest, Kata src)
+/* Menyalin kata
+   I.S. : dest sembarang, src sebuah kata yang valid
+   F.S. : dest merupakan kata dengan panjang yang sama dengan src
+          dan tiap karakter dest sama dengan src */
+{
+	(*dest).Length = src.Length;
+	for (int i=1; i<=src.Length; i++){
+		(*dest).TabKata[i] = src.TabKata[i];
+	}
+}
+
 /* FUNGSI LAIN */
+boolean IsKataSama (Kata k1, Kata k2)
+{
+	int i = 1;
+	boolean sama = true;
+	if (k1.Length == k2.Length) {
+		while (true) {
+			if (k1.TabKata[i] != k2.TabKata[i]) {
+				sama = false;
+				break;
+			} else {
+				i++;
+			}
+		}
+	} else {
+		sama = false;
+	}
+	return sama;
+}
+
+void TulisKata (Kata kata)
+/* F.S : Menulis kata diakhiri dengan enter */
+{
+	for (int i=1; i<=kata.Length; i++) {
+		if (i != kata.Length) {
+			printf("%c\n", kata.TabKata[i]);
+		} else {
+			printf("%c", kata.TabKata[i]);
+		}
+	}
+}
+
+void InputString (Kata *kata)
+{
+	char kar;
+	int countKar = 0;
+    printf("ENTER COMMAND: ");
+	scanf("%c", &kar);
+	if ((kar != BLANK) || (kar != ENTER)){
+		countKar = 1;
+		(*kata).TabKata[countKar] = kar;
+		while (true) {
+			scanf("%c", &kar);
+			if (kar != ENTER) {
+				countKar++;
+				(*kata).TabKata[countKar] = kar;
+			} else {
+				break;
+			}
+		}
+		(*kata).Length = countKar;
+	} else {
+		(*kata).TabKata[countKar+1] = 0;
+		(*kata).Length = countKar;
+	}
+}
+
 void CharToInt(int *res, Kata src)
 {
 	int num = 0;
@@ -108,52 +181,6 @@ int BoolToInt (boolean True)
 	} else {
 		return 0;
 	}
-}
-
-void Salin(Kata* dest, Kata src)
-/* Menyalin kata
-   I.S. : dest sembarang, src sebuah kata yang valid
-   F.S. : dest merupakan kata dengan panjang yang sama dengan src
-          dan tiap karakter dest sama dengan src */
-{
-	(*dest).Length = src.Length;
-	for (int i=1; i<=src.Length; i++){
-		(*dest).TabKata[i] = src.TabKata[i];
-	}
-}
-
-boolean IsKataSama (Kata k1, Kata k2)
-{
-	if (k1.Length == k2.Length) {
-		for (int i=1; i<=k1.Length; i++){
-			if (k1.TabKata[i] != k2.TabKata[i]) {
-				return false;
-			}
-		}
-		return true;
-	} else {
-		return false;
-	}
-}
-
-int PanjangString (char str[]) {
-    int c = 0;
-    while (str[c] != '\0'){
-        c++;
-    }
-    return (c-1);
-}
-
-void InputString (Kata *kata)
-{
-    char str[100];
-    printf("ENTER COMMAND: ");
-    fgets(str, sizeof(str), stdin);
-    int n = PanjangString(str);
-    for (int i=0; i<n; i++){
-    	(*kata).TabKata[i+1] = str[i];
-    }
-    (*kata).Length = n;
 }
 
 void GetTipeBangunan (char *tipe, Kata src)
