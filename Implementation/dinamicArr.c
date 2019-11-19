@@ -46,4 +46,12 @@ void CopyTab(TabBuildings Tin, TabBuildings *Tout)
 /* F.S. Tout berisi salinan dari Tin (identik, Neff dan MaxEl sama) */
 /* Proses : Menyalin isi Tin ke Tout */    
 }
-
+int NbOfBuildings (TabBuildings Tin, int owner){
+    int Nb = 0;
+    for(int i=1;i<Tin.Neff;i++){
+        if((Tin).TI[i].owner == owner){
+            Nb++;
+        }
+    }
+    return Nb;
+}

@@ -250,11 +250,17 @@ void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1
                     {
                         printf("Bangunan Jadi Milikmu!!!!\n");
                         InsertLast(P1List,AllocateL(Target.buildingsIndex));
+                        if(NbOfBuildings(*B,player) == 10){
+                            AddQ(&(*Q1),7);
+                        }
                     }
                     else
                     {
                         printf("Bangunan Jadi Milikmu!!!!\n");
                         InsertLast(P2List,AllocateL(Target.buildingsIndex));
+                        if(NbOfBuildings(*B,player) == 10){
+                            AddQ(&(*Q2),7);
+                        }
                     }
                 }
             }
@@ -267,15 +273,28 @@ void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1
                     {
                         address del;
                         printf("Bangunan Jadi Milikmu!!!!\n");
+                        if(Target.buildingsType == 'F'){
+                            AddQ(&(*Q2),3);
+                        }
                         InsertLast(P1List,AllocateL(Target.buildingsIndex));
                         DelP(P2List,&del,Search(*P2List,Target.buildingsIndex));
+                        if(NbOfBuildings(*B,player) == 10){
+                            AddQ(&(*Q1),7);
+                        }
                     }
                     else
                     {
                         address del;
                         printf("Bangunan Jadi Milikmu!!!!\n");
+                        if (Target.buildingsType == 'F')
+                        {
+                            AddQ(&(*Q1),3);
+                        }
                         InsertLast(P2List,AllocateL(Target.buildingsIndex));
                         DelP(P1List,&del,Search(*P1List,Target.buildingsIndex));
+                        if(NbOfBuildings(*B,player) == 10){
+                            AddQ(&(*Q2),7);
+                        }
                     }
                 }
             }
