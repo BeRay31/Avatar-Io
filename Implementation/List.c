@@ -89,7 +89,7 @@ void DelP (List *L, address *Pdel, address P)
 void InsertLast (List *L, address P)
 {
     address Last;
-    if (!IsEmpty(*L))
+    if ((*L).First != NULL)
     {
         Last = (*L).First;
         while (Last->next!=NULL)
@@ -139,7 +139,28 @@ void CopyList(List Lsrc, List *Ldest)
     x = Lsrc.First;
     while (x!=NULL)
     {
-        InsertLast(Ldest,x);
+        InsertLast(Ldest,AllocateL(x->info));
         x = x->next;
     }
+}
+void PrintInfo (List L)
+{
+    address prnt;
+    if (L.First != NULL)
+    {
+        printf("[");
+        prnt = (L).First;
+        printf("%d",(prnt)->info);
+        while ((prnt)->next != NULL)
+        {
+            prnt = (prnt)->next;
+            printf(",%d",(prnt)->info);
+        }
+        printf ("]");
+    }
+    else
+    {
+        printf ("[]");
+    }
+    
 }

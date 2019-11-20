@@ -55,4 +55,5 @@ void InsertLast (List *L, address P);
 */
 address Search (List L, int X);
 void CopyList(List Lsrc, List *Ldest);
+void PrintInfo (List L);
 #endif

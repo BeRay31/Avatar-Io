@@ -61,4 +61,5 @@ void Move (Buildings *B, Buildings *B2, int Narmies);
 {I.S Anything}
 {F.S Narmies from B moved into B2}
 */
+void JustLvlUp(Buildings *B);
 #endif

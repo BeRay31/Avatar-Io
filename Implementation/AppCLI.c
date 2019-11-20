@@ -23,22 +23,24 @@ int main()
     boolean changeTurn;
     List P1Buildings,P2Buildings;
     GetInfoDariFile (&n, &m, &nbangunan, &ArrOfBuildings, &mgraf);
-    ArrOfBuildings.TI[1].owner = 1;
-    ArrOfBuildings.TI[2].owner = 2;
     UpdateLoadBuilding(&ArrOfBuildings);
     MakeBMap(&Map);
     InitializeQueue(&Q1,&Q2);
     SCreateEmpty(&S);
-    InsertLast(&P1Buildings,AllocateL(1));//Initiate and allocate Building index 1 == owner P1
+    InsertLast(&P1Buildings,AllocateL(1));//Initiate and allocate Building index 1 == owner P1  
     InsertLast(&P2Buildings,AllocateL(2));//Initiate and allocate Building index 2 == owner P2
-    ArrOfBuildings.TI[1].armies = 40;
-    ArrOfBuildings.TI[2].armies = 40;
+    ArrOfBuildings.TI[1].armies = 20;
+    ArrOfBuildings.TI[2].armies = 20;
+    ArrOfBuildings.TI[1].owner = 1;
+    ArrOfBuildings.TI[2].owner = 2;
+
+    UpdateMap(&Map,ArrOfBuildings);
     changeTurn = false;
     if(!NotEnd(ArrOfBuildings)){
         printf("Test\n");
     }
     while(NotEnd(ArrOfBuildings)){
-        
+        IncBuildingTroop(&ArrOfBuildings,Turn);
         if(Turn == 1){    
            do
             {
@@ -60,7 +62,7 @@ int main()
                 PrintMap(Map);
                 printf("Player %d\n",Turn);
                 PrintOwnedBuildings(ArrOfBuildings,P2Buildings,&t);
-                printf("Skill Available : \n");
+                printf("Skill Available : ");
                 PrintSkill(Q2);
                 do{
                     InputString(&command);
