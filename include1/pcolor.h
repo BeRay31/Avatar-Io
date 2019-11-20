@@ -12,16 +12,15 @@ print_xxx(c) will print c with xxx color. Import this header to use the declared
 We only provide 8 colors. Feel free to modify/add colors if you want to.
 **/
 
-//Original
-//#define NORMAL "\x1B[0m"
-//#define RED "\x1B[31m"
-//#define GREEN "\x1B[32m"
-//#define YELLOW "\x1B[33m"
-//#define BLUE "\x1B[34m"
-//#define MAGENTA "\x1B[35m"
-//#define CYAN "\x1B[36m"
+#define NORMAL "\x1B[0m"
+#define RED "\x1B[31m"
+#define GREEN "\x1B[32m"
+#define YELLOW "\x1B[33m"
+#define BLUE "\x1B[34m"
+#define MAGENTA "\x1B[35m"
+#define CYAN "\x1B[36m"
 
-//Windows
+/* Windows
 #define NORMAL 15
 #define RED 12
 #define GREEN 10
@@ -29,7 +28,7 @@ We only provide 8 colors. Feel free to modify/add colors if you want to.
 #define BLUE 9
 #define MAGENTA 13
 #define CYAN 11
-
+*/
 
 void print_red(char c);
 void print_green(char c);

@@ -20,7 +20,7 @@ int main()
     CreateEmptyQ(&Q1,10);
     CreateEmptyQ(&Q2,10);
     BuildMap Map;
-    int changeTurn = 1;
+    boolean changeTurn;
     List P1Buildings,P2Buildings;
     GetInfoDariFile (&n, &m, &nbangunan, &ArrOfBuildings, &mgraf);
     UpdateLoadBuilding(&ArrOfBuildings);
@@ -41,13 +41,9 @@ int main()
                 printf("Player %d\n",Turn);
                 PrintOwnedBuildings(ArrOfBuildings,P1Buildings,&t);
                 printf("Skill Available : \n");
-                sleep(1);
-                InputString(&command);
                 do{
-                    InputString(&command);
+                    Command(&command);
                 }while(OlahString(command) == 0);
-                sleep(1);
-                Command(&command);
                 EksekusiCommand(OlahString(command),Map.G,Turn,&changeTurn,&P1Buildings,&P2Buildings,&ArrOfBuildings,&S,&Q1,&Q2);
                 UpdateMap(&Map,ArrOfBuildings);
             } while (NotEndTurn(OlahString(command)));     
@@ -60,9 +56,8 @@ int main()
                 PrintOwnedBuildings(ArrOfBuildings,P2Buildings,&t);
                 printf("Skill Available : \n");
                 do{
-                    InputString(&command);
+                    Command(&command);
                 }while(OlahString(command) == 0);
-                Command(&command);
                 EksekusiCommand(OlahString(command),Map.G,Turn,&changeTurn,&P1Buildings,&P2Buildings,&ArrOfBuildings,&S,&Q1,&Q2);
                 UpdateMap(&Map,ArrOfBuildings);
             } while (NotEndTurn(OlahString(command)));

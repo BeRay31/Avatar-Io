@@ -3,13 +3,13 @@ Filename: pcolor.c (implementation of pcolor.h)
 Description: Print character with some color in terminal
 Prepared by: Asisten IF2110
 Created at: 17/10/2019
-**/
+*
 
 
 //For Windows
 //#include <windows.h>
 #include <stdio.h>
-#include "pcolor.h"
+#include "../include1/pcolor.h"
 
 HANDLE hConsole;
 int k;
@@ -55,10 +55,10 @@ void print_cyan(char c) {
     printf("%c",c);
     SetConsoleTextAttribute(hConsole, NORMAL);
 }
+*/
 
-/*
 #include <stdio.h>
-#include "pcolor.h"
+#include "../include1/pcolor.h"
 
 void print_red(char c) {
     printf("%s%c", RED, c);
@@ -88,4 +88,4 @@ void print_magenta(char c) {
 void print_cyan(char c) {
     printf("%s%c", MAGENTA, c);
     printf("%s", NORMAL);
-}*/
+}

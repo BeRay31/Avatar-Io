@@ -94,7 +94,7 @@ void AddQ (Queue * Q, int X)
         }
     }
 }
-void IntializeQueue(Queue *Q1, Queue *Q2){
+void InitializeQueue(Queue *Q1, Queue *Q2){
     CreateEmptyQ(&(*Q1),10);
     CreateEmptyQ(&(*Q2),10);
     (*Q1).HEAD = 1;
