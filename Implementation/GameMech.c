@@ -574,6 +574,7 @@ void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List
                 CopyState(St,&StDest);
                 Push(S,StDest);
                 //Move MEch  
+                if(Src.armies>0){    
                     printf("Jumlah Pasukan : ");
                     scanf("%d",&Narmies);
                     while(Narmies>Src.armies || Narmies<0)
@@ -586,7 +587,9 @@ void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List
                     Src.move = false;
                     (*B).TI[TempIndex] = Src;
                     (*B).TI[Bidx.T[selected]]= Dest;
-                
+                }else{
+                    printf("Bangunan tidak memiliki pasukan.\n");
+                }
             }else{
                 printf("Tidak ada bangunan yang dapat menerima perpindahan pasukan.\n");
             }
