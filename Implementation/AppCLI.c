@@ -71,7 +71,6 @@ int main()
                 UpdateMap(&Map,ArrOfBuildings);
             } while (NotEndTurn(OlahString(command)));
         }
-        
         ChangeTurn(&Turn,changeTurn);
         changeTurn = false;
         resetAttacknMove(&ArrOfBuildings);
