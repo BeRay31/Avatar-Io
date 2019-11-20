@@ -20,16 +20,6 @@ We only provide 8 colors. Feel free to modify/add colors if you want to.
 #define MAGENTA "\x1B[35m"
 #define CYAN "\x1B[36m"
 
-/* Windows
-#define NORMAL 15
-#define RED 12
-#define GREEN 10
-#define YELLOW 14
-#define BLUE 9
-#define MAGENTA 13
-#define CYAN 11
-*/
-
 void print_red(char c);
 void print_green(char c);
 void print_yellow(char c);

@@ -32,6 +32,9 @@ int main()
     ArrOfBuildings.TI[1].armies = 40;
     ArrOfBuildings.TI[2].armies = 40;
     changeTurn = false;
+    if(!NotEnd(ArrOfBuildings)){
+        printf("Test\n");
+    }
     while(NotEnd(ArrOfBuildings)){
         
         if(Turn == 1){    
