@@ -76,4 +76,6 @@ void UpdateLoadBuilding(TabBuildings *Arrb);
 void PrintSkill(Queue Q);
 void CopyState (State Ssrc,State *Sdest);
 void IncBuildingTroop (TabBuildings *B, int owner);
+int CountPrintLinkedBuildingsM (int turn,GraphArr G,TabBuildings Buildings,int index);
+int CountPrintLinkedBuildingsA (int turn,GraphArr G,TabBuildings Buildings,int index);
 #endif
