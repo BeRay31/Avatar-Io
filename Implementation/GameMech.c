@@ -219,7 +219,7 @@ void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List
             if (Attck.attck)
             {
 
-                if((CountPrintLinkedBuildingsA(player,G,*B,tempBIndex))!=0){
+                if((CountPrintLinkedBuildingsA(player,G,*B,tempBIndex))!=1){
                     printf("Daftar bangunan yang dapat diserang : \n");
                     PrintLinkedBuildingsA(player,G,*B,tempBIndex,&Bidx);
                     //Select Target Building
@@ -537,7 +537,7 @@ void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List
         }
         printf("Pilih Bangunan :");
         scanf("%d",&selected);
-        while(selected>NbOfB || selected<= 0)
+        while(selected>=NbOfB || selected<= 0)
         {
             printf("Bangunan yang anda pilih tidaklah ada.\n");
             printf("Masukkan kembali bangunan yang akan dipindah pasukannya : ");
@@ -553,7 +553,7 @@ void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List
         Src = (*B).TI[TempIndex];
         if (Src.move)
         {
-            if(CountPrintLinkedBuildingsM(player,G,(*B),TempIndex)!=0){
+            if(CountPrintLinkedBuildingsM(player,G,(*B),TempIndex)!=1){
                 printf("Daftar bangunan yang terdekat : \n");
                 x = G.Arr[TempIndex].First;
                 PrintLinkedBuildingsM(player,G,(*B),TempIndex,&Bidx);
