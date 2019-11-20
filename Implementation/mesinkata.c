@@ -40,6 +40,36 @@ void STARTKATA()
 		SalinKata();
 	}
 }
+
+void STARTCOMMAND()
+/* I.S. : CC sembarang
+   F.S. : EndKata = true, dan CC = EOF;
+          atau EndKata = false, CKata adalah kata yang sudah diakuisisi,
+          CC karakter pertama sesudah karakter terakhir kata */
+{
+	/* KAMUS LOKAL */
+	/* ALGORITMA */
+	printf("ENTER COMMAND : ");
+	STARTSTDIN();
+	IgnoreBlank();
+	if (CC == EOF || CC == ENTER){
+		EndKata = true;
+	} else {
+		EndKata = false;
+		SalinKata();
+	}
+}
+
+void Command (Kata *kata)
+/* F.S. : nilai command */
+{
+	STARTCOMMAND();
+	while (!EndKata) {
+		Salin(kata, CKata);
+		TulisKata(*kata); // buat ngecek
+		ADVKATA();
+	}
+}
 	
 void ADVKATA()
 /* I.S. : CC adalah karakter pertama kata yang akan diakuisisi
@@ -73,17 +103,19 @@ void SalinKata()
 	while (CC != ENTER && CC != BLANK) {
 		CKata.TabKata[i] = CC;
 		ADV();
-		if (CC==ENTER || CC == BLANK || i==NMax){
+		if (CC == ENTER || CC == BLANK || i == NMax || CC == EOF){
 			break;
 		} else {
 			i++;
 		}
 	}
+	/*
 	if (i==NMax) {
 		while (CC != BLANK && CC != ENTER) {
 			ADV();
 		}
 	}
+	*/
 	CKata.Length = i;
 }
 
@@ -128,31 +160,6 @@ void TulisKata (Kata kata)
 		} else {
 			printf("%c", kata.TabKata[i]);
 		}
-	}
-}
-
-void InputString (Kata *kata)
-{
-	char kar;
-	int countKar = 0;
-    printf("ENTER COMMAND: ");
-	scanf("%c", &kar);
-	if ((kar != BLANK) || (kar != ENTER)){
-		countKar = 1;
-		(*kata).TabKata[countKar] = kar;
-		while (true) {
-			scanf("%c", &kar);
-			if (kar != ENTER) {
-				countKar++;
-				(*kata).TabKata[countKar] = kar;
-			} else {
-				break;
-			}
-		}
-		(*kata).Length = countKar;
-	} else {
-		(*kata).TabKata[countKar+1] = 0;
-		(*kata).Length = countKar;
 	}
 }
 
