@@ -32,16 +32,21 @@ boolean NotEnd(TabBuildings B)
 {F.S Check the game if end return false if !end return true}
 */
 
-void ChangeTurn(int *Turn)
+void ChangeTurn(int *Turn,boolean changeTurn)
 {
-    if(*Turn == 1)
+    if (!changeTurn)
     {
-        *Turn = 2;
+         if(*Turn == 1)
+        {
+            *Turn = 2;
+        }
+        else
+        {
+            *Turn = 1;
+        }
     }
-    else
-    {
-        *Turn = 1;
-    }
+    
+   
 }
 /*
 {I.S Game Launched}
@@ -149,7 +154,7 @@ boolean NotEndTurn(int i){
 {I.S Game Launched}
 {F.S Check the Turn if End return False, if !end return true}
 */
-void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1List,List *P2List, TabBuildings *B,Stack *S, Queue *Q1, Queue *Q2)
+void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List *P1List,List *P2List, TabBuildings *B,Stack *S, Queue *Q1, Queue *Q2)
 {   
     *changeTurn = player;
     if(command == 1)
@@ -409,12 +414,7 @@ void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1
         else if(skill == 3){
             // Extra Turn
             printf("Anda menggunakan skill extra turn");
-             if(*changeTurn == 1){
-                *changeTurn == 2;
-            }
-            else{
-                *changeTurn == 1;
-            }
+             *changeTurn = true;
              SCreateEmpty(&(*S));
             // Menyimpan ke Stack
         }
@@ -472,7 +472,14 @@ void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1
     }
     else if(command == 4)
     {//UNDO
-        
+        State state;
+        if((*S).top == NULL){
+            printf("Anda tidak dapat melakukan UNDO");
+        }
+        else
+        {
+            Pop(&(*S),&state);
+        }
     }
     else if(command == 5)
     {//END_TURN
