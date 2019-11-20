@@ -25,7 +25,7 @@ boolean IsFullQ (Queue Q)
 /* yaitu mengandung elemen sebanyak MaxEl */
 int NBElmtQ (Queue Q)
 {
-    if(IsEmpty(Q))
+    if(IsEmptyQ(Q))
     {
         return 0;
     }
@@ -74,7 +74,6 @@ void DeAlokasiQ(Queue * Q)
 /* *** Primitif Add/Delete *** */
 void AddQ (Queue * Q, int X)
 {
-    
     if(IsEmptyQ(*Q))
     {
         (*Q).HEAD = 1;

@@ -1,4 +1,4 @@
-,#include <stdlib.h>
+#include <stdlib.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include "../include1/Buildings.h"
@@ -17,8 +17,15 @@ int main()
     Stack S;
     Queue Q1,Q2;
     int t;
+    Queue Q1,Q2;
+    CreateEmptyQ(&Q1,10);
+    CreateEmptyQ(&Q2,10);
     BuildMap Map;
+<<<<<<< HEAD
     boolean changeTurn;
+=======
+    int changeTurn = 1;
+>>>>>>> 401a2bdde9350f623353962cfcce387a8fe1d43a
     List P1Buildings,P2Buildings;
     GetInfoDariFile (&n, &m, &nbangunan, &ArrOfBuildings, &mgraf);
     UpdateLoadBuilding(&ArrOfBuildings);
@@ -36,12 +43,17 @@ int main()
            do
             {
                 PrintMap(Map);
-                printf("Player %d\n",Turn);                
+                printf("Player %d\n",Turn);
                 PrintOwnedBuildings(ArrOfBuildings,P1Buildings,&t);
                 printf("Skill Available : \n");
+<<<<<<< HEAD
                 do{
                     InputString(&command);
                 }while(OlahString(command) == 0);
+=======
+                sleep(1);
+                Command(&command);
+>>>>>>> 401a2bdde9350f623353962cfcce387a8fe1d43a
                 EksekusiCommand(OlahString(command),Map.G,Turn,&changeTurn,&P1Buildings,&P2Buildings,&ArrOfBuildings,&S,&Q1,&Q2);
                 UpdateMap(&Map,ArrOfBuildings);
             } while (NotEndTurn(OlahString(command)));     
@@ -53,9 +65,13 @@ int main()
                 printf("Player %d\n",Turn);
                 PrintOwnedBuildings(ArrOfBuildings,P2Buildings,&t);
                 printf("Skill Available : \n");
+<<<<<<< HEAD
                 do{
                     InputString(&command);
                 }while(OlahString(command) == 0);
+=======
+                Command(&command);
+>>>>>>> 401a2bdde9350f623353962cfcce387a8fe1d43a
                 EksekusiCommand(OlahString(command),Map.G,Turn,&changeTurn,&P1Buildings,&P2Buildings,&ArrOfBuildings,&S,&Q1,&Q2);
                 UpdateMap(&Map,ArrOfBuildings);
             } while (NotEndTurn(OlahString(command)));

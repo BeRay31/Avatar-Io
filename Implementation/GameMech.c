@@ -214,10 +214,6 @@ void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List
             }
             x = G.Arr[Attck.buildingsIndex].First;
             current = 1;
-            while((*B).TI[x->info].owner==player)
-            {
-                x = x->next;
-            }
             while(current!=selected)//search selected building index
             {
                 while((*B).TI[x->info].owner==player)
@@ -225,6 +221,10 @@ void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List
                     x = x->next;
                 }
                 x = x->next;
+                while((*B).TI[x->info].owner==player)
+                {
+                    x = x->next;
+                }
                 current++;
             }
             tempBLIndex = x->info;
@@ -318,7 +318,6 @@ void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List
         //{DICT}
         int NbOfB;
         address x;
-        
         int current = 1;
         int selected;
         int TempIndex;
@@ -600,7 +599,7 @@ void UpdateListBuilding(int index , List *PlayerB)
 
 void PrintOwnedBuildings(TabBuildings PBuildings, List PBIndex,int *NbofBuilding)
 {
-    int i = 1;
+    int x = 1;
     int indexB;
     address current = PBIndex.First;
     if (current != NULL)
@@ -608,7 +607,7 @@ void PrintOwnedBuildings(TabBuildings PBuildings, List PBIndex,int *NbofBuilding
         while(current!=NULL)
         {
             indexB = current->info;
-            printf("%d. ",i);
+            printf("%d. ",x);
             if (PBuildings.TI[indexB].buildingsType == 'C')
             {
                 printf("Castle (%d,%d) %d lv. %d\n",PBuildings.TI[indexB].position.X,PBuildings.TI[indexB].position.Y,PBuildings.TI[indexB].armies,PBuildings.TI[indexB].level);
@@ -625,11 +624,11 @@ void PrintOwnedBuildings(TabBuildings PBuildings, List PBIndex,int *NbofBuilding
             {
                 printf("Village (%d,%d) %d lv. %d\n",PBuildings.TI[indexB].position.X,PBuildings.TI[indexB].position.Y,PBuildings.TI[indexB].armies,PBuildings.TI[indexB].level);
             }
-            i++;
+            x++;
             current = current->next;
         }
     }
-    *NbofBuilding = i;
+    *NbofBuilding = x;
     printf("\n");
 }
 /*
@@ -714,7 +713,7 @@ void PrintLinkedBuildingsM (int turn,GraphArr G,TabBuildings Buildings,int index
     int indexB ;
     while(currentIndex != NULL)
     {
-        index = currentIndex->info;
+        indexB = currentIndex->info;
         if (Buildings.TI[indexB].owner == turn)
         {
             printf("%d. ",i);
