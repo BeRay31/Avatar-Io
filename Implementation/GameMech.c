@@ -573,19 +573,20 @@ void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List
                 St.P2 = *P2List;
                 CopyState(St,&StDest);
                 Push(S,StDest);
-                //Move MEch
-                printf("Jumlah Pasukan : ");
-                scanf("%d",&Narmies);
-                while(Narmies>Src.armies || Narmies<0)
-                {
-                    printf("Jumlah pasukkan tidaklah valid.\n");
-                    printf("Masukkan kembali jumlah pasukan : ");
+                //Move MEch  
+                    printf("Jumlah Pasukan : ");
                     scanf("%d",&Narmies);
-                }
-                Move(&Src,&Dest,Narmies);
-                Src.move = false;
-                (*B).TI[TempIndex] = Src;
-                (*B).TI[Bidx.T[selected]]= Dest;
+                    while(Narmies>Src.armies || Narmies<0)
+                    {
+                        printf("Jumlah pasukkan tidaklah valid.\n");
+                        printf("Masukkan kembali jumlah pasukan : ");
+                        scanf("%d",&Narmies);
+                    }
+                    Move(&Src,&Dest,Narmies);
+                    Src.move = false;
+                    (*B).TI[TempIndex] = Src;
+                    (*B).TI[Bidx.T[selected]]= Dest;
+                
             }else{
                 printf("Tidak ada bangunan yang dapat menerima perpindahan pasukan.\n");
             }
