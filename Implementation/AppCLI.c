@@ -17,7 +17,6 @@ int main()
     Stack S;
     Queue Q1,Q2;
     int t;
-    Queue Q1,Q2;
     CreateEmptyQ(&Q1,10);
     CreateEmptyQ(&Q2,10);
     BuildMap Map;
@@ -42,7 +41,7 @@ int main()
                 printf("Player %d\n",Turn);
                 PrintOwnedBuildings(ArrOfBuildings,P1Buildings,&t);
                 printf("Skill Available : \n");
-                sleep(1);
+                sle ep(1);
                 InputString(&command);
                 EksekusiCommand(OlahString(command),Map.G,Turn,&changeTurn,&P1Buildings,&P2Buildings,&ArrOfBuildings,&S,&Q1,&Q2);
                 UpdateMap(&Map,ArrOfBuildings);
