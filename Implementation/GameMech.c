@@ -219,7 +219,7 @@ void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List
             if (Attck.attck)
             {
 
-                if(G.Arr[tempBIndex].First != NULL){
+                if((CountPrintLinkedBuildingsA(player,G,*B,tempBIndex))!=0){
                     printf("Daftar bangunan yang dapat diserang : \n");
                     PrintLinkedBuildingsA(player,G,*B,tempBIndex,&Bidx);
                     //Select Target Building
@@ -247,7 +247,6 @@ void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List
                     CopyState(St,&StDest);
                     Push(S,StDest);          
                     //Stack
-                    // printf("Jumlah Pasukan yang digunakan : 1");
                     //AttackMech
                     if(Target.owner == 0)
                     {
@@ -554,7 +553,7 @@ void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List
         Src = (*B).TI[TempIndex];
         if (Src.move)
         {
-            if(G.Arr[TempIndex].First != NULL){
+            if(CountPrintLinkedBuildingsM(player,G,(*B),TempIndex)!=0){
                 printf("Daftar bangunan yang terdekat : \n");
                 x = G.Arr[TempIndex].First;
                 PrintLinkedBuildingsM(player,G,(*B),TempIndex,&Bidx);
@@ -574,7 +573,8 @@ void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List
                 CopyState(St,&StDest);
                 Push(S,StDest);
                 //Move MEch  
-                if(Src.armies>0){    
+                if(Src.armies>0)
+                {    
                     printf("Jumlah Pasukan : ");
                     scanf("%d",&Narmies);
                     while(Narmies>Src.armies || Narmies<0)
@@ -627,7 +627,7 @@ void PrintOwnedBuildings(TabBuildings PBuildings, List PBIndex,int *NbofBuilding
         while(current!=NULL)
         {
             indexB = current->info;
-            printf("%d. ",x);
+            printf("%d .",x);
             if (PBuildings.TI[indexB].buildingsType == 'C')
             {
                 printf("Castle (%d,%d) %d lv. %d\n",PBuildings.TI[indexB].position.X,PBuildings.TI[indexB].position.Y,PBuildings.TI[indexB].armies,PBuildings.TI[indexB].level);
@@ -837,4 +837,50 @@ void IncBuildingTroop (TabBuildings *B, int owner){
             IncTroops(&((*B).TI[i]));
         }
     }
+}
+
+int CountPrintLinkedBuildingsM (int turn,GraphArr G,TabBuildings Buildings,int index)
+{
+    int i = 1;
+    address currentIndex = G.Arr[index].First;
+    int indexB ;
+    while(currentIndex != NULL)
+    {
+        indexB = currentIndex->info;
+        if (Buildings.TI[indexB].owner == turn)
+        {
+            i++;
+        }
+        currentIndex = currentIndex->next;
+    }
+    return i;
+}
+int CountPrintLinkedBuildingsA (int turn,GraphArr G,TabBuildings Buildings,int index)//for attack mech
+{
+    int i = 1;
+    address currentIndex = G.Arr[index].First;
+    int EnemyIndex;
+    int indexB ;
+    if (turn == 1)
+    {
+        EnemyIndex = 2;
+    }
+    else 
+    {
+        EnemyIndex = 1;
+    }
+    while(currentIndex != NULL)
+    {
+        indexB = currentIndex->info;
+        if (Buildings.TI[indexB].owner == EnemyIndex)
+        {
+            i++; 
+        }
+        else if(Buildings.TI[indexB].owner == 0)
+        {
+            i++;      
+        }
+        currentIndex=currentIndex->next;
+    }
+    return i;
 }
