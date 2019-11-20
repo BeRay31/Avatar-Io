@@ -200,7 +200,7 @@ void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List
         printf ("Bangunan yang digunakan untuk menyerang: ");
         scanf("%d",&selected);
         //Select Building That attack
-        while(selected>NbOfB || selected<= 0)
+        while(selected>=NbOfB || selected<= 0)
         {
             printf("Bangunan yang anda pilih tidaklah ada\n");
             printf("Masukkan kembali bangunan yang digunakan untuk menyerang :");

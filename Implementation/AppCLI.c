@@ -27,11 +27,14 @@ int main()
     MakeBMap(&Map);
     InitializeQueue(&Q1,&Q2);
     SCreateEmpty(&S);
-    InsertLast(&P1Buildings,AllocateL(1));//Initiate and allocate Building index 1 == owner P1  
+    InsertLast(&P1Buildings,AllocateL(1));//Initiate and allocate Building index 1 == owner P1
+    InsertLast(&P1Buildings,AllocateL(13));//Initiate and allocate Building index 1 == owner P1    
     InsertLast(&P2Buildings,AllocateL(2));//Initiate and allocate Building index 2 == owner P2
     ArrOfBuildings.TI[1].armies = 20;
+    ArrOfBuildings.TI[13].armies = 20;
     ArrOfBuildings.TI[2].armies = 20;
     ArrOfBuildings.TI[1].owner = 1;
+    ArrOfBuildings.TI[13].owner = 1;
     ArrOfBuildings.TI[2].owner = 2;
 
     UpdateMap(&Map,ArrOfBuildings);
