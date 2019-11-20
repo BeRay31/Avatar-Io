@@ -9,7 +9,7 @@ char CC;
 boolean EOP;
 
 static FILE * pita;
-static int retval;
+static char retval;
 
 void START() {
 /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
@@ -19,7 +19,7 @@ void START() {
           Jika CC = MARK maka EOP akan menyala (true) */
 
     /* Algoritma */
-    pita = fopen("konfigurasi.txt","r");
+    pita = fopen("konfigurasi.txt","rt");
     ADV();
 }
 
@@ -34,34 +34,6 @@ void ADV() {
     /* Algoritma */
     CC = fgetc(pita);
     if (CC == EOF) {
-       fclose(pita);
-    }
-}
-
-void STARTSTDIN() {
-/* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
-   Karakter pertama yang ada pada pita posisinya adalah pada jendela.
-   I.S. : sembarang
-   F.S. : CC adalah karakter pertama pada pita. Jika CC != MARK maka EOP akan padam (false).
-          Jika CC = MARK maka EOP akan menyala (true) */
-
-    /* Algoritma */
-    /* pita = fopen("pitakar.txt","r"); */
-    pita = stdin;
-    ADVSTDIN();
-}
-
-void ADVSTDIN() {
-/* Pita dimajukan satu karakter.
-   I.S. : Karakter pada jendela =
-          CC, CC != MARK
-   F.S. : CC adalah karakter berikutnya dari CC yang lama,
-          CC mungkin = MARK.
-          Jika  CC = MARK maka EOP akan menyala (true) */
-
-    /* Algoritma */
-    CC = fgetc(pita);
-    if (CC == '\n') {
        fclose(pita);
     }
 }

@@ -7,10 +7,8 @@
 
 typedef struct{
     TabBuildings B;
-    List P1,P2;
-    
+    List P1,P2;    
 }State;
-
 typedef struct StElmtList *stackAddress;
 typedef struct StElmtList{
     State info;

@@ -7,6 +7,13 @@
 #include "Stack.h"
 #include "Skills.h"
 #include "Queue.h"
+
+
+typedef struct{
+    int Neff;
+    int T[30];
+}idxArr;
+
 boolean NotEnd (TabBuildings B);
 /*
 {I.S Game Launched}
@@ -41,7 +48,7 @@ void PrintOwnedBuildings(TabBuildings PBuildings, List PBIndex,int *NbofBuilding
 {F.S Players Building Printed}
 */
 
-void PrintLinkedBuildingsA (int turn,GraphArr G,TabBuildings Buildings,int index,int *NbofBuilding);//for attack mech
+void PrintLinkedBuildingsA (int turn,GraphArr G,TabBuildings Buildings,int index,idxArr *T);
 /*
 {I.S Graph Defined and Building Defined for attack mech}
 {F.S Printed Linked Building}
@@ -51,7 +58,7 @@ void UpdateListBuilding(int index , List *PlayerB);
 {I.S List Index of Building defined}
 {F.S List Index of Building updated}
 */
-void PrintLinkedBuildingsM (int turn,GraphArr G,TabBuildings Buildings,int index,int *NbofBuilding);//for attack mech
+void PrintLinkedBuildingsM (int turn,GraphArr G,TabBuildings Buildings,int index,idxArr *T);//for attack mech
 /*
 {I.S Graph Defined and Building Defined for move mech}
 {F.S Printed Linked Building}
@@ -66,4 +73,7 @@ void UpdateLoadBuilding(TabBuildings *Arrb);
 {I.S Building not updated lvl and armies}
 {F.S Building Updated}
 */
+void PrintSkill(Queue Q);
+void CopyState (State Ssrc,State *Sdest);
+void IncBuildingTroop (TabBuildings *B, int owner);
 #endif
