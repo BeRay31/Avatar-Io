@@ -132,3 +132,14 @@ address Search (List L, int X)
 /* Mencari apakah ada elemen list dengan Info(P)= X */
 /* Jika ada, mengirimkan address elemen tersebut. */
 /* Jika tidak ada, mengirimkan Nil */
+void CopyList(List Lsrc, List *Ldest)
+{
+    CreateEmptyL(Ldest);
+    address x;
+    x = Lsrc.First;
+    while (x!=NULL)
+    {
+        InsertLast(Ldest,x);
+        x = x->next;
+    }
+}

@@ -280,52 +280,52 @@ void Move (Buildings *B, Buildings *B2, int Narmies)
 		}
 		else if((*B2).buildingsType == 'V')
 		{
-			printf("%d pasukan dari Castle (%d,%d) telah berpindah ke Village (%d,%d)",Narmies,(*B).position.X,(*B).position.Y,(*B2).position.X,(*B2).position.Y):
+			printf("%d pasukan dari Castle (%d,%d) telah berpindah ke Village (%d,%d)",Narmies,(*B).position.X,(*B).position.Y,(*B2).position.X,(*B2).position.Y);
 		}
 	}
 	else if ((*B).buildingsType == 'T')
 	{
 		if((*B2).buildingsType == 'C')
 		{
-			printf("%d pasukan dari Tower (%d,%d) telah berpindah ke Castle (%d,%d)",Narmies,(*B).position.X,(*B).position.Y,(*B2).position.X,(*B2).position.Y):
+			printf("%d pasukan dari Tower (%d,%d) telah berpindah ke Castle (%d,%d)",Narmies,(*B).position.X,(*B).position.Y,(*B2).position.X,(*B2).position.Y);
 		}
 		else if((*B2).buildingsType == 'F')
 		{
-			printf("%d pasukan dari Tower (%d,%d) telah berpindah ke Fort (%d,%d)",Narmies,(*B).position.X,(*B).position.Y,(*B2).position.X,(*B2).position.Y):
+			printf("%d pasukan dari Tower (%d,%d) telah berpindah ke Fort (%d,%d)",Narmies,(*B).position.X,(*B).position.Y,(*B2).position.X,(*B2).position.Y);
 		}
 		else if((*B2).buildingsType == 'V')
 		{
-			printf("%d pasukan dari Tower (%d,%d) telah berpindah ke Village (%d,%d)",Narmies,(*B).position.X,(*B).position.Y,(*B2).position.X,(*B2).position.Y):
+			printf("%d pasukan dari Tower (%d,%d) telah berpindah ke Village (%d,%d)",Narmies,(*B).position.X,(*B).position.Y,(*B2).position.X,(*B2).position.Y);
 		}
 	}
 	else if ((*B).buildingsType == 'F')
 	{
 		if((*B2).buildingsType == 'C')
 		{
-			printf("%d pasukan dari Fort (%d,%d) telah berpindah ke Castle (%d,%d)",Narmies,(*B).position.X,(*B).position.Y,(*B2).position.X,(*B2).position.Y):
+			printf("%d pasukan dari Fort (%d,%d) telah berpindah ke Castle (%d,%d)",Narmies,(*B).position.X,(*B).position.Y,(*B2).position.X,(*B2).position.Y);
 		}
 		else if((*B2).buildingsType == 'T')
 		{
-			printf("%d pasukan dari Fort (%d,%d) telah berpindah ke Tower (%d,%d)",Narmies,(*B).position.X,(*B).position.Y,(*B2).position.X,(*B2).position.Y):
+			printf("%d pasukan dari Fort (%d,%d) telah berpindah ke Tower (%d,%d)",Narmies,(*B).position.X,(*B).position.Y,(*B2).position.X,(*B2).position.Y);
 		}
 		else if((*B2).buildingsType == 'V')
 		{
-			printf("%d pasukan dari Fort (%d,%d) telah berpindah ke Village (%d,%d)",Narmies,(*B).position.X,(*B).position.Y,(*B2).position.X,(*B2).position.Y):
+			printf("%d pasukan dari Fort (%d,%d) telah berpindah ke Village (%d,%d)",Narmies,(*B).position.X,(*B).position.Y,(*B2).position.X,(*B2).position.Y);
 		}
 	}
 	else if ((*B).buildingsType == 'V')
 	{
 		if((*B2).buildingsType == 'C')
 		{
-			printf("%d pasukan dari Village (%d,%d) telah berpindah ke Castle (%d,%d)",Narmies,(*B).position.X,(*B).position.Y,(*B2).position.X,(*B2).position.Y):
+			printf("%d pasukan dari Village (%d,%d) telah berpindah ke Castle (%d,%d)",Narmies,(*B).position.X,(*B).position.Y,(*B2).position.X,(*B2).position.Y);
 		}
 		else if((*B2).buildingsType == 'F')
 		{
-			printf("%d pasukan dari Village (%d,%d) telah berpindah ke Fort (%d,%d)",Narmies,(*B).position.X,(*B).position.Y,(*B2).position.X,(*B2).position.Y):
+			printf("%d pasukan dari Village (%d,%d) telah berpindah ke Fort (%d,%d)",Narmies,(*B).position.X,(*B).position.Y,(*B2).position.X,(*B2).position.Y);
 		}
 		else if((*B2).buildingsType == 'T')
 		{
-			printf("%d pasukan dari Village (%d,%d) telah berpindah ke Tower (%d,%d)",Narmies,(*B).position.X,(*B).position.Y,(*B2).position.X,(*B2).position.Y):
+			printf("%d pasukan dari Village (%d,%d) telah berpindah ke Tower (%d,%d)",Narmies,(*B).position.X,(*B).position.Y,(*B2).position.X,(*B2).position.Y);
 		}
 	}
 }

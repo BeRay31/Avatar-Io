@@ -15,18 +15,28 @@ int main()
 	MATRIKS mgraf;
     Kata command;
     Stack S;
+    Queue Q1,Q2;
     int t;
+    CreateEmptyQ(&Q1,10);
+    CreateEmptyQ(&Q2,10);
     BuildMap Map;
-    int changeTurn;
+    boolean changeTurn;
     List P1Buildings,P2Buildings;
     GetInfoDariFile (&n, &m, &nbangunan, &ArrOfBuildings, &mgraf);
+    ArrOfBuildings.TI[1].owner = 1;
+    ArrOfBuildings.TI[2].owner = 2;
     UpdateLoadBuilding(&ArrOfBuildings);
     MakeBMap(&Map);
+    InitializeQueue(&Q1,&Q2);
     SCreateEmpty(&S);
     InsertLast(&P1Buildings,AllocateL(1));//Initiate and allocate Building index 1 == owner P1
     InsertLast(&P2Buildings,AllocateL(2));//Initiate and allocate Building index 2 == owner P2
     ArrOfBuildings.TI[1].armies = 40;
     ArrOfBuildings.TI[2].armies = 40;
+    changeTurn = false;
+    if(!NotEnd(ArrOfBuildings)){
+        printf("Test\n");
+    }
     while(NotEnd(ArrOfBuildings)){
         
         if(Turn == 1){    
@@ -34,11 +44,13 @@ int main()
             {
                 PrintMap(Map);
                 printf("Player %d\n",Turn);
-                changeTurn = Turn;
                 PrintOwnedBuildings(ArrOfBuildings,P1Buildings,&t);
-                printf("Skill Available : \n");
-                InputString(&command);
-                EksekusiCommand(OlahString(command),Map.G,Turn,&changeTurn,&P1Buildings,&P2Buildings,&ArrOfBuildings,&S);
+                printf("Skill Available : ");
+                PrintSkill(Q1);
+                do{
+                    InputString(&command);
+                }while(OlahString(command) == 0);
+                EksekusiCommand(OlahString(command),Map.G,Turn,&changeTurn,&P1Buildings,&P2Buildings,&ArrOfBuildings,&S,&Q1,&Q2);
                 UpdateMap(&Map,ArrOfBuildings);
             } while (NotEndTurn(OlahString(command)));     
         }
@@ -49,13 +61,17 @@ int main()
                 printf("Player %d\n",Turn);
                 PrintOwnedBuildings(ArrOfBuildings,P2Buildings,&t);
                 printf("Skill Available : \n");
-                InputString(&command);
-                EksekusiCommand(OlahString(command),Map.G,Turn,&P1Buildings,&P2Buildings,&ArrOfBuildings,&S);
+                PrintSkill(Q2);
+                do{
+                    InputString(&command);
+                }while(OlahString(command) == 0);
+                EksekusiCommand(OlahString(command),Map.G,Turn,&changeTurn,&P1Buildings,&P2Buildings,&ArrOfBuildings,&S,&Q1,&Q2);
                 UpdateMap(&Map,ArrOfBuildings);
             } while (NotEndTurn(OlahString(command)));
         }
-        Turn = changeTurn;
-        ChangeTurn(&Turn);
+        
+        ChangeTurn(&Turn,changeTurn);
+        changeTurn = false;
         resetAttacknMove(&ArrOfBuildings);
     }
 }//main app Command Line Interface

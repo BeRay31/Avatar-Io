@@ -54,4 +54,5 @@ void InsertLast (List *L, address P);
 {F.S Last Elmt of List updated by P}
 */
 address Search (List L, int X);
+void CopyList(List Lsrc, List *Ldest);
 #endif

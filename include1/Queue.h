@@ -54,4 +54,9 @@ void DelQ (Queue * Q, int * X);
 /* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer; 
         Q mungkin kosong */
 
+void InitializeQueue(Queue *Q1, Queue *Q2);
+/*
+{I.S Queue Defined}
+{F.S Skill Initialized}
+*/
 #endif

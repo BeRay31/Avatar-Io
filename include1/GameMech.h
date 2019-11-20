@@ -13,7 +13,7 @@ boolean NotEnd (TabBuildings B);
 {F.S Check the game if end return false if !end return true}
 */
 
-void ChangeTurn(int *Turn);
+void ChangeTurn(int *Turn,boolean changeTurn);
 /*
 {I.S Game Launched}
 {F.S Turn Changed}
@@ -29,7 +29,7 @@ boolean NotEndTurn(int i);
 {F.S Check the Turn if End return False, if !end return true}
 */
 
-void EksekusiCommand(int command,GraphArr G, int player,int *changeTurn,List *P1List,List *P2List, TabBuildings *B,Stack *S,Queue *Q1, Queue *Q2);
+void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List *P1List,List *P2List, TabBuildings *B,Stack *S,Queue *Q1, Queue *Q2);
 /*
 {I.S Command Defined}
 {F.S Execute Command}
@@ -66,4 +66,6 @@ void UpdateLoadBuilding(TabBuildings *Arrb);
 {I.S Building not updated lvl and armies}
 {F.S Building Updated}
 */
+void PrintSkill(Queue Q);
+void CopyState (State Ssrc,State *Sdest);
 #endif
