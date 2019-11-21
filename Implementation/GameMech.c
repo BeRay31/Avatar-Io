@@ -577,7 +577,7 @@ void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List
                 {    
                     printf("Jumlah Pasukan : ");
                     scanf("%d",&Narmies);
-                    while(Narmies>Src.armies || Narmies<0)
+                    while(Narmies>Src.armies || Narmies<=0)
                     {
                         printf("Jumlah pasukkan tidaklah valid.\n");
                         printf("Masukkan kembali jumlah pasukan : ");
@@ -627,7 +627,7 @@ void PrintOwnedBuildings(TabBuildings PBuildings, List PBIndex,int *NbofBuilding
         while(current!=NULL)
         {
             indexB = current->info;
-            printf("%d .",x);
+            printf("%d. ",x);
             if (PBuildings.TI[indexB].buildingsType == 'C')
             {
                 printf("Castle (%d,%d) %d lv. %d\n",PBuildings.TI[indexB].position.X,PBuildings.TI[indexB].position.Y,PBuildings.TI[indexB].armies,PBuildings.TI[indexB].level);
