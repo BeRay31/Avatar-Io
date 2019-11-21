@@ -97,10 +97,8 @@ void AddQ (Queue * Q, int X)
 void InitializeQueue(Queue *Q1, Queue *Q2){
     CreateEmptyQ(&(*Q1),10);
     CreateEmptyQ(&(*Q2),10);
-    (*Q1).HEAD = 1;
-    (*Q1).TAIL = 1;
-    (*Q2).HEAD = 1;
-    (*Q2).TAIL = 1;
+    AddQ(&(*Q1),1);
+    AddQ(&(*Q2),1);
 
 }
 /* Proses: Menambahkan X pada Q dengan aturan FIFO */
@@ -110,6 +108,7 @@ void DelQ (Queue * Q, int * X)
 {
     if((*Q).HEAD==(*Q).TAIL)
     {
+        *X = (*Q).T[(*Q).HEAD];
         (*Q).HEAD = Nil;
         (*Q).TAIL = Nil;
     }

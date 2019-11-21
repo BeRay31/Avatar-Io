@@ -63,15 +63,49 @@ void CreateBuildings (Buildings *B,char type)
 		(*B).armies = 0;
 	}
 }
-
+void JustLvlUp(Buildings *B){
+	if((*B).buildingsType == 'C'){
+			(*B).incArmy += 5;
+			(*B).maxArmyOnBuildings += 20;
+			(*B).minArmiesToOccupy = 0;
+			(*B).level ++;	
+		}	
+		else if((*B).buildingsType == 'T'){
+			if((*B).level==1){
+				(*B).incArmy += 5;
+			}
+			else{
+				(*B).incArmy += 10;	
+			}
+			(*B).maxArmyOnBuildings += 10;
+			(*B).minArmiesToOccupy = 0;
+			(*B).level ++;
+		}
+		else if((*B).buildingsType == 'F'){
+			(*B).incArmy += 10;
+			(*B).maxArmyOnBuildings += 20;
+			(*B).minArmiesToOccupy = 0;	
+			if((*B).level > 1)
+			{
+				(*B).defenses = true;
+			}
+			(*B).level ++;
+		}
+		else if((*B).buildingsType == 'V'){
+			(*B).incArmy += 5;
+			(*B).maxArmyOnBuildings += 10;
+			(*B).minArmiesToOccupy = 0;	
+			(*B).level ++;
+		}
+}
 void LevelUp (Buildings *B)
 /*
-{I.S level 1 2 3}
+{I.S level 1 2 3}	
 {F.S level++ and <=4}
 */
 {
 	if((*B).level <4 && (*B).armies>=((*B).maxArmyOnBuildings/2)){
-		(*B).armies -= ((*B).maxArmyOnBuildings/2);
+		(*B).armies -= ((*B).maxArmyOnBuildings)/2;
 		if((*B).buildingsType == 'C'){
 			(*B).incArmy += 5;
 			(*B).maxArmyOnBuildings += 20;
@@ -131,9 +165,13 @@ void IncTroops (Buildings *B)
 {F.S Total Army incremented by (A)}
 */
 {
-	if((*B).owner!=0){  
+	if(((*B).owner!=0) && (((*B).armies + (*B).incArmy) <=(*B).maxArmyOnBuildings)){  
 		(*B).armies += (*B).incArmy;
 	}
+	else if(((*B).owner!=0) && (((*B).armies + (*B).incArmy) > (*B).maxArmyOnBuildings && ((*B).armies<(*B).maxArmyOnBuildings))){
+		(*B).armies = (*B).maxArmyOnBuildings;
+	}
+	
 }
 void Attack (Buildings *B, Buildings *BL, int Narmies)//*BL = Target
 /*
@@ -211,7 +249,7 @@ void Occupy (Buildings *B,Buildings *BL,int Narmies)//BL target
 	int tempArmies = 0;
 	int tempIndex;
 	int nerfedNarmies;
-	if((*BL).defenses = false)
+	if((*BL).defenses == false)
 	{
 		if(Narmies>=(*BL).minArmiesToOccupy)
 		{

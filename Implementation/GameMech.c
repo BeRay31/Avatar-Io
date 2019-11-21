@@ -1,6 +1,12 @@
+#include <stdlib.h>
+#include <stdbool.h>
+#include <stdio.h>
+#include "../include1/Buildings.h"
+#include "../include1/matriks.h"
+#include "../include1/Map.h"
+#include "../include1/Graph.h"
+#include "../include1/loadinfoawal.h"
 #include "../include1/GameMech.h"
-#include "../include1/point.h"
-#include "../include1/mesinkata.h"
 
 boolean NotEnd(TabBuildings B)
 {
@@ -34,9 +40,13 @@ boolean NotEnd(TabBuildings B)
 
 void ChangeTurn(int *Turn,boolean changeTurn)
 {
-    if (!changeTurn)
+    if (changeTurn)
     {
-         if(*Turn == 1)
+         
+    }
+    else
+    {
+        if(*Turn == 1)
         {
             *Turn = 2;
         }
@@ -45,6 +55,8 @@ void ChangeTurn(int *Turn,boolean changeTurn)
             *Turn = 1;
         }
     }
+    
+    
     
    
 }
@@ -156,20 +168,23 @@ boolean NotEndTurn(int i){
 */
 void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List *P1List,List *P2List, TabBuildings *B,Stack *S, Queue *Q1, Queue *Q2)
 {   
-    *changeTurn = player;
     if(command == 1)
     {//ATTACK
+        
         //{DICT}
         int current = 1;
         int NbOfB;
+        idxArr Bidx;
         int selected;
         int tempBIndex,tempBLIndex;
+        TabBuildings B1;
+        List P1;
+        List P2;
         int armiesUsed;
-        State St;
+        State St,StDest;
         Buildings Attck;//Building that attack
         Buildings Target;//Target Building
         address x;
-
         //IMPLMN
         printf("Daftar Bangunan : \n");
         if(player == 1)
@@ -185,7 +200,7 @@ void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List
         printf ("Bangunan yang digunakan untuk menyerang: ");
         scanf("%d",&selected);
         //Select Building That attack
-        while(selected>NbOfB || selected<= 0)
+        while(selected>=NbOfB || selected<= 0)
         {
             printf("Bangunan yang anda pilih tidaklah ada\n");
             printf("Masukkan kembali bangunan yang digunakan untuk menyerang :");
@@ -199,117 +214,111 @@ void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List
         tempBIndex = x->info;
         Attck = (*B).TI[tempBIndex];//building that attack
 
-        if (Attck.attck)
-        {
-            printf("Daftar bangunan yang dapat diserang : \n");
-            PrintLinkedBuildingsA(player,G,*B,tempBIndex,&NbOfB);
-            //Select Target Building
-            printf ("Target Bangunan untuk diserang: ");
-            scanf("%d",&selected);
-            while(selected>NbOfB || selected<= 0)
+        //-----------------------------------------------
+        if(Attck.armies>0){  
+            if (Attck.attck)
             {
-                printf("Bangunan yang anda pilih tidaklah ada\n");
-                printf("Masukkan kembali bangunan untuk diserang :");
-                scanf("%d",&selected);
-            }
-            x = G.Arr[Attck.buildingsIndex].First;
-            current = 1;
-            while(current!=selected)//search selected building index
-            {
-                while((*B).TI[x->info].owner==player)
-                {
-                    x = x->next;
-                }
-                x = x->next;
-                while((*B).TI[x->info].owner==player)
-                {
-                    x = x->next;
-                }
-                current++;
-            }
-            tempBLIndex = x->info;
-            Target = (*B).TI[tempBLIndex];
-            //NbOfArmies used and validate
-            printf("Jumlah Pasukan yang digunakan : ");
-            scanf("%d",&armiesUsed);
-            while(armiesUsed>Attck.armies)
-            {
-                printf("Jumlah pasukan pada Building anda tidak mencukupi\n");
-                printf("Masukkan kembali jumlah pasukan yang akan digunakan :");
-                scanf("%d",&armiesUsed);
-            }
-            //Stack
-            St.B = *B;
-            St.P1 = *P1List;
-            St.P2 = *P2List;
-            
-            Push(S,St);
-            //AttackMech
-            if(Target.owner == 0)
-            {
-                Occupy(&Attck,&Target,armiesUsed);
-                if (Attck.owner == Target.owner)
-                {
-                    address del;
-                    if(player==1)
+
+                if((CountPrintLinkedBuildingsA(player,G,*B,tempBIndex))!=1){
+                    printf("Daftar bangunan yang dapat diserang : \n");
+                    PrintLinkedBuildingsA(player,G,*B,tempBIndex,&Bidx);
+                    //Select Target Building
+                    printf ("Target Bangunan untuk diserang: ");
+                    scanf("%d",&selected);
+                    while(selected>Bidx.Neff || selected<= 0)
                     {
-                        printf("Bangunan Jadi Milikmu!!!!\n");
-                        InsertLast(P1List,AllocateL(Target.buildingsIndex));
-                        if(NbOfBuildings(*B,player) == 10){
-                            AddQ(&(*Q1),7);
+                        printf("Bangunan yang anda pilih tidaklah ada\n");
+                        printf("Masukkan kembali bangunan untuk diserang :");
+                        scanf("%d",&selected);
+                    }
+                    Target = (*B).TI[Bidx.T[selected]];
+                    //NbOfArmies used and validate
+                    printf("Masukkan jumlah pasukan :");
+                    scanf("%d",&armiesUsed);
+                    while(armiesUsed>Attck.armies)
+                    {
+                        printf("Jumlah pasukan pada Building anda tidak mencukupi\n");
+                        printf("Masukkan kembali jumlah pasukan yang akan digunakan :");
+                        scanf("%d",&armiesUsed);
+                    }      
+                    St.B = *B;
+                    St.P1 = *P1List;
+                    St.P2 = *P2List;
+                    CopyState(St,&StDest);
+                    Push(S,StDest);          
+                    //Stack
+                    //AttackMech
+                    if(Target.owner == 0)
+                    {
+                        Occupy(&Attck,&Target,armiesUsed);
+                        if (Attck.owner == Target.owner)
+                        {
+                            address del;
+                            if(player==1)
+                            {
+                                printf("Bangunan Jadi Milikmu!!!!\n");
+                                InsertLast(P1List,AllocateL(Target.buildingsIndex));
+                                if(NbOfBuildings(*B,player) == 10){
+                                    AddQ(&(*Q1),7);
+                                }
+                            }
+                            else
+                            {
+                                printf("Bangunan Jadi Milikmu!!!!\n");
+                                InsertLast(P2List,AllocateL(Target.buildingsIndex));
+                                if(NbOfBuildings(*B,player) == 10){
+                                    AddQ(&(*Q2),7);
+                                }
+                            }
                         }
                     }
                     else
                     {
-                        printf("Bangunan Jadi Milikmu!!!!\n");
-                        InsertLast(P2List,AllocateL(Target.buildingsIndex));
-                        if(NbOfBuildings(*B,player) == 10){
-                            AddQ(&(*Q2),7);
+                        Attack(&Attck,&Target,armiesUsed);
+                        if (Attck.owner == Target.owner)
+                        {
+                            if(player==1)
+                            {
+                                address del;
+                                printf("Bangunan Jadi Milikmu!!!!\n");
+                                if(Target.buildingsType == 'F'){
+                                    AddQ(&(*Q2),3);
+                                }
+                                InsertLast(P1List,AllocateL(Target.buildingsIndex));
+                                DelP(P2List,&del,Search(*P2List,Target.buildingsIndex));
+                                if(NbOfBuildings(*B,player) == 10){
+                                    AddQ(&(*Q1),7);
+                                }
+                            }
+                            else
+                            {
+                                address del;
+                                printf("Bangunan Jadi Milikmu!!!!\n");
+                                if (Target.buildingsType == 'F')
+                                {
+                                    AddQ(&(*Q1),3);
+                                }
+                                InsertLast(P2List,AllocateL(Target.buildingsIndex));
+                                DelP(P1List,&del,Search(*P1List,Target.buildingsIndex));
+                                if(NbOfBuildings(*B,player) == 10){
+                                    AddQ(&(*Q2),7);
+                                }
+                            }
                         }
                     }
+                    Attck.attck = false;
+                    (*B).TI[tempBIndex] = Attck;
+                    (*B).TI[Bidx.T[selected]] = Target;
+                }else{
+                    printf("Tidak ada bangunan yang dapat diserang.\n");
                 }
             }
             else
             {
-                Attack(&Attck,&Target,armiesUsed);
-                if (Attck.owner == Target.owner)
-                {
-                    if(player==1)
-                    {
-                        address del;
-                        printf("Bangunan Jadi Milikmu!!!!\n");
-                        if(Target.buildingsType == 'F'){
-                            AddQ(&(*Q2),3);
-                        }
-                        InsertLast(P1List,AllocateL(Target.buildingsIndex));
-                        DelP(P2List,&del,Search(*P2List,Target.buildingsIndex));
-                        if(NbOfBuildings(*B,player) == 10){
-                            AddQ(&(*Q1),7);
-                        }
-                    }
-                    else
-                    {
-                        address del;
-                        printf("Bangunan Jadi Milikmu!!!!\n");
-                        if (Target.buildingsType == 'F')
-                        {
-                            AddQ(&(*Q1),3);
-                        }
-                        InsertLast(P2List,AllocateL(Target.buildingsIndex));
-                        DelP(P1List,&del,Search(*P1List,Target.buildingsIndex));
-                        if(NbOfBuildings(*B,player) == 10){
-                            AddQ(&(*Q2),7);
-                        }
-                    }
-                }
+                printf("Bangunan yang anda pilih sudah digunakan untuk menyerang.\n");
             }
-            Attck.attck = false;
-            (*B).TI[tempBIndex] = Attck;
-            (*B).TI[tempBLIndex] = Target;
-        }
-        else
-        {
-            printf("Bangunan yang anda pilih sudah digunakan untuk menyerang.\n");
+        }else{
+            printf("Bangunan yang anda pilih tidak memeliki pasukan.\n");
         }
                 
     }
@@ -321,7 +330,7 @@ void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List
         int current = 1;
         int selected;
         int TempIndex;
-        State St;
+        State St,StDest;
         Buildings LvlUp;
         //{IMPLMNT}
         printf ("Daftar Bangunan : \n");
@@ -351,30 +360,36 @@ void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List
         }
         TempIndex = x->info;
         LvlUp = (*B).TI[TempIndex];
-        //Stack
-        St.B = (*B);
-        St.P1=(*P1List);
-        St.P2=(*P2List);
-        Push(S,St);
-        //Level-Up Mech
-        LevelUp(&LvlUp);
-        if(IsAllLvl4(*B,player)){
-            if (player == 1)
-            {
-                AddQ(&(*Q1),6);
+        if(LvlUp.armies >= (LvlUp.maxArmyOnBuildings)/2){
+            //Stack
+            St.B = *B;
+            St.P1 = *P1List;
+            St.P2 = *P2List;
+            CopyState(St,&StDest);
+            Push(S,StDest);
+            //Level-Up Mech
+            LevelUp(&LvlUp);
+            if(IsAllLvl4(*B,player)){
+                if (player == 1)
+                {
+                    AddQ(&(*Q1),6);
+                }
+                else{
+                    AddQ(&(*Q2),6);
+                }
             }
-            else{
-                AddQ(&(*Q2),6);
-            }
+            (*B).TI[TempIndex] = LvlUp;
         }
-        (*B).TI[TempIndex] = LvlUp;
+        else{
+            printf("Jumlah pasukan bangunan kurang untuk level up.\n");
+        }
     }
     else if(command == 3)
-    {   
+    {   //SKILL
         int skill;
         if(player == 1){
             if(IsEmptyQ(*Q1)){
-                printf("Anda tidak memiliki skill sekarang");
+                printf("Anda tidak memiliki skill sekarang\n");
                 
             }
             else
@@ -386,7 +401,7 @@ void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List
         else
         {
             if(IsEmptyQ(*Q2)){
-                printf("Anda tidak memiliki skill sekarang");
+                printf("Anda tidak memiliki skill sekarang\n");
             }
             else
             {
@@ -394,13 +409,15 @@ void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List
             }
             
         }
+        
         if(skill == 1 ){
             // Instant Upgrade SKill
-            printf("Anda menggunakan skill Instant Upgrade");
+            printf("Anda menggunakan skill Instant Upgrade\n");
             for(int i=0; i < (*B).Neff ; i++){
                 if((*B).TI[i].owner == player){
                     if((*B).TI[i].level <= 3){  // Hanya Level kurang dari sama dengan 3 yang dapat naik level
-                        (*B).TI[i].level++;
+                        JustLvlUp(&(*B).TI[i]);
+                        
                     }
                 }
             }
@@ -412,7 +429,7 @@ void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List
         }
         else if(skill == 3){
             // Extra Turn
-            printf("Anda menggunakan skill extra turn");
+            printf("Anda menggunakan skill extra turn\n");
              *changeTurn = true;
              SCreateEmpty(&(*S));
             // Menyimpan ke Stack
@@ -472,17 +489,24 @@ void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List
     else if(command == 4)
     {//UNDO
         State state;
+        int s;
         if((*S).top == NULL){
-            printf("Anda tidak dapat melakukan UNDO");
+            printf("Anda tidak dapat melakukan UNDO\n");
         }
         else
         {
-            Pop(&(*S),&state);
+            printf("Anda melakukan UNDO\n");
+            Pop(S,&state);
+            PrintOwnedBuildings(state.B,state.P1,&s);
+            *P1List = state.P1;
+            *P2List = state.P2;
+            *B = state.B;
         }
     }
     else if(command == 5)
     {//END_TURN
-        
+        // Increment Troop
+        SCreateEmpty(S);
     }
     else if(command == 6)
     {//SAVE
@@ -495,9 +519,10 @@ void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List
         int selected;
         address x;
         int NbOfB;
+        idxArr Bidx;
         int TempIndex,TempIndexB;
         Buildings Src,Dest;
-        State St;
+        State St,StDest;
         int Narmies;
         //{IMPLEMENT}
         if(player == 1)
@@ -512,7 +537,7 @@ void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List
         }
         printf("Pilih Bangunan :");
         scanf("%d",&selected);
-        while(selected>NbOfB || selected<= 0)
+        while(selected>=NbOfB || selected<= 0)
         {
             printf("Bangunan yang anda pilih tidaklah ada.\n");
             printf("Masukkan kembali bangunan yang akan dipindah pasukannya : ");
@@ -528,51 +553,46 @@ void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List
         Src = (*B).TI[TempIndex];
         if (Src.move)
         {
-            printf("Daftar bangunan yang terdekat : \n");
-            x = G.Arr[TempIndex].First;
-            PrintLinkedBuildingsM(player,G,(*B),TempIndex,&NbOfB);
-            printf("Bangunan yang akan menerima : ");
-            scanf("%d",&selected);
-            while(selected>NbOfB || selected<0)
-            {
-                printf("Bangunan yang anda pilih tidaklah ada.\n");
-                printf("Masukkan kembali bangunan yang akan menerima : ");
+            if(CountPrintLinkedBuildingsM(player,G,(*B),TempIndex)!=1){
+                printf("Daftar bangunan yang terdekat : \n");
+                x = G.Arr[TempIndex].First;
+                PrintLinkedBuildingsM(player,G,(*B),TempIndex,&Bidx);
+                printf("Bangunan yang akan menerima : ");
                 scanf("%d",&selected);
-            }
-            current = 1;
-            while(current != selected)
-            {
-                while((*B).TI[x->info].owner!=player)
+                while(selected>Bidx.Neff || selected<0)
                 {
-                    x = x->next;
+                    printf("Bangunan yang anda pilih tidaklah ada.\n");
+                    printf("Masukkan kembali bangunan yang akan menerima : ");
+                    scanf("%d",&selected);
                 }
-                x = x->next;
-                while((*B).TI[x->info].owner!=player)
-                {
-                    x = x->next;
+                Dest = (*B).TI[Bidx.T[selected]];
+                //Stack
+                St.B = *B;
+                St.P1 = *P1List;
+                St.P2 = *P2List;
+                CopyState(St,&StDest);
+                Push(S,StDest);
+                //Move MEch  
+                if(Src.armies>0)
+                {    
+                    printf("Jumlah Pasukan : ");
+                    scanf("%d",&Narmies);
+                    while(Narmies>Src.armies || Narmies<=0)
+                    {
+                        printf("Jumlah pasukkan tidaklah valid.\n");
+                        printf("Masukkan kembali jumlah pasukan : ");
+                        scanf("%d",&Narmies);
+                    }
+                    Move(&Src,&Dest,Narmies);
+                    Src.move = false;
+                    (*B).TI[TempIndex] = Src;
+                    (*B).TI[Bidx.T[selected]]= Dest;
+                }else{
+                    printf("Bangunan tidak memiliki pasukan.\n");
                 }
-                current ++;
+            }else{
+                printf("Tidak ada bangunan yang dapat menerima perpindahan pasukan.\n");
             }
-            TempIndexB = x->info;
-            Dest = (*B).TI[TempIndexB];
-            //Stack
-            St.B = (*B);
-            St.P1 = (*P1List);
-            St.P2 = (*P2List);
-            Push(S,St);
-            //Move MEch
-            printf("Jumlah Pasukan : ");
-            scanf("%d",&Narmies);
-            while(Narmies>Src.armies || Narmies<0)
-            {
-                printf("Jumlah pasukkan tidaklah valid.\n");
-                printf("Masukkan kembali jumlah pasukan : ");
-                scanf("%d",&Narmies);
-            }
-            Move(&Src,&Dest,Narmies);
-            Src.move = false;
-            (*B).TI[TempIndex] = Src;
-            (*B).TI[TempIndexB]= Dest;
         }
         else
         {
@@ -636,7 +656,7 @@ void PrintOwnedBuildings(TabBuildings PBuildings, List PBIndex,int *NbofBuilding
 {F.S Players Building Printed}
 */
 
-void PrintLinkedBuildingsA (int turn,GraphArr G,TabBuildings Buildings,int index,int *NbofBuilding)//for attack mech
+void PrintLinkedBuildingsA (int turn,GraphArr G,TabBuildings Buildings,int index,idxArr *T)//for attack mech
 {
     int i = 1;
     address currentIndex = G.Arr[index].First;
@@ -671,8 +691,10 @@ void PrintLinkedBuildingsA (int turn,GraphArr G,TabBuildings Buildings,int index
             else if (Buildings.TI[indexB].buildingsType == 'V')
             {
                 printf("Village (%d,%d) %d lv. %d\n",Buildings.TI[indexB].position.X,Buildings.TI[indexB].position.Y,Buildings.TI[indexB].armies,Buildings.TI[indexB].level);
-            }      
-            i++;      
+            }
+            (*T).T[i] = Buildings.TI[indexB].buildingsIndex;
+            i++; 
+
         }
         else if(Buildings.TI[indexB].owner == 0)
         {
@@ -692,20 +714,20 @@ void PrintLinkedBuildingsA (int turn,GraphArr G,TabBuildings Buildings,int index
             else if (Buildings.TI[indexB].buildingsType == 'V')
             {
                 printf("Village (%d,%d) %d lv. %d\n",Buildings.TI[indexB].position.X,Buildings.TI[indexB].position.Y,Buildings.TI[indexB].minArmiesToOccupy,Buildings.TI[indexB].level);
-            }      
+            }
+            (*T).T[i] = Buildings.TI[indexB].buildingsIndex;
             i++;      
         }
-        
         currentIndex=currentIndex->next;
     }
-    *NbofBuilding = i;
+    (*T).Neff = i;
     printf("\n");
 }
 /*
 {I.S Graph Defined and Building Defined}
 {F.S Printed Linked Building}
 */
-void PrintLinkedBuildingsM (int turn,GraphArr G,TabBuildings Buildings,int index,int *NbofBuilding)
+void PrintLinkedBuildingsM (int turn,GraphArr G,TabBuildings Buildings,int index,idxArr *T)
 {
     int i = 1;
     int tempturn = turn;
@@ -732,12 +754,13 @@ void PrintLinkedBuildingsM (int turn,GraphArr G,TabBuildings Buildings,int index
             else if (Buildings.TI[indexB].buildingsType == 'V')
             {
                 printf("Village (%d,%d) %d lv. %d\n",Buildings.TI[indexB].position.X,Buildings.TI[indexB].position.Y,Buildings.TI[indexB].armies,Buildings.TI[indexB].level);
-            }            
+            }
+            (*T).T[i] = Buildings.TI[indexB].buildingsIndex;      
             i++;
         }
         currentIndex = currentIndex->next;
     }
-    *NbofBuilding = i;
+    (*T).Neff = i;
     printf("\n");
 }
 
@@ -775,4 +798,89 @@ void UpdateLoadBuilding(TabBuildings *Arrb)
         Temp.buildingsIndex = i;
         (*Arrb).TI[i] = Temp;
     }
+}
+void PrintSkill (Queue Q){
+    if((Q).T[(Q).HEAD] == 1){
+        printf("Instant Upgrade\n");
+    }
+    else if ((Q).T[(Q).HEAD] == 2){
+        printf("Shield\n");
+    }
+    else if ((Q).T[(Q).HEAD] == 3){
+        printf("Extra Turn\n");
+    }
+    else if ((Q).T[(Q).HEAD] == 4){
+        printf("Attack Up\n");
+    }
+    else if ((Q).T[(Q).HEAD] == 5){  
+        printf("Critical Hit\n");
+    }
+    else if ((Q).T[(Q).HEAD] == 6){
+        printf("Instant Reinforcement\n");
+    }   
+    else if ((Q).T[(Q).HEAD] == 7){
+        printf("Barrage\n");
+    }
+    else{
+        printf("-\n");
+    }
+}
+void CopyState (State Ssrc,State *Sdest)
+{
+    CopyTab(Ssrc.B,&(*Sdest).B);
+    CopyList(Ssrc.P1,&(*Sdest).P1);
+    CopyList(Ssrc.P2,&(*Sdest).P2);
+}
+void IncBuildingTroop (TabBuildings *B, int owner){
+    for(int i=1; i<=(*B).Neff;i++){
+        if((*B).TI[i].owner == owner){
+            IncTroops(&((*B).TI[i]));
+        }
+    }
+}
+
+int CountPrintLinkedBuildingsM (int turn,GraphArr G,TabBuildings Buildings,int index)
+{
+    int i = 1;
+    address currentIndex = G.Arr[index].First;
+    int indexB ;
+    while(currentIndex != NULL)
+    {
+        indexB = currentIndex->info;
+        if (Buildings.TI[indexB].owner == turn)
+        {
+            i++;
+        }
+        currentIndex = currentIndex->next;
+    }
+    return i;
+}
+int CountPrintLinkedBuildingsA (int turn,GraphArr G,TabBuildings Buildings,int index)//for attack mech
+{
+    int i = 1;
+    address currentIndex = G.Arr[index].First;
+    int EnemyIndex;
+    int indexB ;
+    if (turn == 1)
+    {
+        EnemyIndex = 2;
+    }
+    else 
+    {
+        EnemyIndex = 1;
+    }
+    while(currentIndex != NULL)
+    {
+        indexB = currentIndex->info;
+        if (Buildings.TI[indexB].owner == EnemyIndex)
+        {
+            i++; 
+        }
+        else if(Buildings.TI[indexB].owner == 0)
+        {
+            i++;      
+        }
+        currentIndex=currentIndex->next;
+    }
+    return i;
 }
