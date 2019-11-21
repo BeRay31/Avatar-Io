@@ -26,7 +26,6 @@ int main()
     printf("\n");
    /* Save(arrBuildings, graf, n, m, nbuildings);
     return 0;*/
-    /*
     UpdateLoadBuilding(&arrBuildings);
     arrBuildings.TI[1].armies = 80;
     arrBuildings.TI[13].armies = 40;
@@ -43,8 +42,6 @@ int main()
     UpdateMap(&Peta,arrBuildings);
     PrintMap(Peta);
     EksekusiCommand(1,Peta.G,2,&P1Buildings,&P2Buildings,&arrBuildings,&S);
-    */
-    return 0;
 }
 
 // gcc driverFile.c mesinkar.c mesinkata.c loadinfoawal.c Buildings.c point.c matriks.c save.c load.c -o run

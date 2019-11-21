@@ -1,7 +1,5 @@
 gcc -o test driverFile.c save.c Map.c loadinfoawal.c  matriks.c mesinkar.c mesinkata.c  Buildings.c pcolor.c Graph.c List.c dinamicArr.c GameMech.c Stack.c
 ./test
 
-gcc -o testAppCLI AppCLI.c save.c Map.c loadinfoawal.c  matriks.c mesinkar.c mesinkata.c  Buildings.c pcolor.c Graph.c List.c dinamicArr.c GameMech.c Stack.c Queue.c
+gcc -o testAppCLI AppCLI.c save.c Map.c loadinfoawal.c  matriks.c mesinkar.c mesinkata.c  Buildings.c pcolor.c Graph.c List.c dinamicArr.c GameMech.c Stack.c
 ./testAppCLI
-
-gcc -o testAppCLI AppCLI.c Buildings.c dinamicArr.c  driverFile.c  GameMech.c Graph.c List.c load.c loadinfoawal.c Map.c matriks.c mesinkar.c mesinkata.c pcolor.c point.c Queue.c  save.c Skill.c  Stack.c

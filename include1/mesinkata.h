@@ -9,12 +9,14 @@
 
 #define NMax 50
 #define BLANK ' '
-#define ENTER '\n'
 
+/* ********** KONSTRUKTOR ********** */
 typedef struct {
   char TabKata[NMax+1]; /* container penyimpan kata, indeks yang dipakai [1..NMax] */
     int Length;
 } Kata;
+
+/* ****************************** */
 
 /* State Mesin Kata */
 extern boolean EndKata;
@@ -46,31 +48,19 @@ void SalinKata();
           CC adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
 
+/* FUNGSI LAIN */
+void CharToInt(int *res, Kata src);
+void CharToUnShortInt(unsigned short int *res, Kata src);
+int BoolToInt (boolean True);
 void Salin(Kata* dest, Kata src);
 /* Menyalin kata
    I.S. : dest sembarang, src sebuah kata yang valid
    F.S. : dest merupakan kata dengan panjang yang sama dengan src
           dan tiap karakter dest sama dengan src */
 
-/* FUNGSI LAIN */
-boolean IsKataSama (Kata k1, Kata k2);
-
+int PanjangString (char str[]);
 void InputString (Kata *kata);
-
-void TulisKata (Kata kata);
-/* F.S : Menulis kata diakhiri dengan enter */
-
-void CharToInt(int *res, Kata src);
-
-void CharToUnShortInt(unsigned short int *res, Kata src);
-
-int BoolToInt (boolean True);
-
+boolean IsKataSama (Kata k1, Kata k2);
 void GetTipeBangunan (char *tipe, Kata src);
-
-void STARTCOMMAND();
-
-void Command (Kata *kata);
-/* F.S. : nilai command */
 
 #endif

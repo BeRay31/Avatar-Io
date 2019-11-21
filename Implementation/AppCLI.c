@@ -30,19 +30,15 @@ int main()
     InsertLast(&P1Buildings,AllocateL(1));//Initiate and allocate Building index 1 == owner P1
     InsertLast(&P1Buildings,AllocateL(13));//Initiate and allocate Building index 1 == owner P1    
     InsertLast(&P2Buildings,AllocateL(2));//Initiate and allocate Building index 2 == owner P2
-<<<<<<< HEAD
     ArrOfBuildings.TI[1].armies = 40;
     ArrOfBuildings.TI[2].armies = 40;
-=======
     ArrOfBuildings.TI[1].armies = 20;
     ArrOfBuildings.TI[13].armies = 20;
     ArrOfBuildings.TI[2].armies = 20;
     ArrOfBuildings.TI[1].owner = 1;
     ArrOfBuildings.TI[13].owner = 1;
     ArrOfBuildings.TI[2].owner = 2;
-
     UpdateMap(&Map,ArrOfBuildings);
->>>>>>> Test2
     changeTurn = false;
     if(!NotEnd(ArrOfBuildings)){
         printf("Test\n");
@@ -58,7 +54,9 @@ int main()
                 printf("Skill Available : ");
                 PrintSkill(Q1);
                 do{
-                    InputString(&command);
+                    // INPUT COMMAND
+                    //InputString(&command);
+                    Command(&command);
                 }while(OlahString(command) == 0);
                 EksekusiCommand(OlahString(command),Map.G,Turn,&changeTurn,&P1Buildings,&P2Buildings,&ArrOfBuildings,&S,&Q1,&Q2);
                 UpdateMap(&Map,ArrOfBuildings);
@@ -73,7 +71,9 @@ int main()
                 printf("Skill Available : ");
                 PrintSkill(Q2);
                 do{
-                    InputString(&command);
+                    // INPUT COMMAND
+                    //InputString(&command);
+                    Command(&command);
                 }while(OlahString(command) == 0);
                 EksekusiCommand(OlahString(command),Map.G,Turn,&changeTurn,&P1Buildings,&P2Buildings,&ArrOfBuildings,&S,&Q1,&Q2);
                 UpdateMap(&Map,ArrOfBuildings);

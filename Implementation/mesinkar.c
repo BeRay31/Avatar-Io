@@ -9,7 +9,6 @@ char CC;
 boolean EOP;
 
 static FILE * pita;
-static int retval;
 
 void START() {
 /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
@@ -19,7 +18,7 @@ void START() {
           Jika CC = MARK maka EOP akan menyala (true) */
 
     /* Algoritma */
-    pita = fopen("konfigurasi.txt","r");
+    pita = fopen("konfigurasi.txt","rt");
     ADV();
 }
 
@@ -62,6 +61,6 @@ void ADVSTDIN() {
     /* Algoritma */
     CC = fgetc(pita);
     if (CC == '\n') {
-       fclose(pita);
+        /* do nothing */
     }
 }

@@ -198,13 +198,17 @@ void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List
             x = (*P2List).First;
         }
         printf ("Bangunan yang digunakan untuk menyerang: ");
-        scanf("%d",&selected);
+        // INPUT NUMBER
+        // scanf("%d",&selected);
+        inputf(&selected);
         //Select Building That attack
         while(selected>=NbOfB || selected<= 0)
         {
             printf("Bangunan yang anda pilih tidaklah ada\n");
             printf("Masukkan kembali bangunan yang digunakan untuk menyerang :");
-            scanf("%d",&selected);
+            // INPUT NUMBER
+            // scanf("%d",&selected);
+            inputf(&selected);
         }
         while(current!=selected)//search selected building index
         {
@@ -224,22 +228,30 @@ void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List
                     PrintLinkedBuildingsA(player,G,*B,tempBIndex,&Bidx);
                     //Select Target Building
                     printf ("Target Bangunan untuk diserang: ");
-                    scanf("%d",&selected);
+                    // INPUT NUMBER
+                    // scanf("%d",&selected);
+                    inputf(&selected);
                     while(selected>Bidx.Neff || selected<= 0)
                     {
                         printf("Bangunan yang anda pilih tidaklah ada\n");
                         printf("Masukkan kembali bangunan untuk diserang :");
-                        scanf("%d",&selected);
+                        // INPUT NUMBER
+                        // scanf("%d",&selected);
+                        inputf(&selected);
                     }
                     Target = (*B).TI[Bidx.T[selected]];
                     //NbOfArmies used and validate
                     printf("Masukkan jumlah pasukan :");
-                    scanf("%d",&armiesUsed);
+                    // input number
+                    //scanf("%d",&armiesUsed);
+                    inputf(&armiesUsed);
                     while(armiesUsed>Attck.armies)
                     {
                         printf("Jumlah pasukan pada Building anda tidak mencukupi\n");
                         printf("Masukkan kembali jumlah pasukan yang akan digunakan :");
-                        scanf("%d",&armiesUsed);
+                        // input number
+                        //scanf("%d",&armiesUsed);
+                        inputf(&armiesUsed);
                     }      
                     St.B = *B;
                     St.P1 = *P1List;
@@ -345,12 +357,16 @@ void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List
             x = (*P2List).First;
         }
         printf("Bangunan yang akan di level-up : ");
-        scanf("%d",&selected);
+        // input number
+        //scanf("%d",&selected);
+        inputf(&selected);
         while(selected>NbOfB || selected<=0)
         {
             printf("Bangunan yang anda pilih tidaklah ada.\n");
             printf("Masukan kembali bangunan yang akan di level-up : ");
-            scanf("%d",&selected);
+            // INPUT NUMBER
+            // scanf("%d",&selected);
+            inputf(&selected);
         }
         current = 1;
         while(current != selected)
@@ -510,7 +526,8 @@ void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List
     }
     else if(command == 6)
     {//SAVE
-        
+       //Save (TabBuildings CurrentBuilding, MATRIKS Graf, int N, int M, int NBuilding);
+       //load (int *n, int *m, int *nbangunan, TabBuildings *b, MATRIKS *mgraf)
     }
     else if(command == 7)
     {//MOVE
@@ -536,12 +553,16 @@ void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List
             x = (*P2List).First;            
         }
         printf("Pilih Bangunan :");
-        scanf("%d",&selected);
-        while(selected>=NbOfB || selected<= 0)
+        // INPUT NUMBER
+        // scanf("%d",&selected);
+        inputf(&selected);
+        while(selected>NbOfB || selected<= 0)
         {
             printf("Bangunan yang anda pilih tidaklah ada.\n");
             printf("Masukkan kembali bangunan yang akan dipindah pasukannya : ");
-            scanf("%d",&selected);
+            // INPUT NUMBER
+            // scanf("%d",&selected);
+            inputf(&selected);
         }
         current = 1;
         while(current != selected)
@@ -558,12 +579,16 @@ void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List
                 x = G.Arr[TempIndex].First;
                 PrintLinkedBuildingsM(player,G,(*B),TempIndex,&Bidx);
                 printf("Bangunan yang akan menerima : ");
-                scanf("%d",&selected);
+                // INPUT NUMBER
+                // scanf("%d",&selected);
+                inputf(&selected);
                 while(selected>Bidx.Neff || selected<0)
                 {
                     printf("Bangunan yang anda pilih tidaklah ada.\n");
                     printf("Masukkan kembali bangunan yang akan menerima : ");
-                    scanf("%d",&selected);
+                    // INPUT NUMBER
+                    // scanf("%d",&selected);
+                    inputf(&selected);
                 }
                 Dest = (*B).TI[Bidx.T[selected]];
                 //Stack
@@ -576,12 +601,16 @@ void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List
                 if(Src.armies>0)
                 {    
                     printf("Jumlah Pasukan : ");
-                    scanf("%d",&Narmies);
-                    while(Narmies>Src.armies || Narmies<=0)
+                    // input number
+                    //scanf("%d",&Narmies);
+                    inputf(&Narmies);
+                    while(Narmies>Src.armies || Narmies<0)
                     {
                         printf("Jumlah pasukkan tidaklah valid.\n");
                         printf("Masukkan kembali jumlah pasukan : ");
-                        scanf("%d",&Narmies);
+                        // input number
+                        //scanf("%d",&Narmies);
+                        inputf(&Narmies);
                     }
                     Move(&Src,&Dest,Narmies);
                     Src.move = false;
@@ -627,7 +656,7 @@ void PrintOwnedBuildings(TabBuildings PBuildings, List PBIndex,int *NbofBuilding
         while(current!=NULL)
         {
             indexB = current->info;
-            printf("%d. ",x);
+            printf("%d .",x);
             if (PBuildings.TI[indexB].buildingsType == 'C')
             {
                 printf("Castle (%d,%d) %d lv. %d\n",PBuildings.TI[indexB].position.X,PBuildings.TI[indexB].position.Y,PBuildings.TI[indexB].armies,PBuildings.TI[indexB].level);
