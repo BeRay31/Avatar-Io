@@ -656,7 +656,7 @@ void PrintOwnedBuildings(TabBuildings PBuildings, List PBIndex,int *NbofBuilding
         while(current!=NULL)
         {
             indexB = current->info;
-            printf("%d .",x);
+            printf("%d. ",x);
             if (PBuildings.TI[indexB].buildingsType == 'C')
             {
                 printf("Castle (%d,%d) %d lv. %d\n",PBuildings.TI[indexB].position.X,PBuildings.TI[indexB].position.Y,PBuildings.TI[indexB].armies,PBuildings.TI[indexB].level);
