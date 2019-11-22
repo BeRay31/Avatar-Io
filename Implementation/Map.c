@@ -44,16 +44,25 @@ void MakeBMap(BuildMap *Map)
     }
 	
     //EDIT GRAPH
-    Map->G = CreateBaseGraph(Nbuildings);
-    for (int i = 1;i<=Nbuildings;i++)
+
+
+    MakeEmptyGraf(&(*Map).G);
+    for(int i =1 ;i<=Nbuildings;i++)
     {
-        for (int j = 1;j<=Nbuildings;j++)
+        AddMotherLast(&(*Map).G);
+        for(int j =1;j<=Nbuildings;j++)
         {
-            if (Mgraf.Mem[i][j]==1)
+            if(Mgraf.Mem[i][j]==1)
             {
-                addGraph(&(*Map).G,i,j);
+                AddNewChild(&(*Map).G,i,j);
             }
         }
+    }
+    for(int i = 1;i<=Nbuildings;i++)
+    {
+        printf("%d->",i);
+        PrintInfo(MotherOfX((*Map).G,i));
+        printf("\n");
     }
 }
 /*

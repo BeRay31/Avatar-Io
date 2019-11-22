@@ -1,51 +1,91 @@
 #include "../include1/Graph.h"
 
-//Building Relation
 
-GraphArr CreateBaseGraph(int NBuilding)
-{  
-    GraphArr G;
-    (G).NbElmt = NBuilding;
-    for (int i = 0; i<=NBuilding;i++)
+GraphAddress AllocateEmptyG (int x)
+{
+    GraphAddress G = (GraphAddress)malloc(sizeof(GraphElmt));
+    if (G != NULL)
     {
-        (G).Arr[i].First = NULL;
+        G->Child.First= NULL;
+        G->Mother = NULL;
+        G->index = x;
+        return G;
     }
-    return G;
+    else
+    {
+        return NULL;    
+    }
+}
+
+
+void MakeEmptyGraf(Graph *G)
+{
+    (*G).FirstG = NULL;
 }
 /*
 {I.S Anything}
-{F.S graph defined}
+{F.S EmptyGraff defined as First = NULL}
 */
 
-void addGraph (GraphArr *Ga,int src,int NewElm)
+void AddMotherLast(Graph *G)
 {
-    address  NewElmt = AllocateL(NewElm);
-    if (NewElmt != NULL)
+    if((*G).FirstG == NULL)
     {
-        InsertLast(&(*Ga).Arr[src],NewElmt);
+        (*G).FirstG = AllocateEmptyG(1);
+    }
+    else
+    {
+        int x = 2;
+        GraphAddress NewElmt = (*G).FirstG;
+        while (NewElmt->Mother != NULL)
+        {
+            NewElmt = NewElmt->Mother;
+            x++;
+        }
+        NewElmt->Mother = AllocateEmptyG(x);
     }
 }
 /*
-{I.S Graph defined}
-{F.S add NewElmt as new edge of the srcth graph}
+{I.S Graph Defined Can be Empty}
+{F.S Add New Mother}
 */
 
-void printGraph (GraphArr Ga)
+void AddNewChild(Graph *G,int index,int x)
 {
-    address current;
-    for (int i = 1;i<=Ga.NbElmt;i++)
+    GraphAddress MotherX = (*G).FirstG;
+    while(MotherX->index != index)
     {
-        printf("%d",i);
-        current =Ga.Arr[i].First; 
-        while(current != NULL)
-        {
-            printf("->%d",current->info);
-            current = current->next;
-        }
-        printf("\n");
+        MotherX = MotherX->Mother;
     }
+    if(MotherX->Child.First == NULL)
+    {
+        MotherX->Child.First = AllocateL(x);
+    }
+    else
+    {
+        address y = MotherX->Child.First;
+        while(y->next != NULL)
+        {
+            y = y->next;
+        }
+        y->next = AllocateL(x);
+    }
+}
+/*
+{I.S GrafDefined}
+{F.S NewLast Child added}
+*/
+List MotherOfX(Graph G, int X)
+{
+    GraphAddress CurrentElmt = G.FirstG;
+    while(CurrentElmt->index != X)
+    {
+        CurrentElmt = CurrentElmt->Mother;
+    }
+    List Child = CurrentElmt->Child;
+    return Child;
 }
 /*
 {I.S Graph Defined}
-{F.S Graph Printed}
+{F.S Return List from Graph index of X}
 */

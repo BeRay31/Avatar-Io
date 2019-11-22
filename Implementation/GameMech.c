@@ -166,7 +166,7 @@ boolean NotEndTurn(int i){
 {I.S Game Launched}
 {F.S Check the Turn if End return False, if !end return true}
 */
-void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List *P1List,List *P2List, TabBuildings *B,Stack *S, Queue *Q1, Queue *Q2)
+void EksekusiCommand(int command,Graph G, int player,boolean *changeTurn,List *P1List,List *P2List, TabBuildings *B,Stack *S, Queue *Q1, Queue *Q2)
 {   
     if(command == 1)
     {//ATTACK
@@ -230,6 +230,7 @@ void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List
                     printf ("Target Bangunan untuk diserang: ");
                     // INPUT NUMBER
                     // scanf("%d",&selected);
+                    //udah di debug
                     inputf(&selected);
                     while(selected>Bidx.Neff || selected<= 0)
                     {
@@ -360,7 +361,7 @@ void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List
         // input number
         //scanf("%d",&selected);
         inputf(&selected);
-        while(selected>NbOfB || selected<=0)
+        while(selected>=NbOfB || selected<=0)
         {
             printf("Bangunan yang anda pilih tidaklah ada.\n");
             printf("Masukan kembali bangunan yang akan di level-up : ");
@@ -576,7 +577,6 @@ void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List
         {
             if(CountPrintLinkedBuildingsM(player,G,(*B),TempIndex)!=1){
                 printf("Daftar bangunan yang terdekat : \n");
-                x = G.Arr[TempIndex].First;
                 PrintLinkedBuildingsM(player,G,(*B),TempIndex,&Bidx);
                 printf("Bangunan yang akan menerima : ");
                 // INPUT NUMBER
@@ -685,10 +685,10 @@ void PrintOwnedBuildings(TabBuildings PBuildings, List PBIndex,int *NbofBuilding
 {F.S Players Building Printed}
 */
 
-void PrintLinkedBuildingsA (int turn,GraphArr G,TabBuildings Buildings,int index,idxArr *T)//for attack mech
+void PrintLinkedBuildingsA (int turn,Graph G,TabBuildings Buildings,int index,idxArr *T)//for attack mech
 {
     int i = 1;
-    address currentIndex = G.Arr[index].First;
+    address currentIndex = MotherOfX(G,index).First;
     int EnemyIndex;
     int indexB ;
     if (turn == 1)
@@ -756,11 +756,11 @@ void PrintLinkedBuildingsA (int turn,GraphArr G,TabBuildings Buildings,int index
 {I.S Graph Defined and Building Defined}
 {F.S Printed Linked Building}
 */
-void PrintLinkedBuildingsM (int turn,GraphArr G,TabBuildings Buildings,int index,idxArr *T)
+void PrintLinkedBuildingsM (int turn,Graph G,TabBuildings Buildings,int index,idxArr *T)
 {
     int i = 1;
     int tempturn = turn;
-    address currentIndex = G.Arr[index].First;
+    address currentIndex = MotherOfX(G,index).First;
     int indexB ;
     while(currentIndex != NULL)
     {
@@ -868,10 +868,10 @@ void IncBuildingTroop (TabBuildings *B, int owner){
     }
 }
 
-int CountPrintLinkedBuildingsM (int turn,GraphArr G,TabBuildings Buildings,int index)
+int CountPrintLinkedBuildingsM (int turn,Graph G,TabBuildings Buildings,int index)
 {
     int i = 1;
-    address currentIndex = G.Arr[index].First;
+    address currentIndex = MotherOfX(G,index).First;
     int indexB ;
     while(currentIndex != NULL)
     {
@@ -884,10 +884,10 @@ int CountPrintLinkedBuildingsM (int turn,GraphArr G,TabBuildings Buildings,int i
     }
     return i;
 }
-int CountPrintLinkedBuildingsA (int turn,GraphArr G,TabBuildings Buildings,int index)//for attack mech
+int CountPrintLinkedBuildingsA (int turn,Graph G,TabBuildings Buildings,int index)//for attack mech
 {
     int i = 1;
-    address currentIndex = G.Arr[index].First;
+    address currentIndex = MotherOfX(G,index).First;
     int EnemyIndex;
     int indexB ;
     if (turn == 1)

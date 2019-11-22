@@ -2,27 +2,46 @@
 #define __GRAPH_H__
 
 #include "List.h"
+#include <stdlib.h>
 
-typedef struct ArrGraph{
-    int NbElmt;
-    List Arr[100];
-}GraphArr;
+typedef struct ElmtGraph *GraphAddress;
+typedef struct ElmtGraph{
+    GraphAddress Mother;
+    List Child;
+    int index;
+}GraphElmt;
 
-GraphArr CreateBaseGraph(int NBuilding);
+typedef struct graph{
+    GraphAddress FirstG;
+}Graph;
+
+GraphAddress AllocateEmptyG (int x);
+/*
+{I.S Undefined}
+{F.S Allocate neew GrphAddress}
+*/
+
+void MakeEmptyGraf(Graph *G);
 /*
 {I.S Anything}
-{F.S graph defined}
+{F.S EmptyGraff defined as First = NULL}
 */
 
-void addGraph (GraphArr *Ga,int src,int NewElm);
+void AddMotherLast(Graph *G);
 /*
-{I.S Graph defined}
-{F.S add NewElmt as new edge of the srcth graph}
+{I.S Graph Defined Can be Empty}
+{F.S Add New Mother}
 */
 
-void printGraph (GraphArr Ga);
+void AddNewChild(Graph *G,int index,int x);
+/*
+{I.S GrafDefined}
+{F.S NewLast Child added}
+*/
+List MotherOfX(Graph G, int X);
 /*
 {I.S Graph Defined}
-{F.S Graph Printed}
+{F.S Return List from Graph index of X}
 */
+
 #endif
