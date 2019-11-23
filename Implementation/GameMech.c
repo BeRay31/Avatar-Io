@@ -646,6 +646,18 @@ void EksekusiCommand(int command,Graph G, int player,boolean *changeTurn,List *P
     else if (command == 9)
     {
         load (&n, &m, &nb, B, Q1, Q2, &player);
+        CreateEmptyL(P1List);
+        CreateEmptyL(P2List);
+        for(int i = 1; i<= nb; i++){
+            if((*B).TI[i].owner == 1){
+                InsertLast(P1List, AllocateL(i));
+            }else if((*B).TI[i].owner == 2){
+                InsertLast(P2List, AllocateL(i));
+            }
+        }
+        SCreateEmpty(S);
+        *changeTurn = true;
+        printf("Turn : %d\n", player);
     }
     
 }

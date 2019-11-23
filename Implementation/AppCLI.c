@@ -62,9 +62,9 @@ int main()
                 }while(OlahString(command) == 0);
                 EksekusiCommand(OlahString(command),Map.G,Turn,&changeTurn,&P1Buildings,&P2Buildings,&ArrOfBuildings,&S,&Q1,&Q2,n,m,nbangunan);
                 UpdateMap(&Map,ArrOfBuildings);
-                Save(ArrOfBuildings, n, m, nbangunan, Q1, Q2, Turn);
+                //Save(ArrOfBuildings, n, m, nbangunan, Q1, Q2, Turn);
                 //system("clear");
-            } while (NotEndTurn(OlahString(command)));     
+            } while (NotEndTurn(OlahString(command)) && Turn==1);     
         }
         else{
              do
@@ -82,7 +82,7 @@ int main()
                 EksekusiCommand(OlahString(command),Map.G,Turn,&changeTurn,&P1Buildings,&P2Buildings,&ArrOfBuildings,&S,&Q1,&Q2,n,m,nbangunan);
                 UpdateMap(&Map,ArrOfBuildings);
                 //system("clear");
-            } while (NotEndTurn(OlahString(command)));
+            } while (NotEndTurn(OlahString(command)) && Turn==2);
         }
         ChangeTurn(&Turn,changeTurn);
         changeTurn = false;
