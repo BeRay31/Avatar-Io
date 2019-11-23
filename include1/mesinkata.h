@@ -9,6 +9,7 @@
 
 #define NMax 50
 #define BLANK ' '
+#define ENTER '\n'
 
 /* ********** KONSTRUKTOR ********** */
 typedef struct {
@@ -20,6 +21,7 @@ typedef struct {
 
 /* State Mesin Kata */
 extern boolean EndKata;
+extern boolean EndCommand;
 extern Kata CKata;
 
 void IgnoreBlank();
@@ -47,6 +49,40 @@ void SalinKata();
           CC = BLANK atau CC = MARK;
           CC adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
+
+/* COMMAND */
+void STARTCOMMAND();
+/* I.S. : CC sembarang
+   F.S. : EndKata = true, dan CC = MARK;
+          atau EndKata = false, CKata adalah kata yang sudah diakuisisi,
+          CC karakter pertama sesudah karakter terakhir kata */
+
+void ADVCOMMAND();
+/* I.S. : CC adalah karakter pertama kata yang akan diakuisisi
+   F.S. : CKata adalah kata terakhir yang sudah diakuisisi,
+          CC adalah karakter pertama dari kata berikutnya, mungkin MARK
+          Jika CC = MARK, EndKata = true.
+   Proses : Akuisisi kata menggunakan procedure SalinKata */
+
+void SalinCOMMAND();
+/* Mengakuisisi kata, menyimpan dalam CKata
+   I.S. : CC adalah karakter pertama dari kata
+   F.S. : CKata berisi kata yang sudah diakuisisi;
+          CC = BLANK atau CC = MARK;
+          CC adalah karakter sesudah karakter terakhir yang diakuisisi.
+          Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
+
+void input (Kata *kata); 
+/* input dengan hasil kata */
+
+void inputf (int *num);
+/* input dengan hasil int */
+
+void Command (Kata *kata);
+/* command dalam game */
+
+
+void IgnoreBlankStdin();
 
 /* FUNGSI LAIN */
 void CharToInt(int *res, Kata src);

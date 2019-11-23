@@ -628,10 +628,10 @@ void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List
             printf("Bangunan sudah pernah dipindah pasukannya.\n");
         }
     }
-    else if(command == 8)
+    /* else if(command == 8)
     {//EXIT
         
-    }
+    } */
 }
 /*
 {I.S Building Defined}

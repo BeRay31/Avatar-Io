@@ -11,7 +11,7 @@ void Save (TabBuildings CurrentBuilding, MATRIKS Graf, int N, int M, int NBuildi
 // untuk dapet position
 {
 	/* open file for writing */
-	fp = fopen("save_file.dat","w");
+	fp = fopen("save.dat","w");
 	/* write into file */
 	/* write ukuran peta */
 	fprintf(fp, "%d ", N);
