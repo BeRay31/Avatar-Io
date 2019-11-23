@@ -937,3 +937,126 @@ int CountPrintLinkedBuildingsA (int turn,Graph G,TabBuildings Buildings,int inde
     }
     return i;
 }
+void printPlayerBanner(int turn)
+{
+    if (turn ==1)
+    {
+        printf("==========================\n");
+        printf("\\      ");
+        print_cyan('|');
+        print_cyan('-');
+        print_cyan('-');
+        print_cyan('-');
+        print_cyan('-');
+        print_cyan('-');
+        print_cyan('-');
+        print_cyan('-');
+        print_cyan('-');
+        print_cyan('-');
+        print_cyan('|');
+        printf("      /\n");
+        printf(" ======");
+        print_cyan('|');
+        printf(" "); 
+        print_blue('P');
+        print_blue('L');
+        print_blue('A');
+        print_blue('Y');
+        print_blue('E');
+        print_blue('R');
+        print_blue('1');
+        printf(" ");
+        print_cyan('|');
+        printf("======\n");
+        printf("/      ");
+        print_cyan('|');
+        print_cyan('-');
+        print_cyan('-');
+        print_cyan('-');
+        print_cyan('-');
+        print_cyan('-');
+        print_cyan('-');
+        print_cyan('-');
+        print_cyan('-');
+        print_cyan('-');
+        print_cyan('|');
+        printf("      \\\n");
+        printf("==========================\n");
+        printf("\n");
+    }
+    else if (turn ==2)
+    {
+        printf("==========================\n");
+        printf("\\      ");
+        print_blue('|');
+        print_blue('-');
+        print_blue('-');
+        print_blue('-');
+        print_blue('-');
+        print_blue('-');
+        print_blue('-');
+        print_blue('-');
+        print_blue('-');
+        print_blue('-');
+        print_blue('|');
+        printf("      /\n");
+        printf(" ======");
+        print_blue('|');
+        printf(" "); 
+        print_red('P');
+        print_red('L');
+        print_red('A');
+        print_red('Y');
+        print_red('E');
+        print_red('R');
+        print_red('2');
+        printf(" ");
+        print_blue('|');
+        printf("======\n");
+        printf("/      ");
+        print_blue('|');
+        print_blue('-');
+        print_blue('-');
+        print_blue('-');
+        print_blue('-');
+        print_blue('-');
+        print_blue('-');
+        print_blue('-');
+        print_blue('-');
+        print_blue('-');
+        print_blue('|');
+        printf("      \\\n");
+        printf("==========================\n");
+        printf("\n");        
+    }
+}
+void printLabelMap(int turn)
+{
+    printf("        ");
+    if(turn == 1)
+    {
+        print_blue('W');
+        print_blue('O');
+        print_blue('R');
+        print_blue('L');
+        print_blue('D');
+        printf(" ");
+        print_blue('M');
+        print_blue('A');
+        print_blue('P');
+    }
+    else if(turn == 2)
+    {
+        print_red('W');
+        print_red('O');
+        print_red('R');
+        print_red('L');
+        print_red('D');
+        printf(" ");
+        print_red('M');
+        print_red('A');
+        print_red('P');
+
+    }
+    printf("\n");
+}

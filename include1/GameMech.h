@@ -98,4 +98,7 @@ int CountPrintLinkedBuildingsA (int turn,Graph G,TabBuildings Buildings,int inde
 {I.S Linked Graph defined}
 {F.S return number of building that linked and possible to attack by building that have index == index}
 */
+void printPlayerBanner(int turn);
+void printLabelMap(int turn);
+
 #endif

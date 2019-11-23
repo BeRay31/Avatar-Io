@@ -96,13 +96,18 @@ void UpdateMap (BuildMap *Map,TabBuildings b)
 
 void PrintMap(BuildMap Map)
 {
+    printf("   ");
+    print_cyan('\\');
     for (int j = 1; j <= Map.NKolEff+2 ; j++){
-		printf("*");
+		print_cyan('=');
 	}
+    print_cyan('/');
 	printf("\n");
 	
 	for (int i = 1; i <= Map.NBrsEff; i++){
-		printf("*");
+        printf("   ");
+		print_cyan('|');
+        printf(" ");
 		for (int j = 1; j <= Map.NKolEff; j++){
 			if (Map.M[i][j].owner == 1)
 				print_blue(Map.M[i][j].buildingsType);
@@ -111,12 +116,17 @@ void PrintMap(BuildMap Map)
 			else
 				printf("%c",Map.M[i][j].buildingsType);
 		}
-		printf("*\n");
+        printf(" ");
+        print_cyan('|');
+		printf("\n");
 	}
-	
+    printf("   ");
+	print_cyan('/');
 	for (int j = 1; j <= Map.NKolEff+2 ; j++){
-		printf("*");
+		print_cyan('=');
 	}
+    print_cyan('\\');
+	printf("\n");
 	printf("\n");
 }
 /*

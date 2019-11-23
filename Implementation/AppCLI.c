@@ -8,6 +8,7 @@
 #include "../include1/loadinfoawal.h"
 #include "../include1/GameMech.h"
 #include "../include1/save.h"
+#include <unistd.h>
 
 int main()
 {
@@ -49,9 +50,10 @@ int main()
         IncBuildingTroop(&ArrOfBuildings,Turn);
         if(Turn == 1){    
            do
-            {
+            {   
+                printPlayerBanner(Turn);
+                printLabelMap(Turn);
                 PrintMap(Map);
-                printf("Player %d\n",Turn);
                 PrintOwnedBuildings(ArrOfBuildings,P1Buildings,&t);
                 printf("Skill Available : ");
                 PrintSkill(Q1);
@@ -63,14 +65,16 @@ int main()
                 EksekusiCommand(OlahString(command),Map.G,Turn,&changeTurn,&P1Buildings,&P2Buildings,&ArrOfBuildings,&S,&Q1,&Q2,n,m,nbangunan);
                 UpdateMap(&Map,ArrOfBuildings);
                 //Save(ArrOfBuildings, n, m, nbangunan, Q1, Q2, Turn);
-                //system("clear");
+                sleep(1);
+                system("clear");
             } while (NotEndTurn(OlahString(command)) && Turn==1);     
         }
         else{
              do
             {
+                printPlayerBanner(Turn);
+                printLabelMap(Turn);
                 PrintMap(Map);
-                printf("Player %d\n",Turn);
                 PrintOwnedBuildings(ArrOfBuildings,P2Buildings,&t);
                 printf("Skill Available : ");
                 PrintSkill(Q2);
@@ -81,7 +85,8 @@ int main()
                 }while(OlahString(command) == 0);
                 EksekusiCommand(OlahString(command),Map.G,Turn,&changeTurn,&P1Buildings,&P2Buildings,&ArrOfBuildings,&S,&Q1,&Q2,n,m,nbangunan);
                 UpdateMap(&Map,ArrOfBuildings);
-                //system("clear");
+                sleep(1);
+                system("clear");
             } while (NotEndTurn(OlahString(command)) && Turn==2);
         }
         if(IsAllLvl4(ArrOfBuildings,Turn)){
