@@ -5,7 +5,6 @@
 #include "Map.h"
 #include "loadinfoawal.h"
 #include "Stack.h"
-#include "Skills.h"
 #include "Queue.h"
 #include "matriks.h"
 
