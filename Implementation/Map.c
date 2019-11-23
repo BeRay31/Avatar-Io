@@ -58,12 +58,6 @@ void MakeBMap(BuildMap *Map)
             }
         }
     }
-    for(int i = 1;i<=Nbuildings;i++)
-    {
-        printf("%d->",i);
-        PrintInfo(MotherOfX((*Map).G,i));
-        printf("\n");
-    }
 }
 /*
 {I.S Anything}
