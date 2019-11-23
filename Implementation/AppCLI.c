@@ -84,6 +84,15 @@ int main()
                 //system("clear");
             } while (NotEndTurn(OlahString(command)));
         }
+        if(IsAllLvl4(ArrOfBuildings,Turn)){
+            if (Turn == 1)
+            {
+                AddQ(&Q1,6);
+            }
+            else{
+                AddQ(&Q2,6);
+            }
+        }
         ChangeTurn(&Turn,changeTurn);
         changeTurn = false;
         resetAttacknMove(&ArrOfBuildings);

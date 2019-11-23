@@ -57,10 +57,6 @@ void ChangeTurn(int *Turn,boolean changeTurn)
             *Turn = 1;
         }
     }
-    
-    
-    
-   
 }
 /*
 {I.S Game Launched}
@@ -242,7 +238,7 @@ void EksekusiCommand(int command,Graph G, int player,boolean *changeTurn,List *P
                     // scanf("%d",&selected);
                     //udah di debug
                     inputf(&selected);
-                    while(selected>Bidx.Neff || selected<= 0)
+                    while(selected>=Bidx.Neff || selected<= 0)
                     {
                         printf("Bangunan yang anda pilih tidaklah ada\n");
                         printf("Masukkan kembali bangunan untuk diserang :");
@@ -281,16 +277,16 @@ void EksekusiCommand(int command,Graph G, int player,boolean *changeTurn,List *P
                             {
                                 printf("Bangunan Jadi Milikmu!!!!\n");
                                 InsertLast(P1List,AllocateL(Target.buildingsIndex));
-                                if(NbOfBuildings(*B,player) == 10){
-                                    AddQ(&(*Q1),7);
+                                if(NbOfBuildings(*B,player)+1 == 10){
+                                    AddQ(&(*Q2),7);
                                 }
                             }
                             else
                             {
                                 printf("Bangunan Jadi Milikmu!!!!\n");
                                 InsertLast(P2List,AllocateL(Target.buildingsIndex));
-                                if(NbOfBuildings(*B,player) == 10){
-                                    AddQ(&(*Q2),7);
+                                if(NbOfBuildings(*B,player)+1 == 10){
+                                    AddQ(&(*Q1),7);
                                 }
                             }
                         }
@@ -309,8 +305,8 @@ void EksekusiCommand(int command,Graph G, int player,boolean *changeTurn,List *P
                                 }
                                 InsertLast(P1List,AllocateL(Target.buildingsIndex));
                                 DelP(P2List,&del,Search(*P2List,Target.buildingsIndex));
-                                if(NbOfBuildings(*B,player) == 10){
-                                    AddQ(&(*Q1),7);
+                                if(NbOfBuildings(*B,player)+1 == 10){
+                                    AddQ(&(*Q2),7);
                                 }
                             }
                             else
@@ -323,8 +319,8 @@ void EksekusiCommand(int command,Graph G, int player,boolean *changeTurn,List *P
                                 }
                                 InsertLast(P2List,AllocateL(Target.buildingsIndex));
                                 DelP(P1List,&del,Search(*P1List,Target.buildingsIndex));
-                                if(NbOfBuildings(*B,player) == 10){
-                                    AddQ(&(*Q2),7);
+                                if(NbOfBuildings(*B,player)+1 == 10){
+                                    AddQ(&(*Q1),7);
                                 }
                             }
                         }
@@ -371,7 +367,7 @@ void EksekusiCommand(int command,Graph G, int player,boolean *changeTurn,List *P
         // input number
         //scanf("%d",&selected);
         inputf(&selected);
-        while(selected>=NbOfB || selected<=0)
+        while(selected >= NbOfB || selected<=0)
         {
             printf("Bangunan yang anda pilih tidaklah ada.\n");
             printf("Masukan kembali bangunan yang akan di level-up : ");
@@ -396,7 +392,7 @@ void EksekusiCommand(int command,Graph G, int player,boolean *changeTurn,List *P
             Push(S,StDest);
             //Level-Up Mech
             LevelUp(&LvlUp);
-            if(IsAllLvl4(*B,player)){
+            /*if(IsAllLvl4(*B,player)){
                 if (player == 1)
                 {
                     AddQ(&(*Q1),6);
@@ -404,7 +400,7 @@ void EksekusiCommand(int command,Graph G, int player,boolean *changeTurn,List *P
                 else{
                     AddQ(&(*Q2),6);
                 }
-            }
+            }*/
             (*B).TI[TempIndex] = LvlUp;
         }
         else{
@@ -440,7 +436,7 @@ void EksekusiCommand(int command,Graph G, int player,boolean *changeTurn,List *P
         if(skill == 1 ){
             // Instant Upgrade SKill
             printf("Anda menggunakan skill Instant Upgrade\n");
-            for(int i=0; i < (*B).Neff ; i++){
+            for(int i = 1; i <= (*B).Neff ; i++){
                 if((*B).TI[i].owner == player){
                     if((*B).TI[i].level <= 3){  // Hanya Level kurang dari sama dengan 3 yang dapat naik level
                         JustLvlUp(&(*B).TI[i]);
@@ -472,7 +468,7 @@ void EksekusiCommand(int command,Graph G, int player,boolean *changeTurn,List *P
         }
         else if (skill == 6){
             // Instant Reinforcement
-            for(int i=0; i< (*B).Neff ; i++){
+            for(int i=1; i <= (*B).Neff ; i++){
                 if((*B).TI[i].owner == player){
                     if((*B).TI[i].armies + 5 >= (*B).TI[i].maxArmyOnBuildings){
                         (*B).TI[i].armies = (*B).TI[i].maxArmyOnBuildings;
@@ -497,7 +493,7 @@ void EksekusiCommand(int command,Graph G, int player,boolean *changeTurn,List *P
             {
                 lawan = 1;
             }
-            for(int i = 0; i <(*B).Neff;i++){
+            for(int i = 1; i <=(*B).Neff;i++){
                 if((*B).TI[i].owner == lawan){
                     if((*B).TI[i].armies - 10 <= 0 ){
                         (*B).TI[i].armies = 0;
@@ -568,7 +564,7 @@ void EksekusiCommand(int command,Graph G, int player,boolean *changeTurn,List *P
         // INPUT NUMBER
         // scanf("%d",&selected);
         inputf(&selected);
-        while(selected>NbOfB || selected<= 0)
+        while(selected>=NbOfB || selected<= 0)
         {
             printf("Bangunan yang anda pilih tidaklah ada.\n");
             printf("Masukkan kembali bangunan yang akan dipindah pasukannya : ");
@@ -593,7 +589,7 @@ void EksekusiCommand(int command,Graph G, int player,boolean *changeTurn,List *P
                 // INPUT NUMBER
                 // scanf("%d",&selected);
                 inputf(&selected);
-                while(selected>Bidx.Neff || selected<0)
+                while(selected>=Bidx.Neff || selected<=0)
                 {
                     printf("Bangunan yang anda pilih tidaklah ada.\n");
                     printf("Masukkan kembali bangunan yang akan menerima : ");
@@ -641,7 +637,7 @@ void EksekusiCommand(int command,Graph G, int player,boolean *changeTurn,List *P
     }
     else if(command == 8)
     {//EXIT
-     exit(0);   
+        exit(0);   
     }
     else if (command == 9)
     {
