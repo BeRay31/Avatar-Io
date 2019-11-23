@@ -23,6 +23,12 @@ void START() {
     ADV();
 }
 
+void STARTLOAD() {
+    /* Algoritma */
+    pita = fopen("save.dat","rt");
+    ADV();
+}
+
 void ADV() {
 /* Pita dimajukan satu karakter.
    I.S. : Karakter pada jendela =

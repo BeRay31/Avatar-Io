@@ -20,6 +20,8 @@ void START();
 
     /* Algoritma */
 
+void STARTLOAD();
+
 void ADV() ;
 /* Pita dimajukan satu karakter.
    I.S. : Karakter pada jendela =

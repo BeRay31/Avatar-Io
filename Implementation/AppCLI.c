@@ -8,6 +8,7 @@
 #include "../include1/loadinfoawal.h"
 #include "../include1/GameMech.h"
 #include "../include1/save.h"
+
 int main()
 {
     int n, m, nbangunan;
@@ -87,6 +88,4 @@ int main()
         changeTurn = false;
         resetAttacknMove(&ArrOfBuildings);
     }
-}//main app Command Line Interface
-
-/* gcc -o test AppCLI.c Buildings.c dinamicArr.c GameMech.c Graph.c List.c load.c loadinfoawal.c Map.c matriks.c mesinkar.c */
+}

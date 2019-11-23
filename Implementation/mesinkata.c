@@ -24,6 +24,7 @@ void IgnoreBlank()
 		ADV();
 	}
 }
+
 void STARTKATA()
 /* I.S. : CC sembarang
    F.S. : EndKata = true, dan CC = EOF;
@@ -33,6 +34,24 @@ void STARTKATA()
 	/* KAMUS LOKAL */
 	/* ALGORITMA */
 	START();
+	IgnoreBlank();
+	if (CC == EOF){
+		EndKata = true;
+	} else {
+		EndKata = false;
+		SalinKata();
+	}
+}
+
+void STARTKATALOAD()
+/* I.S. : CC sembarang
+   F.S. : EndKata = true, dan CC = EOF;
+          atau EndKata = false, CKata adalah kata yang sudah diakuisisi,
+          CC karakter pertama sesudah karakter terakhir kata */
+{
+	/* KAMUS LOKAL */
+	/* ALGORITMA */
+	STARTLOAD();
 	IgnoreBlank();
 	if (CC == EOF){
 		EndKata = true;

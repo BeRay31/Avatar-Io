@@ -33,7 +33,7 @@ void load (int *n, int *m, int *nbangunan, TabBuildings *b , Queue *q1, Queue *q
 	// turn
 	int Turn;
 	/* ALGORITMA */
-	STARTKATA();
+	STARTKATALOAD();
 	while (!EndKata){
 		CountKata++;
 		if (CountKata == 1) {
