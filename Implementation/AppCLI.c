@@ -7,6 +7,7 @@
 #include "../include1/Graph.h"
 #include "../include1/loadinfoawal.h"
 #include "../include1/GameMech.h"
+#include "../include1/save.h"
 int main()
 {
     int n, m, nbangunan;
@@ -30,13 +31,14 @@ int main()
     InsertLast(&P1Buildings,AllocateL(1));//Initiate and allocate Building index 1 == owner P1
     InsertLast(&P1Buildings,AllocateL(13));//Initiate and allocate Building index 1 == owner P1    
     InsertLast(&P2Buildings,AllocateL(2));//Initiate and allocate Building index 2 == owner P2
+    ArrOfBuildings.TI[1].armies = 40;
+    ArrOfBuildings.TI[2].armies = 40;
     ArrOfBuildings.TI[1].armies = 20;
     ArrOfBuildings.TI[13].armies = 20;
     ArrOfBuildings.TI[2].armies = 20;
     ArrOfBuildings.TI[1].owner = 1;
     ArrOfBuildings.TI[13].owner = 1;
     ArrOfBuildings.TI[2].owner = 2;
-
     UpdateMap(&Map,ArrOfBuildings);
     changeTurn = false;
     if(!NotEnd(ArrOfBuildings)){
@@ -57,8 +59,10 @@ int main()
                     //InputString(&command);
                     Command(&command);
                 }while(OlahString(command) == 0);
-                EksekusiCommand(OlahString(command),Map.G,Turn,&changeTurn,&P1Buildings,&P2Buildings,&ArrOfBuildings,&S,&Q1,&Q2);
+                EksekusiCommand(OlahString(command),Map.G,Turn,&changeTurn,&P1Buildings,&P2Buildings,&ArrOfBuildings,&S,&Q1,&Q2,n,m,nbangunan);
                 UpdateMap(&Map,ArrOfBuildings);
+                Save(ArrOfBuildings, n, m, nbangunan, Q1, Q2, Turn);
+                //system("clear");
             } while (NotEndTurn(OlahString(command)));     
         }
         else{
@@ -74,8 +78,9 @@ int main()
                     //InputString(&command);
                     Command(&command);
                 }while(OlahString(command) == 0);
-                EksekusiCommand(OlahString(command),Map.G,Turn,&changeTurn,&P1Buildings,&P2Buildings,&ArrOfBuildings,&S,&Q1,&Q2);
+                EksekusiCommand(OlahString(command),Map.G,Turn,&changeTurn,&P1Buildings,&P2Buildings,&ArrOfBuildings,&S,&Q1,&Q2,n,m,nbangunan);
                 UpdateMap(&Map,ArrOfBuildings);
+                //system("clear");
             } while (NotEndTurn(OlahString(command)));
         }
         ChangeTurn(&Turn,changeTurn);
@@ -83,3 +88,5 @@ int main()
         resetAttacknMove(&ArrOfBuildings);
     }
 }//main app Command Line Interface
+
+/* gcc -o test AppCLI.c Buildings.c dinamicArr.c GameMech.c Graph.c List.c load.c loadinfoawal.c Map.c matriks.c mesinkar.c */

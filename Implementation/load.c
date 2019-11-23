@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../include1/loadinfoawal.h"
+#include "../include1/load.h"
 
-void load (int *n, int *m, int *nbangunan, TabBuildings *b, MATRIKS *mgraf)
+void load (int *n, int *m, int *nbangunan, TabBuildings *b , Queue *q1, Queue *q2, int *turn)
 {
 	/* KAMUS */
 	int CountKata = 0;
@@ -24,6 +25,13 @@ void load (int *n, int *m, int *nbangunan, TabBuildings *b, MATRIKS *mgraf)
 	int idks;
 	MATRIKS MGraf;
 	int k;
+	// queue
+	int nq1, nq2;
+	//Queue Q1, Q2;
+	int q1start, q2start;
+	int elmtQ;
+	// turn
+	int Turn;
 	/* ALGORITMA */
 	STARTKATA();
 	while (!EndKata){
@@ -98,17 +106,39 @@ void load (int *n, int *m, int *nbangunan, TabBuildings *b, MATRIKS *mgraf)
 				CharToInt(&NTemp, KataTemp);
 				e.position.Y = NTemp;
 				CountAtribut = 1;
+				B.TI[j] = e;
+				j++;
+				B.Neff++;
+				q1start = 3+(NBangunan*11)+1;
 			}
-		} else if (CountKata > (3+(NBangunan*11))) {
+		} else if (CountKata == q1start) {
+			// menyimpan nbelmt queue pemain satu
 			Salin(&KataTemp, CKata);
-			CharToInt(&elmtGraf, KataTemp);
-			// e.armies menyimpan 0 or 1 UNTUK GRAF SEMENTARA
-			e.armies = elmtGraf;
-			tg.TI[idks] = e;
-			idks++;
+			CharToInt(&nq1, KataTemp);
+			CreateEmptyQ(q1, nq1);
+			//printf("%d ", nq1);
+		} else if (CountKata > q1start && CountKata <= q1start+nq1) {
+			Salin(&KataTemp, CKata);
+			CharToInt(&elmtQ, KataTemp);
+			AddQ(q1, elmtQ);
+			q2start = q1start+nq1+1;
+		} else if (CountKata == q2start){
+			// mengambil nbelmt queue pemain kedua
+			Salin(&KataTemp, CKata);
+			CharToInt(&nq2, KataTemp);
+			CreateEmptyQ(q2, nq2);
+		} else if (CountKata > q2start && CountKata <= q2start+nq2) {
+			Salin(&KataTemp, CKata);
+			CharToInt(&elmtQ, KataTemp);
+			AddQ(q2, elmtQ);
+		} else if (CountKata > q2start+nq2) {
+			Salin(&KataTemp, CKata);
+			CharToInt(&Turn, KataTemp);
+			*turn = Turn;
 		}
 		ADVKATA();
 	}
+	/*
 	MakeMATRIKS(NBangunan, NBangunan, &MGraf);
 	k = 1;
 	for (int i=1; i<=NBangunan; i++){
@@ -117,10 +147,11 @@ void load (int *n, int *m, int *nbangunan, TabBuildings *b, MATRIKS *mgraf)
 			k++;
 		}
 	}
+	*/
 	(*n) = N;
 	(*m) = M;
 	(*nbangunan) = NBangunan;
 	CopyTab(B, b);
-	CopyMATRIKS(MGraf, mgraf);
-	Dealokasi(&tg);
+	//CopyMATRIKS(MGraf, mgraf);
+	//Dealokasi(&tg);
 }

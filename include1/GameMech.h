@@ -7,6 +7,7 @@
 #include "Stack.h"
 #include "Skills.h"
 #include "Queue.h"
+#include "matriks.h"
 
 
 typedef struct{
@@ -36,7 +37,7 @@ boolean NotEndTurn(int i);
 {F.S Check the Turn if End return False, if !end return true}
 */
 
-void EksekusiCommand(int command,GraphArr G, int player,boolean *changeTurn,List *P1List,List *P2List, TabBuildings *B,Stack *S,Queue *Q1, Queue *Q2);
+void EksekusiCommand(int command,Graph G, int player,boolean *changeTurn,List *P1List,List *P2List, TabBuildings *B,Stack *S,Queue *Q1, Queue *Q2, int n, int m, int nb);
 /*
 {I.S Command Defined}
 {F.S Execute Command}
@@ -48,7 +49,7 @@ void PrintOwnedBuildings(TabBuildings PBuildings, List PBIndex,int *NbofBuilding
 {F.S Players Building Printed}
 */
 
-void PrintLinkedBuildingsA (int turn,GraphArr G,TabBuildings Buildings,int index,idxArr *T);
+void PrintLinkedBuildingsA (int turn,Graph G,TabBuildings Buildings,int index,idxArr *T);
 /*
 {I.S Graph Defined and Building Defined for attack mech}
 {F.S Printed Linked Building}
@@ -58,7 +59,7 @@ void UpdateListBuilding(int index , List *PlayerB);
 {I.S List Index of Building defined}
 {F.S List Index of Building updated}
 */
-void PrintLinkedBuildingsM (int turn,GraphArr G,TabBuildings Buildings,int index,idxArr *T);//for attack mech
+void PrintLinkedBuildingsM (int turn,Graph G,TabBuildings Buildings,int index,idxArr *T);//for attack mech
 /*
 {I.S Graph Defined and Building Defined for move mech}
 {F.S Printed Linked Building}
@@ -76,6 +77,6 @@ void UpdateLoadBuilding(TabBuildings *Arrb);
 void PrintSkill(Queue Q);
 void CopyState (State Ssrc,State *Sdest);
 void IncBuildingTroop (TabBuildings *B, int owner);
-int CountPrintLinkedBuildingsM (int turn,GraphArr G,TabBuildings Buildings,int index);
-int CountPrintLinkedBuildingsA (int turn,GraphArr G,TabBuildings Buildings,int index);
+int CountPrintLinkedBuildingsM (int turn,Graph G,TabBuildings Buildings,int index);
+int CountPrintLinkedBuildingsA (int turn,Graph G,TabBuildings Buildings,int index);
 #endif

@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include "../include1/boolean.h"
+#include "../include1/Queue.h"
 #include "../include1/loadinfoawal.h"
 #include "../include1/save.h"
 
 // gcc driverFile.c mesinkar.c mesinkata.c loadinfoawal.c Buildings.c point.c matriks.c save.c -o run
 
-void Save (TabBuildings CurrentBuilding, MATRIKS Graf, int N, int M, int NBuilding)
+void Save (TabBuildings CurrentBuilding, int N, int M, int NBuilding, Queue q1, Queue q2, int Turn)
 // p.s. dalam main program dipake
 // include header dari loadinfoawal
 // untuk dapet position
@@ -33,7 +34,7 @@ void Save (TabBuildings CurrentBuilding, MATRIKS Graf, int N, int M, int NBuildi
 		fprintf(fp, "%d ", CurrentBuilding.TI[i].position.X);
 		fprintf(fp, "%d\n", CurrentBuilding.TI[i].position.Y);
 	}
-	/* write graf keterhubungan */
+	/* write graf keterhubungan 
 	for (int i=1; i<=Graf.NBrsEff; i++){
 		for (int j=1; j<=Graf.NKolEff; j++){
 			if (j==Graf.NKolEff) {
@@ -42,7 +43,27 @@ void Save (TabBuildings CurrentBuilding, MATRIKS Graf, int N, int M, int NBuildi
 				fprintf(fp, "%d ",Graf.Mem[i][j]);
 			}
 		}
+	} */
+	/* menyimpan queue */
+	// q1
+	fprintf(fp, "%d\n", NBElmtQ(q1));
+	for (int i=1; i<=NBElmtQ(q1); i++) {
+		if (i == NBElmtQ(q1)) {
+			fprintf(fp, "%d\n", q1.T[i]);
+		} else {
+			fprintf(fp, "%d ", q1.T[i]);
+		}
 	}
+	// q2
+	fprintf(fp, "%d\n", NBElmtQ(q2));
+	for (int i=1; i<=NBElmtQ(q2); i++) {
+		if (i == NBElmtQ(q2)) {
+			fprintf(fp, "%d\n", q2.T[i]);
+		} else {
+			fprintf(fp, "%d ", q2.T[i]);
+		}
+	}
+	fprintf(fp, "%d\n", Turn);
 	/* close file */
 	fclose(fp);
 }

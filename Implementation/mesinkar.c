@@ -19,6 +19,7 @@ void START() {
 
     /* Algoritma */
     pita = fopen("konfigurasi.txt","rt");
+    //pita = fopen("save.dat","rt");
     ADV();
 }
 

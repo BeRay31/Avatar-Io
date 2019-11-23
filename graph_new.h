@@ -1,9 +1,8 @@
 #ifndef __GRAPH_H__
 #define __GRAPH_H__
 
-#include "List.h"
+#include "include1/List.h"
 #include <stdlib.h>
-
 typedef struct ElmtGraph *GraphAddress;
 typedef struct ElmtGraph{
     GraphAddress Mother;

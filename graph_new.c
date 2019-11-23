@@ -1,4 +1,5 @@
-#include "../include1/Graph.h"
+#include "graph_new.h"
+#include "include1/loadinfoawal.h"
 
 
 GraphAddress AllocateEmptyG (int x)
@@ -89,3 +90,31 @@ List MotherOfX(Graph G, int X)
 {I.S Graph Defined}
 {F.S Return List from Graph index of X}
 */
+int main()
+{
+    int n,m,NbB;
+    TabBuildings BArr;
+    MATRIKS Graff;
+    GetInfoDariFile(&n,&m,&NbB,&BArr,&Graff);
+        printf("here\n");
+    Graph G;
+    MakeEmptyGraf(&G);
+    for(int i =1 ;i<=NbB;i++)
+    {
+        AddMotherLast(&G);
+        for(int j =1;j<=NbB;j++)
+        {
+            if(Graff.Mem[i][j]==1)
+            {
+                AddNewChild(&G,i,j);
+            }
+        }
+    }
+    for(int i = 1;i<=NbB;i++)
+    {
+        printf("%d->",i);
+        PrintInfo(MotherOfX(G,i));
+        printf("\n");
+    }
+    return 0;
+}
