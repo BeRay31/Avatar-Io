@@ -94,6 +94,9 @@ void AddQ (Queue * Q, int X)
         }
     }
 }
+/* Proses: Menambahkan X pada Q dengan aturan FIFO */
+/* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
+/* F.S. X menjadi TAIL yang baru, TAIL "maju" dengan mekanisme circular buffer */
 void InitializeQueue(Queue *Q1, Queue *Q2){
     CreateEmptyQ(&(*Q1),10);
     CreateEmptyQ(&(*Q2),10);
@@ -101,9 +104,10 @@ void InitializeQueue(Queue *Q1, Queue *Q2){
     AddQ(&(*Q2),1);
 
 }
-/* Proses: Menambahkan X pada Q dengan aturan FIFO */
-/* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
-/* F.S. X menjadi TAIL yang baru, TAIL "maju" dengan mekanisme circular buffer */
+/*
+{I.S Anything}
+{F.S QueueSkill for early game initialized}
+*/
 void DelQ (Queue * Q, int * X)
 {
     if((*Q).HEAD==(*Q).TAIL)

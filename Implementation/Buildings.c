@@ -98,6 +98,10 @@ void JustLvlUp(Buildings *B){
 			(*B).level++;
 		}
 }
+/*
+{I.S Buildings defined}
+{F.S Buildings level++ without decreasing armies on that}
+*/
 void LevelUp (Buildings *B)
 /*
 {I.S level 1 2 3}	

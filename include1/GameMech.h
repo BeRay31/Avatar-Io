@@ -75,8 +75,28 @@ void UpdateLoadBuilding(TabBuildings *Arrb);
 {F.S Building Updated}
 */
 void PrintSkill(Queue Q);
+/*
+{I.s Skill defined}
+{F.S Skill printed}
+*/
 void CopyState (State Ssrc,State *Sdest);
+/*
+{I.S State defined}
+{F.S Ssrc copied to Sdest}
+*/
 void IncBuildingTroop (TabBuildings *B, int owner);
+/*
+{I.S Building owner == owner defined}
+{F.S All armies on building incremented depends on its type}
+*/
 int CountPrintLinkedBuildingsM (int turn,Graph G,TabBuildings Buildings,int index);
+/*
+{I.s Linked Graph defined}
+{F.S return number of building that linked that possible to move armied on there}
+*/
 int CountPrintLinkedBuildingsA (int turn,Graph G,TabBuildings Buildings,int index);
+/*
+{I.S Linked Graph defined}
+{F.S return number of building that linked and possible to attack by building that have index == index}
+*/
 #endif

@@ -1,15 +1,15 @@
 #include <stdio.h>
-#include "../include1/boolean.h"
-#include "../include1/load.h"
+#include "../../include1/boolean.h"
+#include "../../include1/loadinfoawal.h"
 
 
 int main()
 {
     int n, m, nbangunan;
     TabBuildings b;
-    Queue q1, q2;
+    MATRIKS mgraf;
     int turn;
-    load (&n, &m, &nbangunan, &b, &q1, &q2, &turn);
+    GetInfoDariFile(&n, &m, &nbangunan, &b, &mgraf);
     printf("%d ", n); printf("%d\n", m);
     printf("%d\n", nbangunan);
     for (int i=1; i<=nbangunan; i++){
@@ -26,22 +26,5 @@ int main()
 		printf("%d ", b.TI[i].position.X);
 		printf("%d\n", b.TI[i].position.Y);
 	}
-    // q1
-    printf("%d\n", NBElmtQ(q1));
-	for (int i=1; i<=NBElmtQ(q1); i++) {
-		if (i == NBElmtQ(q1)) {
-			printf("%d\n", q1.T[i]);
-		} else {
-			printf("%d ", q1.T[i]);
-		}
-	}
-	// q2
-	printf("%d\n", NBElmtQ(q2));
-	for (int i=1; i<=NBElmtQ(q2); i++) {
-		if (i == NBElmtQ(q2)) {
-			printf("%d\n", q2.T[i]);
-		} else {
-			printf("%d ", q2.T[i]);
-		}
-	}
+    TulisMATRIKS(mgraf);
 }
