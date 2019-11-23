@@ -48,7 +48,7 @@ void CopyTab(TabBuildings Tin, TabBuildings *Tout)
 }
 int NbOfBuildings (TabBuildings Tin, int owner){
     int Nb = 0;
-    for(int i=1;i<Tin.Neff;i++){
+    for(int i=1;i<=Tin.Neff;i++){
         if((Tin).TI[i].owner == owner){
             Nb++;
         }
@@ -57,7 +57,7 @@ int NbOfBuildings (TabBuildings Tin, int owner){
 }
 boolean IsAllLvl4 (TabBuildings Tin, int owner){
     boolean indicator = true;
-    for(int i=1;i<Tin.Neff;i++){
+    for(int i=1;i<=Tin.Neff;i++){
         if((Tin).TI[i].owner == owner && (Tin).TI[i].level != 4){
             indicator = false;
         }
