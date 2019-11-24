@@ -13,6 +13,12 @@
         "infofileeksternal.h": "c",
         "graph.h": "c",
         "list.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "buildings.h": "c",
+        "load.h": "c",
+        "dinamicarr.h": "c",
+        "map.h": "c",
+        "gamemech.h": "c",
+        "stdbool.h": "c"
     }
 }

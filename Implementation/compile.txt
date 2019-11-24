@@ -1,5 +1,0 @@
-gcc -o testAppCLI AppCLI.c Buildings.c dinamicArr.c GameMech.c Graph.c List.c load.c loadinfoawal.c Map.c matriks.c mesinkar.c Stack.c pcolor.c mesinkata.c Queue.c save.c
-
-gcc -o testload driver-file-load.c Buildings.c dinamicArr.c load.c matriks.c mesinkar.c mesinkata.c Queue.c save.c
-
-gcc -o testloadawal driver-file-loadinfoawal.c mesinkar.c mesinkata.c matriks.c dinamicArr.c Buildings.c loadinfoawal.c

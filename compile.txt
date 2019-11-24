@@ -1,0 +1,18 @@
+gcc -c Buildings/Buildings.c
+gcc -c DinamicArr/dinamicArr.c
+gcc -c GameMech/GameMech.c
+gcc -c Graph/Graph.c
+gcc -c List/List.c
+gcc -c Load/load.c
+gcc -c Map/Map.c
+gcc -c LoadInfoAwal/loadinfoawal.c
+gcc -c Matriks/matriks.c
+gcc -c mesinkar/mesinkar.c
+gcc -c mesinkata/mesinkata.c
+gcc -c pColor/pcolor.c
+gcc -c Point/point.c
+gcc -c Queue/Queue.c
+gcc -c Save/save.c
+gcc -c Stack/Stack.c
+gcc -c Main\ and\ Driver/AppCLI.c 
+
