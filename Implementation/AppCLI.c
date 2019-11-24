@@ -52,7 +52,6 @@ int main()
         if(!fromLoad)
         {
             IncBuildingTroop(&ArrOfBuildings,Turn);
-            fromLoad = false;
         }
         if(Turn == 1){    
            do
@@ -73,6 +72,7 @@ int main()
                 //Save(ArrOfBuildings, n, m, nbangunan, Q1, Q2, Turn);
                 sleep(1);
                 system("clear");
+                fromLoad = false;
                 if(OlahString(command)==9 )
                 {
                     fromLoad = true;
@@ -98,7 +98,8 @@ int main()
                 UpdateMap(&Map,ArrOfBuildings);
                 sleep(1);
                 system("clear");
-                 if(OlahString(command)==9 )
+                fromLoad = false;            
+                if(OlahString(command)==9 )
                 {
                     fromLoad = true;
                     break;
