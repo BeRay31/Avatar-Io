@@ -156,26 +156,6 @@ boolean IsKataSama (Kata k1, Kata k2)
 	}
 }
 
-int PanjangString (char str[]) {
-    int c = 0;
-    while (str[c] != '\0'){
-        c++;
-    }
-    return (c-1);
-}
-
-void InputString (Kata *kata)
-{
-    char str[100];
-    printf("ENTER COMMAND: ");
-    fgets(str, sizeof(str), stdin);
-    int n = PanjangString(str);
-    for (int i=0; i<n; i++){
-    	(*kata).TabKata[i+1] = str[i];
-    }
-    (*kata).Length = n;
-}
-
 void GetTipeBangunan (char *tipe, Kata src)
 {
 	*tipe = src.TabKata[src.Length];

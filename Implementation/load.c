@@ -138,20 +138,8 @@ void load (int *n, int *m, int *nbangunan, TabBuildings *b , Queue *q1, Queue *q
 		}
 		ADVKATA();
 	}
-	/*
-	MakeMATRIKS(NBangunan, NBangunan, &MGraf);
-	k = 1;
-	for (int i=1; i<=NBangunan; i++){
-		for (int j=1; j<=NBangunan; j++){
-			MGraf.Mem[i][j] = tg.TI[k].armies;
-			k++;
-		}
-	}
-	*/
 	(*n) = N;
 	(*m) = M;
 	(*nbangunan) = NBangunan;
 	CopyTab(B, b);
-	//CopyMATRIKS(MGraf, mgraf);
-	//Dealokasi(&tg);
 }

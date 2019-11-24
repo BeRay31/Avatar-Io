@@ -24,7 +24,10 @@ void CreateEmptyL (List *L);
 {F.S Building Defined}
 */
 boolean IsEmpty (List L);
-
+/*
+{I.S  List Defined}
+{F.S  Return True if is empty}
+*/
 void InsertFirst (List *L, address P);
 /*
 {I.S List defined}
@@ -37,7 +40,10 @@ void InsertAfter (List *L, address P, address Prec);
 {F.S Elmt after Prec is P}
 */
 void DelP (List *L, address *Pdel, address P);
-
+/*
+{I.S List DEfined}
+{F.S Delete address P on List}
+*/
 void DelFirst (List *L, address *P);
 /*
 {I.S List defined}
@@ -54,6 +60,18 @@ void InsertLast (List *L, address P);
 {F.S Last Elmt of List updated by P}
 */
 address Search (List L, int X);
+/*
+{I.S List Defined}
+{F.S Return address list that have info X}
+*/
 void CopyList(List Lsrc, List *Ldest);
+/*
+{I.S Lsrc Defined}
+{F.S List copied to Ldest}
+*/
 void PrintInfo (List L);
+/*
+{I.S List Defined}
+{F.S List printed}
+*/
 #endif

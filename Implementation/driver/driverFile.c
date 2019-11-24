@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include "../include1/boolean.h"
-#include "../include1/load.h"
+#include "../../include1/boolean.h"
+#include "../../include1/load.h"
 
 //load (int *n, int *m, int *nbangunan, TabBuildings *b, MATRIKS *mgraf, Queue *q1, Queue *q2)
 

@@ -62,4 +62,8 @@ void Move (Buildings *B, Buildings *B2, int Narmies);
 {F.S Narmies from B moved into B2}
 */
 void JustLvlUp(Buildings *B);
+/*
+{I.S Buildings defined}
+{F.S Buildings level++ without decreasing armies on that}
+*/
 #endif

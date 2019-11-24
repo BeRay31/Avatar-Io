@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../include1/boolean.h"
-#include "../include1/infofileeksternal.h"
+#include "../../include1/boolean.h"
+#include "../../include1/loadinfoawal.h"
 
 int main(){
 	/*** KAMUS ***/
