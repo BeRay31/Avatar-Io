@@ -534,7 +534,7 @@ void EksekusiCommand(int command,Graph G, int player,boolean *changeTurn,List *P
     else if(command == 6)
     {//SAVE
        Save (*B, n, m, nb, *Q1, *Q2, player);
-       printf("Game Sucessfully Saved!\n");
+       printf("Game Sucessfully Saved!\n\n");
        exit(0);
     }
     else if(command == 7)
@@ -637,7 +637,20 @@ void EksekusiCommand(int command,Graph G, int player,boolean *changeTurn,List *P
     }
     else if(command == 8)
     {//EXIT
-        exit(0);   
+        Kata yes, Yes, No;
+        Yes.TabKata[1] = 'Y';  Yes.TabKata[2] = 'e';  Yes.TabKata[3] = 's';
+        Yes.Length = 3;
+        No.TabKata[1] = 'N';  No.TabKata[2] = 'o';
+        No.Length = 2;
+        printf("Do you want to save game before quit? Yes/No: \n"); Command(&yes);
+        if (IsKataSama(Yes, yes)) {
+            Save (*B, n, m, nb, *Q1, *Q2, player);
+            printf("\nGame Sucessfully Saved!\n\n");
+            exit(0);
+        } else if (IsKataSama(yes, No)) {
+            printf("\nQuiting the Game...\n\n");
+            exit(0);
+        }   
     }
     else if (command == 9)
     {//LOAD
