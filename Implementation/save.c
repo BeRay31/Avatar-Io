@@ -12,7 +12,7 @@ void Save (TabBuildings CurrentBuilding, int N, int M, int NBuilding, Queue q1, 
 // untuk dapet position
 {
 	/* open file for writing */
-	fp = fopen("save.dat","w");
+	fp = fopen("driver-save.dat","w");
 	/* write into file */
 	/* write ukuran peta */
 	fprintf(fp, "%d ", N);
