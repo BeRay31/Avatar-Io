@@ -1,3 +1,0 @@
-gcc -o  main AppCLI.o Buildings.o dinamicArr.o GameMech.o Graph.o List.o load.o loadinfoawal.o Map.o matriks.o mesinkar.o mesinkata.o pcolor.o point.o Queue.o save.o Stack.o
-./main
-
