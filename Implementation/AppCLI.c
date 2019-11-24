@@ -43,12 +43,17 @@ int main()
     ArrOfBuildings.TI[2].owner = 2;
     UpdateMap(&Map,ArrOfBuildings);
     changeTurn = false;
+    boolean fromLoad = false;
     boolean loadChange = false;
     if(!NotEnd(ArrOfBuildings)){
         printf("Test\n");
     }
     while(NotEnd(ArrOfBuildings)){
-        IncBuildingTroop(&ArrOfBuildings,Turn);
+        if(!fromLoad)
+        {
+            IncBuildingTroop(&ArrOfBuildings,Turn);
+            fromLoad = false;
+        }
         if(Turn == 1){    
            do
             {   
@@ -70,6 +75,7 @@ int main()
                 system("clear");
                 if(OlahString(command)==9 )
                 {
+                    fromLoad = true;
                     break;
                 }
             } while (NotEndTurn(OlahString(command)) && !loadChange);     
@@ -94,6 +100,7 @@ int main()
                 system("clear");
                  if(OlahString(command)==9 )
                 {
+                    fromLoad = true;
                     break;
                 }
             } while (NotEndTurn(OlahString(command)) && Turn==2);
