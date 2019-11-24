@@ -134,7 +134,14 @@ void load (int *n, int *m, int *nbangunan, TabBuildings *b , Queue *q1, Queue *q
 		} else if (CountKata > q2start+nq2) {
 			Salin(&KataTemp, CKata);
 			CharToInt(&Turn, KataTemp);
-			*turn = Turn;
+			if(Turn ==1)
+			{
+				(*turn) = 1;
+			}
+			else if(Turn ==2)
+			{
+				(*turn) = 2;
+			}
 		}
 		ADVKATA();
 	}

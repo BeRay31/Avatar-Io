@@ -43,6 +43,7 @@ int main()
     ArrOfBuildings.TI[2].owner = 2;
     UpdateMap(&Map,ArrOfBuildings);
     changeTurn = false;
+    boolean loadChange = false;
     if(!NotEnd(ArrOfBuildings)){
         printf("Test\n");
     }
@@ -67,7 +68,11 @@ int main()
                 //Save(ArrOfBuildings, n, m, nbangunan, Q1, Q2, Turn);
                 sleep(1);
                 system("clear");
-            } while (NotEndTurn(OlahString(command)) && Turn==1);     
+                if(OlahString(command)==9 )
+                {
+                    break;
+                }
+            } while (NotEndTurn(OlahString(command)) && !loadChange);     
         }
         else{
              do
@@ -87,6 +92,10 @@ int main()
                 UpdateMap(&Map,ArrOfBuildings);
                 sleep(1);
                 system("clear");
+                 if(OlahString(command)==9 )
+                {
+                    break;
+                }
             } while (NotEndTurn(OlahString(command)) && Turn==2);
         }
         if(IsAllLvl4(ArrOfBuildings,Turn)){

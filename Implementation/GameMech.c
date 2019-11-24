@@ -640,7 +640,8 @@ void EksekusiCommand(int command,Graph G, int player,boolean *changeTurn,List *P
         exit(0);   
     }
     else if (command == 9)
-    {
+    {//LOAD
+        int tempTurn = player;
         load (&n, &m, &nb, B, Q1, Q2, &player);
         CreateEmptyL(P1List);
         CreateEmptyL(P2List);
@@ -652,7 +653,14 @@ void EksekusiCommand(int command,Graph G, int player,boolean *changeTurn,List *P
             }
         }
         SCreateEmpty(S);
-        *changeTurn = true;
+        if(tempTurn == player)
+        {
+            *changeTurn = true;
+        }
+        else
+        {
+            *changeTurn = false;
+        }
         printf("Turn : %d\n", player);
     }
     
